@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>SC_Calculator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+
+
+</head>
+<body>
+<div class="header">
+    <img class="logo" src="static/image/VMlogo.png" alt="logo">
+    <div class="textContainer"><span class="logoText">Site Cost Calculator</span></div>
+
+    <a href="http://netauth-poc-web1.vmware.com/" class="btn" id="homeButton">
+                <span class="glyphicon glyphicon-home"></span> NETAUTH
+    </a>
+
+</div>
+
+<div class="container-fluid">
+    <div class="col-md-9">
+        <form id="inputForm" action="/fetch">
+        <div class="row row_details">
+        <div class = "col-md-2 detail_column">
+            <p class="detail_text" >Site Details</p>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="site_type">Site Type :</label>
+                <select class="form-control" id="site_type" name="site_type" required>
+                    <option id="select" value="" disabled selected>Select...</option>
+                    <option id="W&W" name="W&W" value="W&W">Wired & Wireless</option>
+                    <option id="Wireless" name="Wiresless" value="Wireless">Wireless only</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="BU">Business Unit :</label>
+                <select class="form-control" id="BU" name="BU">
+                    <option value="" disabled selected>Select...</option>
+                    <!--<option value="weekly">Weekly</option>-->
+                    <option>HR & Sales</option>
+                    <option>HR, Sales & RnD</option>
+                    <option>HR, Sales & GSS</option>
+                    <!--<option value="custom">Custom Date</option>-->
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="region">Region :</label>
+                <select class="form-control" id="region" name="region">
+                    <option value="" disabled selected>Select...</option>
+                    <!--<option value="weekly">Weekly</option>-->
+                    <option>APAC</option>
+                    <option>EMEA</option>
+                    <option>NASA</option>
+                    <!--<option value="custom">Custom Date</option>-->
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="country">Country :</label>
+                <select class="form-control" id="country" name="country">
+                    <option value="" disabled selected>Select...</option>
+                    <!--<option value="weekly">Weekly</option>-->
+                    <option>Singapore</option>
+                    <option>Netherland</option>
+                    <option>China</option>
+                    <!--<option value="custom">Custom Date</option>-->
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label for="headcount">Head Count:</label>
+            <input type="number" class= "form-control" id="headcount" name="headcount" placeholder="Enter Estimated Headcount">
+        </div>
+
+        </div>
+
+         <div class="row" style="text-align:center">
+           <div class="col-md-3" >
+
+                </div>
+                 <div class="col-md-3" >
+
+                </div>
+             <div class="col-md-3">
+                <button type="submit" class="btn btn-primary">Calculate</button>
+             </div>
+          <div class="col-md-3" >
+           </div>
+         </div>
+        </form>
+        <div class="row">
+            <div class="col-md-4">
+                <table>
+                    <tbody>
+                    <tr>
+                        <th>Site Tier</th>
+                        <td id="site_tier"></td>
+                    </tr>
+                    <tr>
+                        <th>MPLS Link Count</th>
+                        <td id="mpls_count"></td>
+                    </tr>
+                    <tr>
+                        <th>Internet Link Count</th>
+                        <td id="internet_count"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+          <h5>Network Infra Details</h5>
+        </div>
+        <hr class="line">
+
+        <div class="row row_details">
+            {% for service in service_list%}
+                <div class="col-md-4">
+                    <div class="card">
+                    <div class="card-header">
+                        <h5 class="service_name">{{service}}</h5><h5><b>Details</b></h5>
+                    </div>
+                    <div class="card-body">
+                        <table id="table_{{service}}" class="table table-fixed" style="height:40%;width:100%;">
+                            <thead  align="centre">
+                            <tr>
+                                <th align="centre">Device Type</th>
+                                <th>Device Modal</th>
+                                <th>CAPEX</th>
+                                <th>OPEX</th>
+                            </tr>
+                           </thead>
+
+                        </table>
+                    </div>
+
+                </div>
+                </div>
+            {% endfor %}
+
+
+
+        </div>
+        <div class="row">
+        <h5>Circuit Details</h5>
+        </div>
+        <hr class="line">
+        <div class="row row_details">
+            <div class="col-md-6">
+                <p>MPLS</p>
+            </div>
+            <div class="col-md-6">
+                <p>INTERNET/P2P</p>
+            </div>
+            <div class="col-md-3">
+                <p>MRC</p>
+            </div>
+            <div class="col-md-3">
+                 <p>NRC</p>
+            </div>
+            <div class="col-md-3">
+                 <p>MRC</p>
+            </div>
+            <div class="col-md-3">
+                 <p>NRC</p>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="col-md-3" style="padding-left:32px;">
+        <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        <b>Financial Details</b>
+                    </div>
+                    <div class="card-body">
+                    <h5>CAPEX</h5>
+                    <hr>
+                     <h4>$7,03,000</h4>
+                    <h5>OPEX</h5>
+                    <hr>
+                     <h3>Hardware</h3>
+                      <h4>$ 57,00</h4>
+                     <h3>Circuits</h3>
+                      <h4>$ 3,000</h4>
+                     <h5>Total Cost</h5>
+                     <hr>
+                     <h4>$7,07,459</h4>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+$(document).ready(function () {
+    var service_array = {{service_list|safe}};
+    console.log(service_array);
+    var service_name = document.getElementsByClassName('service_name').innerHTML;
+    console.log(service_name);
+    $('#inputForm').on('submit', function(e) {
+        e.preventDefault();
+        console.log($("input#headcount").val());
+        $.ajax({
+            url : $(this).attr('action') || window.location.pathname,
+            type: "GET",
+            data: $(this).serialize(),
+            success: function (data) {
+                $("#site_tier").innerText = data[0].tier;
+                for (i=0 ; i< service_array.length; i++)
+                {
+                var trHTML = '';
+                var rspns = JSON.parse(data[0]);
+
+                $.each(rspns, function(x, item) {
+                    if (item.ServiceType == service_array[i]){
+
+                        trHTML += '<tbody><tr><td>' + item.DeviceType + '</td><td>'+ item.DeviceModel + '</td><td>'+item.CAPEX + '</td><td>'+
+                        item.OPEX +'</td></tr><tbody>';
+                     }
+                });
+                    $("#table_"+ service_array[i] +  " tbody > tr").remove();
+                    $("#table_" + service_array[i]).append(trHTML);
+                }
+                console.log(data[1]);
+
+            },
+            error: function (jXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    });
+});
+
+
+</script>
+</html>

@@ -1,0 +1,96 @@
+.header{
+padding: 10px;
+background-color: #0e161b;
+text-align: left;
+width: 100%;
+height: 60px;
+}
+#homeButton{
+    float: right;
+    margin-top:4px;
+    border: solid 1px white;
+    color: #4c4c4c;
+    background: #fafafa;
+    border-radius: 1px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    width: 140px;
+    font-size : 17px;
+    line-height:25px;
+}
+#homeButton:hover{
+    background : rgba(255,255,255,.15);
+    color : white;
+}
+.logo{
+padding: 3px 3px !important;
+height: 40px !important;
+width: 40px;
+	}
+.textContainer {
+display: inline;
+line-height: 50px;
+}
+.logoText{
+color: #fafafa;
+font-size: 1.67rem;
+font-weight: 400;
+font-family: Metropolis,"Avenir Next","Helvetica Neue",Arial,sans-serif;
+letter-spacing: .02em;
+line-height: 2.5rem;
+text-decoration: none;
+}
+.calculate_button {
+  background-color: white;
+  border: 2px solid #008CBA;
+  border-radius: 4px;
+  color: black;
+  padding: 8px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.calculate_button:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.row_details{
+margin-top:20px;
+border: 1px solid black;
+}
+.detail_column{
+border:1px solid black;
+background-color : #394D5B;
+color: white;
+}
+.detail_text{
+
+margin-top: 15px;
+text-align: center;
+font-size: 14px;
+margin-bottom: 1rem;
+}
+
+.card{
+width:100%;
+}
+.btn-primary{
+float:center;
+position:relative;
+margin-top:10px;
+}
+.line {
+margin-top: 0px;
+height: 0.1rem;
+border: 0;
+margin-left:-15px;
+margin-bottom:17px;
+background: black;
+background: -webkit-gradient(linear, 0 0, 100% 0, from(black), to(white), color-stop(50%, black));
+}

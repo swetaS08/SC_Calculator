@@ -1,0 +1,101 @@
+﻿Tier,ServiceType,DeviceType,DeviceModel
+Tier 1A,WAN,MPLS Router 1,Cisco ASR 1002-X (8GB)
+Tier 1A,WAN,MPLS Router 2,Cisco ASR 1002-X (8GB)
+Tier 1A,WAN,MPLS Route Reflector 1,Cisco ASR 1002-X (8GB)
+Tier 1A,WAN,MPLS Route Reflector 2,Cisco ASR 1002-X (8GB)
+Tier 1A,WAN,Internet Router 1,Cisco ASR 1002-X (8GB)
+Tier 1A,WAN,Internet Router 2,Cisco ASR 1002-X (8GB)
+Tier 1A,WAN,Int Route Reflector 1,Cisco ASR 1002-X (8GB)
+Tier 1A,WAN,Int Route Reflector 2,Cisco ASR 1002-X (8GB)
+Tier 1A,WAN,Velocloud,NA
+Tier 1A,LAN,LAN Core ,Cisco 6807-XL
+Tier 1A,LAN,LAN DMZ,Cisco WS-C4500X-40X-ES
+Tier 1A,LAN,Office Switch,Cisco WS-C4510RE-S8
+Tier 1A,LAN,AV Switch,Cisco C9300-48UN-E
+Tier 1A,LAN,Wireless Switch,Cisco C9300-48UN-E 
+Tier 1A,LAN,Footprint,Cisco N9K-C93180YC-FX
+Tier 1A,LAN,Wireless Controller,Aruba 7240XM
+Tier 1A,LAN,Wireless AP's,Aruba AP535
+Tier 1A,LAN,Console Switch,Avocent ACS8048MDAC-400
+Tier 1A,Firewall,FIREWALL 1,PAN 3250
+Tier 1A,Firewall,FIREWALL 2,PAN 3250
+Tier 1B,WAN,MPLS Router 1,Cisco ASR 1001-X
+Tier 1B,WAN,MPLS Router 2,Cisco ASR 1001-X
+Tier 1B,WAN,MPLS Route Reflector 1,Cisco ASR 1001-X
+Tier 1B,WAN,MPLS Route Reflector 2,Cisco ASR 1001-X
+Tier 1B,WAN,Internet Router 1,Cisco ASR 1001-X
+Tier 1B,WAN,Internet Router 2,Cisco ASR 1001-X
+Tier 1B,WAN,Int Route Reflector 1,Cisco ASR 1001-X
+Tier 1B,WAN,Int Route Reflector 2,Cisco ASR 1001-X
+Tier 1B,WAN,Velocloud 1,NA
+Tier 1B,LAN,LAN Core ,Cisco 6807-XL
+Tier 1B,LAN,LAN DMZ,Cisco WS-C4500X-40X-ES
+Tier 1B,LAN,Office Switch,Cisco WS-C4510RE-S8
+Tier 1B,LAN,AV Switch,Cisco C9300-48UN-E
+Tier 1B,LAN,Wireless Switch,Cisco C9300-48UN-E 
+Tier 1B,LAN,Footprint,Cisco N9K-C93180YC-FX
+Tier 1B,LAN,Wireless Controller,Aruba 7240XM
+Tier 1B,LAN,Wireless AP's,Aruba AP535
+Tier 1B,LAN,Console Switch,Avocent ACS8048MDAC-400
+Tier 1B,Firewall,FIREWALL 1,PAN 3250
+Tier 1B,Firewall,FIREWALL 2,PAN 3250
+Tier 1C,WAN,MPLS Router 1,Cisco ASR 1001-X
+Tier 1C,WAN,MPLS Router 2,Cisco ASR 1001-X
+Tier 1C,WAN,MPLS Route Reflector 1,Cisco ASR 1001-X
+Tier 1C,WAN,MPLS Route Reflector 2,Cisco ASR 1001-X
+Tier 1C,WAN,Internet Router 1,Cisco ASR 1001-X
+Tier 1C,WAN,Internet Router 2,Cisco ASR 1001-X
+Tier 1C,WAN,Int Route Reflector 1,Cisco ASR 1001-X
+Tier 1C,WAN,Int Route Reflector 2,Cisco ASR 1001-X
+Tier 1C,WAN,Velocloud 1,NA
+Tier 1C,LAN,LAN Core ,Cisco 6807-XL
+Tier 1C,LAN,LAN DMZ,Cisco WS-C4500X-40X-ES
+Tier 1C,LAN,Office Switch,Cisco WS-C4510RE-S8
+Tier 1C,LAN,AV Switch,Cisco C9300-48UN-E
+Tier 1C,LAN,Wireless Switch,Cisco C9300-48UN-E
+Tier 1C,LAN,Footprint,Cisco N9K-C93180YC-FX
+Tier 1C,LAN,Wireless Controller,Aruba 7210
+Tier 1C,LAN,Wireless AP's,Aruba AP535
+Tier 1C,LAN,Console Switch,Avocent ACS8048MDAC-400
+Tier 1C,Firewall,FIREWALL 1,PAN 3250
+Tier 1C,Firewall,FIREWALL 2,PAN 3250
+Tier 2A,WAN,MPLS Router 1,NA
+Tier 2A,WAN,MPLS Router 2,NA
+Tier 2A,WAN,MPLS Route Reflector 1,NA
+Tier 2A,WAN,MPLS Route Reflector 2,NA
+Tier 2A,WAN,Internet Router 1,NA
+Tier 2A,WAN,Internet Router 2,NA
+Tier 2A,WAN,Int Route Reflector 1,NA
+Tier 2A,WAN,Int Route Reflector 2,NA
+Tier 2A,WAN,Velocloud 1,VeloCloud Edge 3800
+Tier 2A,LAN,LAN Core ,Cisco WS-C4500X-40X-ES
+Tier 2A,LAN,LAN DMZ,Cisco WS-C3850-24XS-E
+Tier 2A,LAN,Office Switch,Cisco C9300-48UN-E 
+Tier 2A,LAN,AV Switch,Cisco C9300-48UN-E 
+Tier 2A,LAN,Wireless Switch,Cisco C9300-48UN-E 
+Tier 2A,LAN,Footprint,Cisco N9K-C93180YC-FX
+Tier 2A,LAN,Wireless Controller,Aruba 7205
+Tier 2A,LAN,Wireless AP's,Aruba AP535
+Tier 2A,LAN,Console Switch,Avocent ACS8048MDAC-400
+Tier 2A,Firewall,FIREWALL 1,PAN 3250
+Tier 2A,Firewall,FIREWALL 2,PAN 3250
+Tier 2B,WAN,MPLS Router 1,NA
+Tier 2B,WAN,MPLS Router 2,NA
+Tier 2B,WAN,MPLS Route Reflector 1,NA
+Tier 2B,WAN,MPLS Route Reflector 2,NA
+Tier 2B,WAN,Internet Router 1,NA
+Tier 2B,WAN,Internet Router 2,NA
+Tier 2B,WAN,Int Route Reflector 1,NA
+Tier 2B,WAN,Int Route Reflector 2,NA
+Tier 2B,WAN,Velocloud 1,VeloCloud Edge 3800
+Tier 2B,LAN,LAN Core ,Cisco WS-C3850-24XS-E
+Tier 2B,LAN,LAN DMZ,Cisco WS-C3850-24XS-E
+Tier 2B,LAN,Office Switch,Cisco C9300-48UN-E 
+Tier 2B,LAN,AV Switch,Cisco C9300-48UN-E 
+Tier 2B,LAN,Wireless Switch,Cisco C9300-48UN-E 
+Tier 2B,LAN,Footprint,NA
+Tier 2B,LAN,Wireless Controller,Aruba 7205
+Tier 2B,LAN,Wireless AP's,Aruba AP535
+Tier 2B,LAN,Console Switch,Avocent ACS8048MDAC-400
+Tier 2B,Firewall,FIREWALL 1,PAN 850
+Tier 2B,Firewall,FIREWALL 2,PAN 850
