@@ -13,19 +13,32 @@ std_data = pd.read_csv("data/Network Hardware Standards.csv")
 model_price = pd.read_csv("data/Device Model Price.csv")
 
 sum_data= pd.merge(std_data,model_price, on ="DeviceModel", how="left")
+sum_data['DeviceModel'] = sum_data['DeviceModel'].replace(np.nan, 'NONE')
 
 
 @app.route('/')
 def home():
-
+    device_type = {}
+    device_model = {}
     service_list= sum_data['ServiceType'].unique().tolist()
-    return render_template("index.html", service_list= service_list)
+    for service in service_list:
+        device_type[service] = sum_data.loc[sum_data['ServiceType'] == service,'DeviceType'].unique().tolist()
+    #print(device_type)
+    device_list = sum_data['DeviceType'].unique().tolist()
+    for device in device_list:
+        device_model[device] = sum_data.loc[sum_data['DeviceType'] == device, 'DeviceModel'].unique().tolist()
+
+    #print(device_model)
+    model_price_1 = pd.read_csv("data/Device Model Price.csv")
+    model_price = model_price_1.to_json(orient='records')
+
+    return render_template("index.html", service_list= service_list, device_type=device_type, device_model= device_model, model_price = model_price)
 
 @app.route('/fetch')
 def fetch():
     link_count = {}
     H_C = int(request.args.get("headcount"))
-    print(H_C)
+
     mpls_count = 0
     internet_count = 2
     if H_C < 50:
@@ -59,9 +72,11 @@ def fetch():
     link_count['opex'] = opex_value
 
     result = tier_data.to_json(orient='records')
-    print(result)
+
     response = { '0': result, '1': link_count }
     return response
+
+
 
 
 

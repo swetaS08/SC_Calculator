@@ -106,18 +106,18 @@
         </form>
         <div class="row">
             <div class="col-md-4">
-                <table>
-                    <tbody>
+                <table class="table">
+                    <tbody >
                     <tr>
-                        <th>Site Tier</th>
+                        <th>Site Tier:</th>
                         <td id="site_tier"></td>
                     </tr>
                     <tr>
-                        <th>MPLS Link Count</th>
+                        <th>MPLS Link Count:</th>
                         <td id="mpls_count"></td>
                     </tr>
                     <tr>
-                        <th>Internet Link Count</th>
+                        <th>Internet Link Count:</th>
                         <td id="internet_count"></td>
                     </tr>
                     </tbody>
@@ -141,11 +141,27 @@
                             <thead  align="centre">
                             <tr>
                                 <th align="centre">Device Type</th>
-                                <th>Device Modal</th>
+                                <th>Device Model</th>
                                 <th>CAPEX</th>
                                 <th>OPEX</th>
                             </tr>
                            </thead>
+                            <tbody>
+                                {%for device_type in device_type[service]%}
+                                <tr id="{{service}}_{{loop.index}}">
+                                    <td>{{device_type}}</td>
+                                    <td>
+                                        <select id="type_{{service}}_{{loop.index}}">
+                                            <option>Select DM</option>
+                                            {%for device_model in device_model[device_type]%}
+                                            <option value="{{device_model}}">{{device_model}}</option>
+                                            {% endfor%}
+                                        </select></td>
+                                    <td class="capex" id="capex_{{service}}_{{loop.index}}"></td>
+                                    <td class= "opex" id="opex_{{service}}_{{loop.index}}"></td>
+                                </tr>
+                                {% endfor%}
+                            </tbody>
 
                         </table>
                     </div>
@@ -211,11 +227,29 @@
 </div>
 </body>
 <script>
+
+$("td select").on("change", function() {
+    var value = this.value;
+    var $cell = $(this).parent();
+    var $row = $cell.parent();
+    var row_id = $row.attr("id");
+    console.log(typeof parseInt($('#' + row_id + ' .capex').html()));
+
+
+
+    var price_list =  {{model_price|safe}};
+    var capex_data = price_list.filter( item => item.DeviceModel == value);
+    console.log(capex_data[0].CAPEX);
+
+
+});
+
+
 $(document).ready(function () {
+
     var service_array = {{service_list|safe}};
     console.log(service_array);
-    var service_name = document.getElementsByClassName('service_name').innerHTML;
-    console.log(service_name);
+
     $('#inputForm').on('submit', function(e) {
         e.preventDefault();
         console.log($("input#headcount").val());
@@ -224,23 +258,36 @@ $(document).ready(function () {
             type: "GET",
             data: $(this).serialize(),
             success: function (data) {
-                $("#site_tier").innerText = data[0].tier;
-                for (i=0 ; i< service_array.length; i++)
-                {
-                var trHTML = '';
+
+                $("#site_tier").html(data[1].tier);
+                $("#mpls_count").html(data[1].mpls_count);
+                $("#internet_count").html(data[1].internet_count);
+
                 var rspns = JSON.parse(data[0]);
 
-                $.each(rspns, function(x, item) {
-                    if (item.ServiceType == service_array[i]){
 
-                        trHTML += '<tbody><tr><td>' + item.DeviceType + '</td><td>'+ item.DeviceModel + '</td><td>'+item.CAPEX + '</td><td>'+
-                        item.OPEX +'</td></tr><tbody>';
-                     }
-                });
-                    $("#table_"+ service_array[i] +  " tbody > tr").remove();
-                    $("#table_" + service_array[i]).append(trHTML);
+
+                for (i=0 ; i< service_array.length; i++)
+                {
+                    var idx = 1;
+                    var idcpx = 1;
+                    var idopx = 1;
+                    $.each(rspns, function(x, item) {
+
+                        if (item.ServiceType == service_array[i]){
+                            var id = "#type_" + service_array[i] +  "_" + idx++;
+                            var id_capex = "#capex_" + service_array[i] +  "_" + idcpx++;
+                            var id_opex = "#opex_" + service_array[i] +  "_" + idopx++;
+
+
+                            $(id).val(item.DeviceModel);
+                            $(id_capex).html(parseInt(item.CAPEX));
+                            $(id_opex).html(parseInt(item.OPEX));
+                         }
+
+                    });
                 }
-                console.log(data[1]);
+
 
             },
             error: function (jXHR, textStatus, errorThrown) {
@@ -248,6 +295,25 @@ $(document).ready(function () {
             }
         });
     });
+
+var sum1 = 0;
+var sum2 = 0;
+$("#category tr").not(':first').not(':last').each(function() {
+  sum1 +=  getnum($(this).find(".capex").text());
+  sum2 +=  getnum($(this).find(".opex").text());
+  function getnum(t){
+  	if(isNumeric(t)){
+    	return parseInt(t,10);
+    }
+    return 0;
+	 	function isNumeric(n) {
+  		return !isNaN(parseFloat(n)) && isFinite(n);
+		}
+  }
+});
+console.log(sum1);
+console.log(sum2);
+
 });
 
 

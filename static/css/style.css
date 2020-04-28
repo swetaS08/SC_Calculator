@@ -59,6 +59,9 @@ text-decoration: none;
   background-color: #008CBA;
   color: white;
 }
+tr{
+dispaly:inline-block;
+}
 
 .row_details{
 margin-top:20px;

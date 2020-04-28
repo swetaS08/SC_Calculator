@@ -7,7 +7,7 @@ Tier 1A,WAN,Internet Router 1,Cisco ASR 1002-X (8GB)
 Tier 1A,WAN,Internet Router 2,Cisco ASR 1002-X (8GB)
 Tier 1A,WAN,Int Route Reflector 1,Cisco ASR 1002-X (8GB)
 Tier 1A,WAN,Int Route Reflector 2,Cisco ASR 1002-X (8GB)
-Tier 1A,WAN,Velocloud,NA
+Tier 1A,WAN,Velocloud 1,NA
 Tier 1A,LAN,LAN Core ,Cisco 6807-XL
 Tier 1A,LAN,LAN DMZ,Cisco WS-C4500X-40X-ES
 Tier 1A,LAN,Office Switch,Cisco WS-C4510RE-S8
