@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>SC_Calculator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+
+
+</head>
+<body>
+<div class="header">
+    <img class="logo" src="static/image/VMlogo.png" alt="logo">
+    <div class="textContainer"><span class="logoText">Site Cost Calculator</span></div>
+
+    <a href="http://netauth-poc-web1.vmware.com/" class="btn" id="homeButton">
+                <span class="glyphicon glyphicon-home"></span> NETAUTH
+    </a>
+
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        <form id="inputForm" action="/fetch">
+        <div class="row row_details">
+        <!--<div class = "col-md-2 detail_column">-->
+            <!--<p class="detail_text" >Site Details</p>-->
+        <!--</div>-->
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="site_type">Site Type :</label>
+                <select class="form-control" id="site_type" name="site_type" required>
+                    <option id="select" value="" disabled selected>Select...</option>
+                    <option id="W&W" name="W&W" value="W&W">Wired & Wireless</option>
+                    <option id="Wireless" name="Wiresless" value="Wireless">Wireless only</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="BU">Business Unit :</label>
+                <select class="form-control" id="BU" name="BU">
+                    <option value="" disabled selected>Select...</option>
+                    <!--<option value="weekly">Weekly</option>-->
+                    <option>HR & Sales</option>
+                    <option>HR, Sales & RnD</option>
+                    <option>HR, Sales & GSS</option>
+                    <!--<option value="custom">Custom Date</option>-->
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="region">Region :</label>
+                <select class="form-control" id="region" name="region">
+                    <option value="" disabled selected>Select...</option>
+                    <!--<option value="weekly">Weekly</option>-->
+                    <option>APAC</option>
+                    <option>EMEA</option>
+                    <option>NASA</option>
+                    <!--<option value="custom">Custom Date</option>-->
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="country">Country :</label>
+                <select class="form-control" id="country" name="country">
+                    <option value="" disabled selected>Select...</option>
+                    <!--<option value="weekly">Weekly</option>-->
+                    <option>Singapore</option>
+                    <option>Netherland</option>
+                    <option>China</option>
+                    <!--<option value="custom">Custom Date</option>-->
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label for="headcount">Head Count:</label>
+            <input type="number" class= "form-control" id="headcount" name="headcount" placeholder="Enter Estimated Headcount">
+        </div>
+        <div class = "col-md-2 detail_column">
+            <!--<p class="detail_text" >Site Details</p>-->
+            <button type="submit" class="btn btn-primary">Calculate</button>
+        </div>
+        </div>
+
+        <br>
+        </form>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+            <div class="col-md-4">
+                <table class="table">
+                    <tbody >
+                    <tr>
+                        <th>Site Tier:</th>
+                        <td id="site_tier"></td>
+                    </tr>
+                    <tr>
+                        <th>MPLS Link Count:</th>
+                        <td id="mpls_count"></td>
+                    </tr>
+                    <tr>
+                        <th>Internet Link Count:</th>
+                        <td id="internet_count"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-md-9">
+            <h5>Network Infra Details</h5>
+
+        <hr class="line">
+
+        <div class="row row_details">
+            {% for service in service_list%}
+                <div class="col-md-4">
+                    <div class="card">
+                    <div class="card-header">
+                        <h5 class="service_name" style="display:inline;">{{service}} Details</h5>
+                        <h5 id="sum_{{service}}" style="display:inline;float:right"></h5>
+                    </div>
+                    <div class="card-body">
+                        <table id="table_{{service}}" class="table table-fixed" style="height:40%;width:100%;">
+                            <thead  align="centre">
+                            <tr>
+                                <th align="centre">Device Type</th>
+                                <th>Device Model</th>
+                                <th>CAPEX</th>
+                                <th>OPEX</th>
+                            </tr>
+                           </thead>
+                            <tbody>
+                                {%for device_type in device_type[service]%}
+                                <tr id="{{service}}_{{loop.index}}">
+                                    <td>{{device_type}}</td>
+                                    <td>
+                                        <select id="type_{{service}}_{{loop.index}}">
+                                            <option>Select DM</option>
+                                            {%for device_model in device_model[device_type]%}
+                                            <option value="{{device_model}}">{{device_model}}</option>
+                                            {% endfor%}
+                                        </select></td>
+                                    <td class="capex" id="capex_{{service}}_{{loop.index}}"></td>
+                                    <td class= "opex" id="opex_{{service}}_{{loop.index}}"></td>
+                                </tr>
+                                {% endfor%}
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+                </div>
+            {% endfor %}
+
+
+
+        </div>
+
+        <h5>Circuit Details</h5>
+        <hr class="line">
+        <div class="row row_details">
+            <div class="col-md-6">
+                <p>MPLS</p>
+            </div>
+            <div class="col-md-6">
+                <p>INTERNET/P2P</p>
+            </div>
+            <div class="col-md-3">
+                <p>MRC</p>
+            </div>
+            <div class="col-md-3">
+                 <p>NRC</p>
+            </div>
+            <div class="col-md-3">
+                 <p>MRC</p>
+            </div>
+            <div class="col-md-3">
+                 <p>NRC</p>
+            </div>
+
+        </div>
+        </div>
+        <div class="col-md-3" style="padding-left:32px;">
+        <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        <b>Financial Details</b>
+                    </div>
+                    <div class="card-body">
+
+                        <h4 id="total_capex"></h4>
+                        <h5>CAPEX</h5>
+                        <hr>
+                        <h4 id="total_opex"></h4>
+                        <h5>OPEX</h5>
+                        <hr>
+                     <!--<h3>Hardware</h3>-->
+                      <!--<h4>$ 57,00</h4>-->
+                     <!--<h3>Circuits</h3>-->
+                      <!--<h4>$ 3,000</h4>-->
+                        <h4 id="site_cost"></h4>
+                        <h5>Total Cost</h5>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+<script>
+
+$("td select").on("change", function() {
+    var value = this.value;
+    var $cell = $(this).parent();
+    var $row = $cell.parent();
+    var row_id = $row.attr("id");
+    var price_list =  {{model_price|safe}};
+    var capex_data = price_list.filter( item => item.DeviceModel == value);
+    $('#' + row_id + ' .capex').html(capex_data[0].CAPEX);
+    $('#' + row_id + ' .opex').html(capex_data[0].OPEX);
+
+    calculate();
+});
+
+function calculate(){
+    var service_array = {{service_list|safe}};
+    var device_type = {{device_type | safe}}
+    var sum_capex = 0 ;
+    var sum_opex = 0 ;
+    for (i=0 ; i< service_array.length; i++)
+        {   var sum_service = 0;
+            type_array = device_type[service_array[i]];
+            for(j=1; j<= type_array.length;j++)
+            {
+                var cid = "#capex_"+service_array[i]+"_"+j;
+                var oid = "#opex_"+service_array[i]+"_"+j;
+                var capex_value = parseInt($(cid).html());
+                var opex_value = parseInt($(oid).html());
+                if(!isNaN(capex_value)){
+                   sum_capex += capex_value;
+                }
+                if(!isNaN(opex_value)){
+                   sum_opex += opex_value;
+                }
+            }
+            sum_service = sum_capex + sum_opex;
+            $('#sum_' +service_array[i]).html("$"+sum_service);
+
+        }
+    site_cost = sum_capex + sum_opex;
+    $('#total_capex').html("$"+sum_capex);
+    $('#total_opex').html("$"+sum_opex);
+    $('#site_cost').html("$"+site_cost);
+
+}
+
+
+$(document).ready(function () {
+
+    var service_array = {{service_list|safe}};
+    console.log(service_array);
+
+    $('#inputForm').on('submit', function(e) {
+        e.preventDefault();
+        console.log($("input#headcount").val());
+        $.ajax({
+            url : $(this).attr('action') || window.location.pathname,
+            type: "GET",
+            data: $(this).serialize(),
+            success: function (data) {
+                $("#site_tier").html(data[1].tier);
+                $("#mpls_count").html(data[1].mpls_count);
+                $("#internet_count").html(data[1].internet_count);
+
+                var rspns = JSON.parse(data[0]);
+
+                for (i=0 ; i< service_array.length; i++)
+                {
+                    var idx = 1;
+                    var idcpx = 1;
+                    var idopx = 1;
+                    $.each(rspns, function(x, item) {
+
+                        if (item.ServiceType == service_array[i]){
+                            var id = "#type_" + service_array[i] +  "_" + idx++;
+                            var id_capex = "#capex_" + service_array[i] +  "_" + idcpx++;
+                            var id_opex = "#opex_" + service_array[i] +  "_" + idopx++;
+
+                            $(id).val(item.DeviceModel);
+                            $(id_capex).html(parseInt(item.CAPEX));
+                            $(id_opex).html(parseInt(item.OPEX));
+                         }
+
+                    });
+                }
+                calculate();
+            },
+            error: function (jXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    });
+});
+
+
+</script>
+</html>
