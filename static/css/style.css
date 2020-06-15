@@ -1,3 +1,7 @@
+body{
+background:#fafafa;
+font-size:12px;
+}
 .header{
 padding: 10px;
 background-color: #0e161b;
@@ -5,6 +9,54 @@ text-align: left;
 width: 100%;
 height: 60px;
 }
+
+#inputForm{
+margin : 40px 15px 0 15px;
+background : hsl(198, 83%, 94%);
+padding : 20px 5px;
+}
+.additional_detail{
+margin : 40px 15px 0 15px;
+background : hsl(198, 83%, 94%);
+padding : 20px 5px;
+width:100%;
+}
+.form-control{
+font-size : 1.2rem;
+}
+#country>option{
+max-height:100px;
+}
+
+.site_specifics{
+    margin: 40px 20px 30px 20px;
+    text-align:center;
+}
+
+.card{
+box-shadow: 0 5px 15px rgba(57,98,254,.02), 0 4px 6px rgba(117,108,254,.12);
+border:none;
+}
+
+.site_specifics .card{
+    border-left: solid 4px #00567A;
+    border-radius:0;
+}
+
+.site_specifics .card .card-body{
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+.site_details .card{
+    border: solid 2px #00567A;
+    border-top:none;
+    border-radius:0;
+}
+.site_details .card .card-header{
+    border-radius:0;
+}
+
 #homeButton{
     float: right;
     margin-top:4px;
@@ -23,13 +75,14 @@ height: 60px;
     color : white;
 }
 .logo{
-padding: 3px 3px !important;
-height: 40px !important;
+vertical-align:top;
+padding: 3px 3px;
+height: 40px;
 width: 40px;
-	}
+}
 .textContainer {
 display: inline;
-line-height: 50px;
+line-height: 40px;
 }
 .logoText{
 color: #fafafa;
@@ -37,27 +90,7 @@ font-size: 1.67rem;
 font-weight: 400;
 font-family: Metropolis,"Avenir Next","Helvetica Neue",Arial,sans-serif;
 letter-spacing: .02em;
-line-height: 2.5rem;
 text-decoration: none;
-}
-.calculate_button {
-  background-color: white;
-  border: 2px solid #008CBA;
-  border-radius: 4px;
-  color: black;
-  padding: 8px 14px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-.calculate_button:hover {
-  background-color: #008CBA;
-  color: white;
 }
 tr{
 dispaly:inline-block;
@@ -83,17 +116,49 @@ margin-bottom: 1rem;
 .card{
 width:100%;
 }
-.btn-primary{
-float:center;
-position:relative;
-margin-top:10px;
+.btn{
+background-color: #0072a3;
+font-size:14px;
+letter-spacing:1px;
+font-weight:500;
+color:#f8f8f8;
+}
+
+.btn:hover{
+background-color: #00567A;
+color:#fff;
+}
+.btn:focus{
+color:#fff;
 }
 .line {
 margin-top: 0px;
-height: 0.1rem;
+height: 0.2rem;
 border: 0;
-margin-left:-15px;
-margin-bottom:17px;
-background: black;
-background: -webkit-gradient(linear, 0 0, 100% 0, from(black), to(white), color-stop(50%, black));
+margin-bottom:15px;
+background: -webkit-linear-gradient(left,#777,#fff);
+}
+#calculate_btn{
+    margin : auto;
+}
+#loader {
+  display : none;
+  margin : auto;
+  border: 6px solid #e8e8e8;
+  border-radius: 50%;
+  border-top: 6px solid #0072A3;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

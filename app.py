@@ -1,18 +1,25 @@
-import sqlite3
-from statistics import mean
-from datetime import datetime
 from flask import Flask, request, render_template
-import  os
 import pandas as pd
 import numpy as np
+from flask_mysqldb import MySQL
 
-app = Flask(__name__ , template_folder='templates')
+
+app = Flask(__name__)
+
+app.config['MYSQL_HOST'] = 'nw-poc-cps1.vmware.com'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'Suman.524532'
+app.config['MYSQL_DB'] = 'cps_db'
+
+mysql = MySQL(app)
 
 
 std_data = pd.read_csv("data/Network Hardware Standards.csv")
+#std_data = std_data.reindex(sorted(std_data.DeviceType), axis=1)
+#std_data = std_data[sorted(std_data.DeviceType)]
 model_price = pd.read_csv("data/Device Model Price.csv")
 
-sum_data= pd.merge(std_data,model_price, on ="DeviceModel", how="left")
+sum_data = pd.merge(std_data, model_price, on ="DeviceModel", how="left")
 sum_data['DeviceModel'] = sum_data['DeviceModel'].replace(np.nan, 'NONE')
 
 
@@ -20,64 +27,128 @@ sum_data['DeviceModel'] = sum_data['DeviceModel'].replace(np.nan, 'NONE')
 def home():
     device_type = {}
     device_model = {}
-    service_list= sum_data['ServiceType'].unique().tolist()
+    service_list = sum_data['ServiceType'].unique().tolist()
     for service in service_list:
         device_type[service] = sum_data.loc[sum_data['ServiceType'] == service,'DeviceType'].unique().tolist()
-    #print(device_type)
+        device_type[service] = sorted(device_type[service])
+
     device_list = sum_data['DeviceType'].unique().tolist()
     for device in device_list:
         device_model[device] = sum_data.loc[sum_data['DeviceType'] == device, 'DeviceModel'].unique().tolist()
 
-    #print(device_model)
     model_price_1 = pd.read_csv("data/Device Model Price.csv")
     model_price = model_price_1.to_json(orient='records')
 
-    return render_template("index.html", service_list= service_list, device_type=device_type, device_model= device_model, model_price = model_price)
+    conn = mysql.connect
+    query = "select distinct(country),region  from site_details "\
+            "join circuit_details on circuit_details.location=site_details.site_name " \
+            "order by country"
+
+    result = pd.read_sql(query, conn)
+
+    country_list = result.to_json(orient='records')
+    conn.close()
+
+
+
+    return render_template("index.html", service_list=service_list, device_type=device_type,
+                           device_model=device_model,model_price=model_price,
+                           country_list=country_list)
+
+
+def getSiteSpecifics(headcount):
+    site_specs = dict()
+    site_specs['mpls_count'] = 0
+    site_specs['internet_count'] = 2
+    if headcount < 50:
+        site_specs['tier'] = "2B"
+        site_specs['mpls_count'] = 0
+        site_specs['mpls_bw'] = 0
+        site_specs['internet_bw'] = 100
+    elif 50 <= headcount < 100:
+        site_specs['tier'] = "2A"
+        site_specs['mpls_count'] = 1
+        site_specs['mpls_bw'] = 50
+        site_specs['internet_bw'] = 100
+    elif 100 <= headcount < 250:
+        site_specs['tier'] = "1C"
+        site_specs['mpls_count'] = 2
+        site_specs['mpls_bw'] = 100
+        site_specs['internet_bw'] = 500
+    elif 250 <= headcount < 500:
+        site_specs['tier'] = "1B"
+        site_specs['mpls_count'] = 2
+        site_specs['mpls_bw'] = 200
+        site_specs['internet_bw'] = 500
+    elif headcount >= 500:
+        site_specs['tier'] = "1A"
+        site_specs['mpls_count'] = 2
+        site_specs['mpls_bw'] = 500
+        site_specs['internet_bw'] = 1000
+    return site_specs
+
+
+def ciruitDetails(country, site_specs):
+    circuit_cost = dict()
+
+    cur = mysql.connection.cursor()
+    mpls_query = "select country,circuit_type,max(circuit_details.`$/Mbit`) as max_per_meg, "\
+                 "sum(mrc_usd)/sum(bandwidth_mb) as avg_per_meg from site_details " \
+                 "join circuit_details on circuit_details.location=site_details.site_name " \
+                 "where site_details.country = '" + country + "' and tier in ('1A','1B','1C','2A','2B') "\
+                                                              "and circuit_type='MPLS'"
+
+    cur.execute(mpls_query)
+    mpls_result = cur.fetchall()
+    if mpls_result[0][0] is None:
+        circuit_cost["mpls_max"] = 0
+        circuit_cost["mpls_avg"] = 0
+    else:
+        circuit_cost["mpls_max"] = float(mpls_result[0][2])
+        circuit_cost["mpls_avg"] = float(mpls_result[0][3])
+
+    circuit_cost['mpls_cost_max'] = circuit_cost["mpls_max"] * site_specs['mpls_bw']
+    circuit_cost['mpls_cost_avg'] = circuit_cost["mpls_avg"] * site_specs['mpls_bw']
+
+    int_query = "select country,circuit_type,max(circuit_details.`$/Mbit`) as max_per_meg, " \
+                "sum(mrc_usd)/sum(bandwidth_mb) as avg_per_meg from site_details " \
+                "join circuit_details on circuit_details.location=site_details.site_name " \
+                "where site_details.country = '" + country + "' and tier in ('1A','1B','1C','2A','2B') " \
+                                                             "and circuit_type='Internet'"
+
+    cur.execute(int_query)
+
+    int_result = cur.fetchall()
+    if int_result[0][0] is None:
+        circuit_cost["int_max"] = 0
+        circuit_cost["int_avg"] = 0
+    else:
+        circuit_cost["int_max"] = float(int_result[0][2])
+        circuit_cost["int_avg"] = float(int_result[0][3])
+
+    circuit_cost['int_cost_max'] = circuit_cost["int_max"] * site_specs['internet_bw']
+    circuit_cost['int_cost_avg'] = circuit_cost["int_avg"] * site_specs['internet_bw']
+
+    cur.close()
+    return circuit_cost
+
 
 @app.route('/fetch')
 def fetch():
-    link_count = {}
-    H_C = int(request.args.get("headcount"))
 
-    mpls_count = 0
-    internet_count = 2
-    if H_C < 50:
-        Site_Tier ="Tier 2B"
-        mpls_count = 0
+    headcount = int(request.args.get("headcount"))
+    country = request.args.get('country')
 
-    elif H_C >= 50 and H_C < 100:
-        Site_Tier = "Tier 2A"
-        mpls_count = 1
-
-    elif H_C >= 100 and H_C < 250:
-        Site_Tier = "Tier 1C"
-        mpls_count = 2
-
-    elif H_C >=250 and H_C < 500 :
-        Site_Tier ="Tier 1B"
-        mpls_count = 2
-
-    elif H_C >= 500:
-        Site_Tier = "Tier 1A"
-        mpls_count = 2
-
-    tier_data = sum_data.loc[std_data['Tier'] == Site_Tier]
-    capex_value = sum(tier_data['CAPEX'].fillna(0))
-    opex_value = sum(tier_data['OPEX'].fillna(0))
-
-    link_count['mpls_count'] = mpls_count
-    link_count['internet_count'] = internet_count
-    link_count['tier'] =Site_Tier
-    link_count['capex'] = capex_value
-    link_count['opex'] = opex_value
+    site_specs = getSiteSpecifics(headcount)
+    circuit_cost = ciruitDetails(country, site_specs)
+    tier_val = "Tier "+site_specs['tier']
+    tier_data = sum_data.loc[std_data['Tier'] == tier_val]
 
     result = tier_data.to_json(orient='records')
 
-    response = { '0': result, '1': link_count }
+    response = {'0': result, '1': site_specs, '2': circuit_cost}
+
     return response
-
-
-
 
 
 if __name__ == "__main__":
