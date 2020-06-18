@@ -56,7 +56,10 @@ border:none;
 .site_details .card .card-header{
     border-radius:0;
 }
-
+#site_cost_details_1 h4{
+background: #00567A;
+margin-bottom:10px;
+}
 #homeButton{
     float: right;
     margin-top:4px;
@@ -123,7 +126,6 @@ letter-spacing:1px;
 font-weight:500;
 color:#f8f8f8;
 }
-
 .btn:hover{
 background-color: #00567A;
 color:#fff;
@@ -132,11 +134,13 @@ color:#fff;
 color:#fff;
 }
 .line {
+width:100%;
 margin-top: 0px;
+display:inline-block;
 height: 0.2rem;
 border: 0;
 margin-bottom:15px;
-background: -webkit-linear-gradient(left,#777,#fff);
+background: -webkit-linear-gradient(left,#00567A,#fff);
 }
 #calculate_btn{
     margin : auto;
@@ -161,4 +165,46 @@ background: -webkit-linear-gradient(left,#777,#fff);
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+.features_box{
+margin-right:20px;
+margin-bottom: 10px;
+}
+.collapsible {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    font-weight: 700;
+    /* outline: none; */
+    font-size: 18.72px;
+}
+.active, .collapsible:hover {
+  background-color: #00567A ;
+  color:white;
+}
+.collapsible:after {
+  content: '\002B';
+  color: black;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+.active:after {
+  content: "\2212";
+  color:white;
+}
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: white;
+  margin-bottom: 0.5px;
+}
+.row_expand{
+    border: 2px solid #00567A;
 }

@@ -22,9 +22,11 @@ model_price = pd.read_csv("data/Device Model Price.csv")
 sum_data = pd.merge(std_data, model_price, on ="DeviceModel", how="left")
 sum_data['DeviceModel'] = sum_data['DeviceModel'].replace(np.nan, 'NONE')
 
-
 @app.route('/')
-def home():
+def main_page():
+    return render_template("main.html")
+@app.route('/existing')
+def existing():
     device_type = {}
     device_model = {}
     service_list = sum_data['ServiceType'].unique().tolist()
@@ -47,14 +49,79 @@ def home():
     result = pd.read_sql(query, conn)
 
     country_list = result.to_json(orient='records')
+    query_country = "select distinct(site_name),country  from site_details "
+    result_country= pd.read_sql(query_country, conn)
+
+    location_list = result_country.to_json(orient='records')
+
+
+    #****Extract device details************
+    query_device = "select * from hw_device_details"
+    result_device = pd.read_sql(query_device, conn)
+    LAN_WLAN = ['WIRELESS CNTRL', 'CE ROUTER', 'CORE SWITCH', 'DMZ SWITCH', 'ACCESS SWITCH', 'OFFICE SWITCH',
+                  'VOICE SWITCH', 'WIRELESS SWITCH', 'LAB SWITCH', 'MANAGEMENT SWITCH']
+
+    def check_service(result_device):
+        if result_device['service_unit'] in LAN_WLAN:
+            return "LAN-WLAN"
+        else:
+            return "None"
+    result_device['service_type'] = result_device.apply(check_service, axis=1)
+
+    device_list = result_device
+    #print(device_list)
+
     conn.close()
+    #print(location_list)
+    gss_list= ['CORK BEHAN HOUSE','CORK YEATS HOUSE','BROOMFIELD','Bangalore PS'
+        ,'BANGALORE KM','BANGALORE KV' ,'BANGALORE CNX','Costa Rica','Tokyo',
+        'Shanghai R&D','Guangzhou','Beijing R&D','Sydney','Melbourne','Singapore Suntec']
+    #print(device_type)
 
-
-
-    return render_template("index.html", service_list=service_list, device_type=device_type,
+    service_list_checkbox = ['LAN-WLAN','WAN','DC-Ops','Firewall']
+    return render_template("existing.html", service_list=service_list, device_type=device_type,
                            device_model=device_model,model_price=model_price,
-                           country_list=country_list)
+                           country_list=country_list, location_list = location_list,
+                           gss_list = gss_list, device_list=device_list, service_list_checkbox = service_list_checkbox)
 
+@app.route('/new')
+def new():
+    device_type = {}
+    device_model = {}
+    service_list = sum_data['ServiceType'].unique().tolist()
+    for service in service_list:
+        device_type[service] = sum_data.loc[sum_data['ServiceType'] == service,'DeviceType'].unique().tolist()
+        device_type[service] = sorted(device_type[service])
+
+    device_list = sum_data['DeviceType'].unique().tolist()
+    for device in device_list:
+        device_model[device] = sum_data.loc[sum_data['DeviceType'] == device, 'DeviceModel'].unique().tolist()
+
+    model_price_1 = pd.read_csv("data/Device Model Price.csv")
+    model_price = model_price_1.to_json(orient='records')
+
+    conn = mysql.connect
+    query = "select distinct(country),region  from site_details "\
+            "join circuit_details on circuit_details.location=site_details.site_name " \
+            "order by country"
+
+    result = pd.read_sql(query, conn)
+
+    country_list = result.to_json(orient='records')
+    query_country = "select distinct(site_name),country  from site_details "
+    result_country= pd.read_sql(query_country, conn)
+
+    location_list = result_country.to_json(orient='records')
+    conn.close()
+    #print(location_list)
+    gss_list= ['CORK BEHAN HOUSE','CORK YEATS HOUSE','BROOMFIELD','Bangalore PS'
+        ,'BANGALORE KM','BANGALORE KV' ,'BANGALORE CNX','Costa Rica','Tokyo',
+        'Shanghai R&D','Guangzhou','Beijing R&D','Sydney','Melbourne','Singapore Suntec']
+
+
+    return render_template("new.html", service_list=service_list, device_type=device_type,
+                           device_model=device_model,model_price=model_price,
+                           country_list=country_list, location_list = location_list, gss_list = gss_list)
 
 def getSiteSpecifics(headcount):
     site_specs = dict()
@@ -143,12 +210,58 @@ def fetch():
     circuit_cost = ciruitDetails(country, site_specs)
     tier_val = "Tier "+site_specs['tier']
     tier_data = sum_data.loc[std_data['Tier'] == tier_val]
+    tier_data = tier_data.sort_values(['ServiceType', 'DeviceType'])
 
     result = tier_data.to_json(orient='records')
 
     response = {'0': result, '1': site_specs, '2': circuit_cost}
 
     return response
+
+@app.route('/fetch_device', methods = ['POST','GET'])
+def fetch_device():
+
+    headcount = int(request.get_json("headcount"))
+    site_specs = getSiteSpecifics(headcount)
+    response = {'0': site_specs}
+
+    return response
+
+@app.route('/existing_details', methods = ['POST','GET'])
+def existing_details():
+    conn = mysql.connect
+    dict_value = request.get_json('dict')
+    checkbox_service = dict_value['key1']
+    location = dict_value['key2']
+    print(checkbox_service)
+    print(location)
+    checked_service= checkbox_service.split(',')
+    checked_service = checked_service[:-1]
+    print(checked_service)
+    query_device = "select * from hw_device_details"
+    result_device = pd.read_sql(query_device, conn)
+    LAN_WLAN = ['WIRELESS CNTRL', 'CE ROUTER', 'CORE SWITCH', 'DMZ SWITCH', 'ACCESS SWITCH', 'OFFICE SWITCH',
+                'VOICE SWITCH', 'WIRELESS SWITCH', 'LAB SWITCH', 'MANAGEMENT SWITCH']
+
+    def check_service(result_device):
+        if result_device['service_unit'] in LAN_WLAN:
+            return "LAN-WLAN"
+        else:
+            return "None"
+
+    result_device['service_type'] = result_device.apply(check_service, axis=1)
+
+    device_list = result_device[(result_device['service_type'].isin(checked_service)) & (result_device['location'] == location)]
+    result = device_list.to_json(orient='records')
+    service_list_checkbox = ['LAN-WLAN', 'WAN', 'DC-Ops', 'Firewall']
+
+    response = {'0': result, '1' : checked_service, '2' : service_list_checkbox}
+    print(response)
+    conn.close()
+
+    return response
+
+
 
 
 if __name__ == "__main__":

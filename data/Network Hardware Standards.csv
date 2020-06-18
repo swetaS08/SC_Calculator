@@ -1,24 +1,24 @@
 ﻿Tier,ServiceType,DeviceType,DeviceModel
-Tier 1A,LAN,Wireless Switch,Cisco C9300-48UN-E
-Tier 1B,LAN,Wireless Switch,Cisco C9300-48UN-E
-Tier 1C,LAN,Wireless Switch,Cisco C9300-48UN-E
-Tier 2A,LAN,Wireless Switch,Cisco C9300-48UN-E
-Tier 2B,LAN,Wireless Switch,Cisco C9300-48UN-E
-Tier 1A,LAN,Wireless Controller B,Aruba 7240XM
-Tier 1B,LAN,Wireless Controller B,Aruba 7240XM
-Tier 1C,LAN,Wireless Controller B,Aruba 7210
-Tier 2A,LAN,Wireless Controller B,Aruba 7205
-Tier 2B,LAN,Wireless Controller B,Aruba 7205
-Tier 1A,LAN,Wireless Controller A,Aruba 7240XM
-Tier 1B,LAN,Wireless Controller A,Aruba 7240XM
-Tier 1C,LAN,Wireless Controller A,Aruba 7210
-Tier 2A,LAN,Wireless Controller A,Aruba 7205
-Tier 2B,LAN,Wireless Controller A,Aruba 7205
-Tier 1A,LAN,Wireless AP,Aruba AP535
-Tier 1B,LAN,Wireless AP,Aruba AP535
-Tier 1C,LAN,Wireless AP,Aruba AP535
-Tier 2A,LAN,Wireless AP,Aruba AP535
-Tier 2B,LAN,Wireless AP,Aruba AP535
+Tier 1A,LAN-WLAN,Wireless Switch,Cisco C9300-48UN-E
+Tier 1B,LAN-WLAN,Wireless Switch,Cisco C9300-48UN-E
+Tier 1C,LAN-WLAN,Wireless Switch,Cisco C9300-48UN-E
+Tier 2A,LAN-WLAN,Wireless Switch,Cisco C9300-48UN-E
+Tier 2B,LAN-WLAN,Wireless Switch,Cisco C9300-48UN-E
+Tier 1A,LAN-WLAN,Wireless Controller B,Aruba 7240XM
+Tier 1B,LAN-WLAN,Wireless Controller B,Aruba 7240XM
+Tier 1C,LAN-WLAN,Wireless Controller B,Aruba 7210
+Tier 2A,LAN-WLAN,Wireless Controller B,Aruba 7205
+Tier 2B,LAN-WLAN,Wireless Controller B,Aruba 7205
+Tier 1A,LAN-WLAN,Wireless Controller A,Aruba 7240XM
+Tier 1B,LAN-WLAN,Wireless Controller A,Aruba 7240XM
+Tier 1C,LAN-WLAN,Wireless Controller A,Aruba 7210
+Tier 2A,LAN-WLAN,Wireless Controller A,Aruba 7205
+Tier 2B,LAN-WLAN,Wireless Controller A,Aruba 7205
+Tier 1A,LAN-WLAN,Wireless AP,Aruba AP535
+Tier 1B,LAN-WLAN,Wireless AP,Aruba AP535
+Tier 1C,LAN-WLAN,Wireless AP,Aruba AP535
+Tier 2A,LAN-WLAN,Wireless AP,Aruba AP535
+Tier 2B,LAN-WLAN,Wireless AP,Aruba AP535
 Tier 1A,WAN,Velocloud B,NA
 Tier 1A,WAN,Velocloud A,NA
 Tier 1B,WAN,Velocloud A,NA
@@ -27,23 +27,23 @@ Tier 2A,WAN,Velocloud A,VeloCloud Edge 3800
 Tier 2B,WAN,Velocloud A,VeloCloud Edge 3800
 Tier 1A,Footprint,Switch B,Cisco N9K-C93180YC-FX
 Tier 1B,Footprint,Switch B,Cisco N9K-C93180YC-FX
-Tier  1C,Footprint,Switch B,Cisco N9K-C93180YC-FX
+Tier 1C,Footprint,Switch B,Cisco N9K-C93180YC-FX
 Tier 2A,Footprint,Switch B,Cisco N9K-C93180YC-FX
 Tier 1A,Footprint,Switch A,Cisco N9K-C93180YC-FX
 Tier 1B,Footprint,Switch A,Cisco N9K-C93180YC-FX
-Tier  1C,Footprint,Switch A,Cisco N9K-C93180YC-FX
+Tier 1C,Footprint,Switch A,Cisco N9K-C93180YC-FX
 Tier 2A,Footprint,Switch A,Cisco N9K-C93180YC-FX
 Tier 1A,DC-Ops,Rack,NA
 Tier 1B,DC-Ops,Rack,NA
-Tier  1C,DC-Ops,Rack,NA
+Tier 1C,DC-Ops,Rack,NA
 Tier 1A,DC-Ops,PDU's,NA
 Tier 1B,DC-Ops,PDU's,NA
-Tier  1C,DC-Ops,PDU's,NA
-Tier 1A,LAN,LAN Office Switch,Cisco C9410R-96U-BNDL-A
-Tier 1B,LAN,LAN Office Switch,Cisco C9410R-96U-BNDL-A
-Tier 1C,LAN,LAN Office Switch,Cisco C9410R-96U-BNDL-A
-Tier 2A,LAN,LAN Office Switch,Cisco C9300-48UN-E
-Tier 2B,LAN,LAN Office Switch,Cisco C9300-48UN-E
+Tier 1C,DC-Ops,PDU's,NA
+Tier 1A,LAN-WLAN,LAN Office Switch,Cisco C9410R-96U-BNDL-A
+Tier 1B,LAN-WLAN,LAN Office Switch,Cisco C9410R-96U-BNDL-A
+Tier 1C,LAN-WLAN,LAN Office Switch,Cisco C9410R-96U-BNDL-A
+Tier 2A,LAN-WLAN,LAN Office Switch,Cisco C9300-48UN-E
+Tier 2B,LAN-WLAN,LAN Office Switch,Cisco C9300-48UN-E
 Tier 1A,WAN,MPLS Router B,Cisco ASR 1002-X (8GB)
 Tier 1B,WAN,MPLS Router B,Cisco ASR 1001-X
 Tier 1C,WAN,MPLS Router B,Cisco ASR 1001-X
@@ -66,30 +66,30 @@ Tier 2A,WAN,MPLS Route Reflector A,NA
 Tier 2B,WAN,MPLS Route Reflector A,NA
 Tier 1A,DC-Ops,Mgmt Switch,NA
 Tier 1B,DC-Ops,Mgmt Switch,NA
-Tier  1C,DC-Ops,Mgmt Switch,NA
+Tier 1C,DC-Ops,Mgmt Switch,NA
 Tier 1A,Network Services,Load Balancer,NA
 Tier 1B,Network Services,Load Balancer,NA
-Tier  1C,Network Services,Load Balancer,NA
-Tier 1A,LAN,LAN DMZ B,Cisco C9500-48Y4C-A
-Tier 1B,LAN,LAN DMZ B,Cisco C9500-48Y4C-A
-Tier 1C,LAN,LAN DMZ B,Cisco C9500-48Y4C-A
-Tier 2A,LAN,LAN DMZ B,Cisco C9500-24Y4C-A
-Tier 2B,LAN,LAN DMZ B,Cisco C9500-24Y4C-A
-Tier 1A,LAN,LAN DMZ A,Cisco C9500-48Y4C-A
-Tier 1B,LAN,LAN DMZ A,Cisco C9500-48Y4C-A
-Tier 1C,LAN,LAN DMZ A,Cisco C9500-48Y4C-A
-Tier 2A,LAN,LAN DMZ A,Cisco C9500-24Y4C-A
-Tier 2B,LAN,LAN DMZ A,Cisco C9500-24Y4C-A
-Tier 1A,LAN,LAN Core B,Cisco C9500-48Y4C-A
-Tier 1B,LAN,LAN Core B,Cisco C9500-48Y4C-A
-Tier 1C,LAN,LAN Core B,Cisco C9500-48Y4C-A
-Tier 2A,LAN,LAN Core B,Cisco C9500-48Y4C-A
-Tier 2B,LAN,LAN Core B,Cisco C9500-24Y4C-A
-Tier 1A,LAN,LAN Core A,Cisco C9500-48Y4C-A
-Tier 1B,LAN,LAN Core A,Cisco C9500-48Y4C-A
-Tier 1C,LAN,LAN Core A,Cisco C9500-48Y4C-A
-Tier 2A,LAN,LAN Core A,Cisco C9500-48Y4C-A
-Tier 2B,LAN,LAN Core A,Cisco C9500-24Y4C-A
+Tier 1C,Network Services,Load Balancer,NA
+Tier 1A,LAN-WLAN,LAN DMZ B,Cisco C9500-48Y4C-A
+Tier 1B,LAN-WLAN,LAN DMZ B,Cisco C9500-48Y4C-A
+Tier 1C,LAN-WLAN,LAN DMZ B,Cisco C9500-48Y4C-A
+Tier 2A,LAN-WLAN,LAN DMZ B,Cisco C9500-24Y4C-A
+Tier 2B,LAN-WLAN,LAN DMZ B,Cisco C9500-24Y4C-A
+Tier 1A,LAN-WLAN,LAN DMZ A,Cisco C9500-48Y4C-A
+Tier 1B,LAN-WLAN,LAN DMZ A,Cisco C9500-48Y4C-A
+Tier 1C,LAN-WLAN,LAN DMZ A,Cisco C9500-48Y4C-A
+Tier 2A,LAN-WLAN,LAN DMZ A,Cisco C9500-24Y4C-A
+Tier 2B,LAN-WLAN,LAN DMZ A,Cisco C9500-24Y4C-A
+Tier 1A,LAN-WLAN,LAN Core B,Cisco C9500-48Y4C-A
+Tier 1B,LAN-WLAN,LAN Core B,Cisco C9500-48Y4C-A
+Tier 1C,LAN-WLAN,LAN Core B,Cisco C9500-48Y4C-A
+Tier 2A,LAN-WLAN,LAN Core B,Cisco C9500-48Y4C-A
+Tier 2B,LAN-WLAN,LAN Core B,Cisco C9500-24Y4C-A
+Tier 1A,LAN-WLAN,LAN Core A,Cisco C9500-48Y4C-A
+Tier 1B,LAN-WLAN,LAN Core A,Cisco C9500-48Y4C-A
+Tier 1C,LAN-WLAN,LAN Core A,Cisco C9500-48Y4C-A
+Tier 2A,LAN-WLAN,LAN Core A,Cisco C9500-48Y4C-A
+Tier 2B,LAN-WLAN,LAN Core A,Cisco C9500-24Y4C-A
 Tier 1A,WAN,Internet Router B,Cisco ASR 1002-X (8GB)
 Tier 1B,WAN,Internet Router B,Cisco ASR 1001-X
 Tier 1C,WAN,Internet Router B,Cisco ASR 1001-X
@@ -112,15 +112,15 @@ Tier 2A,WAN,Int Route Reflector A,NA
 Tier 2B,WAN,Int Route Reflector A,NA
 Tier 1A,Network Services,InfoBlox Maintenance,IB-MNT-PRM
 Tier 1B,Network Services,InfoBlox Maintenance,IB-MNT-PRM
-Tier  1C,Network Services,InfoBlox Maintenance,IB-MNT-PRM
+Tier 1C,Network Services,InfoBlox Maintenance,IB-MNT-PRM
 Tier 2A,Network Services,InfoBlox Maintenance,IB-MNT-PRM
 Tier 1A,Network Services,InfoBlox License VM Trinzic V8B5,TE-V825-NS1GRID
 Tier 1B,Network Services,InfoBlox License VM Trinzic V8B5,TE-V825-NS1GRID
-Tier  1C,Network Services,InfoBlox License VM Trinzic V8B5,TE-V825-NS1GRID
+Tier 1C,Network Services,InfoBlox License VM Trinzic V8B5,TE-V825-NS1GRID
 Tier 2A,Network Services,InfoBlox License VM Trinzic V8B5,TE-V825-NS1GRID
 Tier 1A,Footprint,Footprint Server,Dell/EMC/VX Rail
 Tier 1B,Footprint,Footprint Server,Dell/EMC/VX Rail
-Tier  1C,Footprint,Footprint Server,Dell/EMC/VX Rail
+Tier 1C,Footprint,Footprint Server,Dell/EMC/VX Rail
 Tier 2A,Footprint,Footprint Server,Dell/EMC/VX Rail
 Tier 1A,Firewall,FIREWALL B,PAN 3250
 Tier 1B,Firewall,FIREWALL B,PAN 3250
@@ -132,54 +132,54 @@ Tier 1B,Firewall,FIREWALL A,PAN 3250
 Tier 1C,Firewall,FIREWALL A,PAN 3220
 Tier 2A,Firewall,FIREWALL A,PAN 3250
 Tier 2B,Firewall,FIREWALL A,PAN 850
-Tier 1A,LAN,Console Switch,Avocent ACS8048MDAC-400
-Tier 1B,LAN,Console Switch,Avocent ACS8048MDAC-400
-Tier 1C,LAN,Console Switch,Avocent ACS8048MDAC-400
-Tier 2A,LAN,Console Switch,Avocent ACS8048MDAC-400
-Tier 2B,LAN,Console Switch,Avocent ACS8048MDAC-400
+Tier 1A,LAN-WLAN,Console Switch,Avocent ACS8048MDAC-400
+Tier 1B,LAN-WLAN,Console Switch,Avocent ACS8048MDAC-400
+Tier 1C,LAN-WLAN,Console Switch,Avocent ACS8048MDAC-400
+Tier 2A,LAN-WLAN,Console Switch,Avocent ACS8048MDAC-400
+Tier 2B,LAN-WLAN,Console Switch,Avocent ACS8048MDAC-400
 Tier 1A,Network Services,ClearPass License VM,HPE Aruba ClearPass JZ399AAE
 Tier 1B,Network Services,ClearPass License VM,HPE Aruba ClearPass JZ399AAE
-Tier  1C,Network Services,ClearPass License VM,HPE Aruba ClearPass JZ399AAE
+Tier 1C,Network Services,ClearPass License VM,HPE Aruba ClearPass JZ399AAE
 Tier 1A,Network Services,ClearPass License 5000,HPE Aruba ClearPass JZ403AAE
 Tier 1B,Network Services,ClearPass License 5000,HPE Aruba ClearPass JZ403AAE
-Tier  1C,Network Services,ClearPass License 5000,HPE Aruba ClearPass JZ403AAE
-Tier 1A,LAN,AV Switch,Cisco C9300-48UN-E
-Tier 1B,LAN,AV Switch,Cisco C9300-48UN-E
-Tier 1C,LAN,AV Switch,Cisco C9300-48UN-E
-Tier 2A,LAN,AV Switch,Cisco C9300-48UN-E
-Tier 2B,LAN,AV Switch,Cisco C9300-48UN-E
-Tier 1A,LAN,Access Management,Cisco C9300-48UN-E
-Tier 1B,LAN,Access Mgmt,Cisco C9300-48UN-E
-Tier 1C,LAN,Access Mgmt,Cisco C9300-48UN-E
-Tier 2A,LAN,Access Mgmt,Cisco C9300-48UN-E
-Tier 2B,LAN,Access Mgmt,Cisco C9300-48UN-E
-Tier 1A,LAN,Access Physical Security,Cisco C9300-48UN-E
-Tier 1B,LAN,Access Physical Security,Cisco C9300-48UN-E
-Tier 1C,LAN,Access Physical Security,Cisco C9300-48UN-E
-Tier 2A,LAN,Access Physical Security,Cisco C9300-48UN-E
-Tier 2B,LAN,Access Physical Security,Cisco C9300-48UN-E
-Tier 1A,LAN,Access Lab Switch,Cisco C9300-48UN-E
-Tier 1B,LAN,Access lab switch,Cisco C9300-48UN-E
-Tier 1C,LAN,Access lab switch,Cisco C9300-48UN-E
-Tier 2A,LAN,Access lab switch,Cisco C9300-48UN-E
-Tier 2B,LAN,Access lab switch,Cisco C9300-48UN-E
-Tier 1A,Transceivers,10 Gbps MMF,Cisco SFP-10G-SR=
-Tier 1A,Transceivers,1 Gbps MMF,Cisco SX-MMD=
-Tier 1A,Transceivers,1 Gbps Copper,Cisco GLC-TE=
-Tier 1A,Transceivers,10 Gbps SMF,Cisco SFP-10G-LR=
-Tier 1B,Transceivers,10 Gbps MMF,Cisco SFP-10G-SR=
-Tier 1B,Transceivers,1 Gbps MMF,Cisco SX-MMD=
-Tier 1B,Transceivers,1 Gbps Copper,Cisco GLC-TE=
-Tier 1B,Transceivers,10 Gbps SMF,Cisco SFP-10G-LR=
-Tier 1C,Transceivers,10 Gbps MMF,Cisco SFP-10G-SR=
-Tier 1C,Transceivers,1 Gbps MMF,Cisco SX-MMD=
-Tier 1C,Transceivers,1 Gbps Copper,Cisco GLC-TE=
-Tier 1C,Transceivers,10 Gbps SMF,Cisco SFP-10G-LR=
-Tier 2A,Transceivers,10 Gbps MMF,Cisco SFP-10G-SR=
-Tier 2A,Transceivers,1 Gbps MMF,Cisco SX-MMD=
-Tier 2A,Transceivers,1 Gbps Copper,Cisco GLC-TE=
-Tier 2A,Transceivers,10 Gbps SMF,Cisco SFP-10G-LR=
-Tier 2B,Transceivers,10 Gbps MMF,Cisco SFP-10G-SR=
-Tier 2B,Transceivers,1 Gbps MMF,Cisco SX-MMD=
-Tier 2B,Transceivers,1 Gbps Copper,Cisco GLC-TE=
-Tier 2B,Transceivers,10 Gbps SMF,Cisco SFP-10G-LR=
+Tier 1C,Network Services,ClearPass License 5000,HPE Aruba ClearPass JZ403AAE
+Tier 1A,LAN-WLAN,AV Switch,Cisco C9300-48UN-E
+Tier 1B,LAN-WLAN,AV Switch,Cisco C9300-48UN-E
+Tier 1C,LAN-WLAN,AV Switch,Cisco C9300-48UN-E
+Tier 2A,LAN-WLAN,AV Switch,Cisco C9300-48UN-E
+Tier 2B,LAN-WLAN,AV Switch,Cisco C9300-48UN-E
+Tier 1A,LAN-WLAN,Access Management,Cisco C9300-48UN-E
+Tier 1B,LAN-WLAN,Access Management,Cisco C9300-48UN-E
+Tier 1C,LAN-WLAN,Access Management,Cisco C9300-48UN-E
+Tier 2A,LAN-WLAN,Access Management,Cisco C9300-48UN-E
+Tier 2B,LAN-WLAN,Access Management,Cisco C9300-48UN-E
+Tier 1A,LAN-WLAN,Access Physical Security,Cisco C9300-48UN-E
+Tier 1B,LAN-WLAN,Access Physical Security,Cisco C9300-48UN-E
+Tier 1C,LAN-WLAN,Access Physical Security,Cisco C9300-48UN-E
+Tier 2A,LAN-WLAN,Access Physical Security,Cisco C9300-48UN-E
+Tier 2B,LAN-WLAN,Access Physical Security,Cisco C9300-48UN-E
+Tier 1A,LAN-WLAN,Access Lab Switch,Cisco C9300-48UN-E
+Tier 1B,LAN-WLAN,Access Lab Switch,Cisco C9300-48UN-E
+Tier 1C,LAN-WLAN,Access Lab Switch,Cisco C9300-48UN-E
+Tier 2A,LAN-WLAN,Access Lab Switch,Cisco C9300-48UN-E
+Tier 2B,LAN-WLAN,Access Lab Switch,Cisco C9300-48UN-E
+Tier 1A,Module(LineCard),10 Gbps MMF,Cisco SFP-10G-SR=
+Tier 1A,Module(LineCard),1 Gbps MMF,Cisco SX-MMD=
+Tier 1A,Module(LineCard),1 Gbps Copper,Cisco GLC-TE=
+Tier 1A,Module(LineCard),10 Gbps SMF,Cisco SFP-10G-LR=
+Tier 1B,Module(LineCard),10 Gbps MMF,Cisco SFP-10G-SR=
+Tier 1B,Module(LineCard),1 Gbps MMF,Cisco SX-MMD=
+Tier 1B,Module(LineCard),1 Gbps Copper,Cisco GLC-TE=
+Tier 1B,Module(LineCard),10 Gbps SMF,Cisco SFP-10G-LR=
+Tier 1C,Module(LineCard),10 Gbps MMF,Cisco SFP-10G-SR=
+Tier 1C,Module(LineCard),1 Gbps MMF,Cisco SX-MMD=
+Tier 1C,Module(LineCard),1 Gbps Copper,Cisco GLC-TE=
+Tier 1C,Module(LineCard),10 Gbps SMF,Cisco SFP-10G-LR=
+Tier 2A,Module(LineCard),10 Gbps MMF,Cisco SFP-10G-SR=
+Tier 2A,Module(LineCard),1 Gbps MMF,Cisco SX-MMD=
+Tier 2A,Module(LineCard),1 Gbps Copper,Cisco GLC-TE=
+Tier 2A,Module(LineCard),10 Gbps SMF,Cisco SFP-10G-LR=
+Tier 2B,Module(LineCard),10 Gbps MMF,Cisco SFP-10G-SR=
+Tier 2B,Module(LineCard),1 Gbps MMF,Cisco SX-MMD=
+Tier 2B,Module(LineCard),1 Gbps Copper,Cisco GLC-TE=
+Tier 2B,Module(LineCard),10 Gbps SMF,Cisco SFP-10G-LR=

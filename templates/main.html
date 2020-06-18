@@ -1,0 +1,17 @@
+{% extends "header.html" %}
+{% block body %}
+<div class="main-wrapper">
+    <div class="select-type">
+        <div class="title">
+        <span class="net-auth-title">Network and Authentication Services</span>
+        <span style="margin-top:10px">Site Cost Calculator</span>
+        </div>
+
+        <a href="{{url_for('new')}}" role="button" class="button">New Site Buildout</a>
+        <a href="{{url_for('existing')}}" role="button" class="button">Existing Site Floor Expansion</a>
+
+    </div>
+
+
+</div>
+{% endblock %}
