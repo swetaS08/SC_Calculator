@@ -22,7 +22,7 @@ model_price = pd.read_csv("data/Device Model Price.csv")
 
 sum_data = pd.merge(std_data, model_price, on ="DeviceModel", how="left")
 sum_data['DeviceModel'] = sum_data['DeviceModel'].replace(np.nan, 'NONE')
-sum_data.to_csv("sum_data.csv")
+#sum_data.to_csv("sum_data.csv")
 
 @app.route('/')
 def main_page():
