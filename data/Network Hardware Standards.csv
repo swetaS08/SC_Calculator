@@ -163,26 +163,26 @@ Tier 1B,LAN-WLAN,Access Lab Switch,Cisco C9300-48UN-E
 Tier 1C,LAN-WLAN,Access Lab Switch,Cisco C9300-48UN-E
 Tier 2A,LAN-WLAN,Access Lab Switch,Cisco C9300-48UN-E
 Tier 2B,LAN-WLAN,Access Lab Switch,Cisco C9300-48UN-E
-Tier 1A,Module(LineCard),10 Gbps MMF,Cisco SFP-10G-SR=
-Tier 1A,Module(LineCard),1 Gbps MMF,Cisco SX-MMD=
-Tier 1A,Module(LineCard),1 Gbps Copper,Cisco GLC-TE=
-Tier 1A,Module(LineCard),10 Gbps SMF,Cisco SFP-10G-LR=
-Tier 1B,Module(LineCard),10 Gbps MMF,Cisco SFP-10G-SR=
-Tier 1B,Module(LineCard),1 Gbps MMF,Cisco SX-MMD=
-Tier 1B,Module(LineCard),1 Gbps Copper,Cisco GLC-TE=
-Tier 1B,Module(LineCard),10 Gbps SMF,Cisco SFP-10G-LR=
-Tier 1C,Module(LineCard),10 Gbps MMF,Cisco SFP-10G-SR=
-Tier 1C,Module(LineCard),1 Gbps MMF,Cisco SX-MMD=
-Tier 1C,Module(LineCard),1 Gbps Copper,Cisco GLC-TE=
-Tier 1C,Module(LineCard),10 Gbps SMF,Cisco SFP-10G-LR=
-Tier 2A,Module(LineCard),10 Gbps MMF,Cisco SFP-10G-SR=
-Tier 2A,Module(LineCard),1 Gbps MMF,Cisco SX-MMD=
-Tier 2A,Module(LineCard),1 Gbps Copper,Cisco GLC-TE=
-Tier 2A,Module(LineCard),10 Gbps SMF,Cisco SFP-10G-LR=
-Tier 2B,Module(LineCard),10 Gbps MMF,Cisco SFP-10G-SR=
-Tier 2B,Module(LineCard),1 Gbps MMF,Cisco SX-MMD=
-Tier 2B,Module(LineCard),1 Gbps Copper,Cisco GLC-TE=
-Tier 2B,Module(LineCard),10 Gbps SMF,Cisco SFP-10G-LR=
+Tier 1A,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=
+Tier 1A,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=
+Tier 1A,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=
+Tier 1A,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=
+Tier 1B,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=
+Tier 1B,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=
+Tier 1B,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=
+Tier 1B,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=
+Tier 1C,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=
+Tier 1C,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=
+Tier 1C,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=
+Tier 1C,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=
+Tier 2A,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=
+Tier 2A,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=
+Tier 2A,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=
+Tier 2A,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=
+Tier 2B,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=
+Tier 2B,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=
+Tier 2B,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=
+Tier 2B,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=
 Tier 1C,Security,Gigamon,Gigamon HC1
 Tier 2A,Security,Gigamon,Gigamon HC1
 Tier 2B,Security,Gigamon,Gigamon HC1

@@ -1,7 +1,8 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import pandas as pd
 import numpy as np
 from flask_mysqldb import MySQL
+
 
 
 app = Flask(__name__)
@@ -216,7 +217,7 @@ def fetch():
 
     response = {'0': result, '1': site_specs, '2': circuit_cost}
 
-    return response
+    return jsonify(response)
 
 @app.route('/fetch_device', methods = ['POST','GET'])
 def fetch_device():
