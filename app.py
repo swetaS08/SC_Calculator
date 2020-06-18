@@ -22,6 +22,7 @@ model_price = pd.read_csv("data/Device Model Price.csv")
 
 sum_data = pd.merge(std_data, model_price, on ="DeviceModel", how="left")
 sum_data['DeviceModel'] = sum_data['DeviceModel'].replace(np.nan, 'NONE')
+sum_data.to_csv("sum_data.csv")
 
 @app.route('/')
 def main_page():
@@ -209,8 +210,11 @@ def fetch():
 
     site_specs = getSiteSpecifics(headcount)
     circuit_cost = ciruitDetails(country, site_specs)
-    tier_val = "Tier "+site_specs['tier']
-    tier_data = sum_data.loc[std_data['Tier'] == tier_val]
+    tier_val = "Tier "+ site_specs['tier']
+    print(tier_val)
+    tier_data = sum_data.loc[sum_data['Tier'] == tier_val]
+    wan_data = tier_data[tier_data['ServiceType']== "WAN"]
+    print(wan_data[['ServiceType','DeviceType']])
     tier_data = tier_data.sort_values(['ServiceType', 'DeviceType'])
 
     result = tier_data.to_json(orient='records')
