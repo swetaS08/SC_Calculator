@@ -183,3 +183,13 @@ Tier 2B,Module(LineCard),10 Gbps MMF,Cisco SFP-10G-SR=
 Tier 2B,Module(LineCard),1 Gbps MMF,Cisco SX-MMD=
 Tier 2B,Module(LineCard),1 Gbps Copper,Cisco GLC-TE=
 Tier 2B,Module(LineCard),10 Gbps SMF,Cisco SFP-10G-LR=
+Tier 1C,Security,Gigamon,Gigamon HC1
+Tier 2A,Security,Gigamon,Gigamon HC1
+Tier 2B,Security,Gigamon,Gigamon HC1
+Tier 1C,Security,Security Footprint,Power Edge Dell R640
+Tier 2A,Security,Security Footprint,Power Edge Dell R640
+Tier 2B,Security,Security Footprint,Power Edge Dell R640
+Tier 1A,Security,Gigamon,Gigamon HC2
+Tier 1B,Security,Gigamon,Gigamon HC2
+Tier 1A,Security,Security Footprint,Power Edge Dell C6420
+Tier 1B,Security,Security Footprint,Power Edge Dell C6420
