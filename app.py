@@ -253,7 +253,7 @@ def fetch_device():
     site_specs = getSiteSpecifics(headcount)
     response = {'0': site_specs}
 
-    return response
+    return jsonify(response)
 
 @app.route('/existing_details', methods = ['POST','GET'])
 def existing_details():
@@ -287,8 +287,7 @@ def existing_details():
     print(response)
     conn.close()
 
-    return response
-
+    return jsonify(response)
 
 
 
