@@ -234,10 +234,8 @@ def fetch():
     site_specs = getSiteSpecifics(headcount)
     circuit_cost = ciruitDetails(country, site_specs)
     tier_val = "Tier "+ site_specs['tier']
-    print(tier_val)
+
     tier_data = sum_data.loc[sum_data['Tier'] == tier_val]
-    wan_data = tier_data[tier_data['ServiceType']== "WAN"]
-    print(wan_data[['ServiceType','DeviceType']])
     tier_data = tier_data.sort_values(['ServiceType', 'DeviceType'])
 
     result = tier_data.to_json(orient='records')
@@ -251,7 +249,8 @@ def fetch_device():
 
     headcount = int(request.get_json("headcount"))
     site_specs = getSiteSpecifics(headcount)
-    response = {'0': site_specs}
+    service_list  = sum_data['ServiceType'].unique().tolist()
+    response = {'0': site_specs, '1': service_list}
 
     return jsonify(response)
 
@@ -261,30 +260,35 @@ def existing_details():
     dict_value = request.get_json('dict')
     checkbox_service = dict_value['key1']
     location = dict_value['key2']
-    print(checkbox_service)
-    print(location)
+
     checked_service= checkbox_service.split(',')
     checked_service = checked_service[:-1]
-    print(checked_service)
+
     query_device = "select * from hw_device_details"
     result_device = pd.read_sql(query_device, conn)
     LAN_WLAN = ['WIRELESS CNTRL', 'CE ROUTER', 'CORE SWITCH', 'DMZ SWITCH', 'ACCESS SWITCH', 'OFFICE SWITCH',
                 'VOICE SWITCH', 'WIRELESS SWITCH', 'LAB SWITCH', 'MANAGEMENT SWITCH']
+    WAN = ['MPLS ROUTE REFLECTOR', 'INTERNET ROUTE REFLECTOR', 'INTERNET ROUTER', 'MPLS ROUTER', 'P2P ROUTER']
+    Firewall = ['Firewall']
 
     def check_service(result_device):
         if result_device['service_unit'] in LAN_WLAN:
             return "LAN-WLAN"
+        elif result_device['service_unit'] in WAN:
+            return "WAN"
+        elif result_device['service_unit'] in Firewall:
+            return "Firewall"
         else:
             return "None"
 
     result_device['service_type'] = result_device.apply(check_service, axis=1)
+    result_device = result_device[~result_device.device_name.str.contains("SUP")]
 
     device_list = result_device[(result_device['service_type'].isin(checked_service)) & (result_device['location'] == location)]
     result = device_list.to_json(orient='records')
     service_list_checkbox = ['LAN-WLAN', 'WAN', 'DC-Ops', 'Firewall']
 
     response = {'0': result, '1' : checked_service, '2' : service_list_checkbox}
-    print(response)
     conn.close()
 
     return jsonify(response)

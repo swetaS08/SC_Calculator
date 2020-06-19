@@ -30,7 +30,7 @@
                             </select>
                         </div>
                     </div>
-                     <div class="col-md-3 features_box">
+                     <div class="col-md-3 features_box" id="div_site">
                         <div class="form-group">
                             <label for="site_type">Site Type :</label>
                             <select class="form-control" id="site_type" name="site_type" required>
@@ -325,7 +325,7 @@
     </div>
     <br><br>
     <div class="row_expand">
-            <button class="collapsible">IT InfraStructure Details</button>
+            <button class="collapsible">IT Infrastructure Details</button>
             <div class="content">
                 <div class="row site_details">
                 {% for service_val in service_list%}
@@ -339,7 +339,7 @@
                 <div class="col-md-12" id = "div_{{service}}" style="margin-bottom:20px; margin-top:20px">
                     <div class="card">
                     <div class="card-header" style="background:#00567A;color:#fff">
-                        <h5 class="service_name" style="display:inline;">{{service}} Details</h5>
+                        <h5 class="service_name" style="display:inline;">{{service_val}} Details</h5>
                         <h5 id="sum_{{service}}" style="display:inline;float:right;font-size:16px;"></h5>
                     </div>
                     <div class="card-body">
@@ -402,7 +402,7 @@
 
     </div>
         <br><br>
-    <div class= "row_expand">
+    <div class= "row_expand" id="ckt_detail">
         <button class="collapsible">Circuit Details</button>
         <div class="content">
                     <div class="row">
@@ -496,10 +496,9 @@ $(".select_type_qty select").on("change", function() {
      opex_qty = opex_value * qty_value;
      $('#' + row_id + ' .capex').html(formatter1.format(capex_qty));
      $('#' + row_id + ' .opex').html(formatter1.format(opex_qty));
-     calculate();
+
 
 });
-
 $(".select_device_type select").on("change", function() {
     var value = this.value;
     var $cell = $(this).parent();
@@ -511,7 +510,7 @@ $(".select_device_type select").on("change", function() {
     $('#' + row_id + ' .capex').html(formatter1.format(capex_data[0].CAPEX));
     $('#' + row_id + ' .opex').html(formatter1.format(capex_data[0].OPEX));
 
-    calculate();
+
 });
 $( ".checkBox" ).change(function() {
     var $input = $( this );
@@ -520,10 +519,7 @@ $( ".checkBox" ).change(function() {
     $("#checkboxes").append(id_val); //change this
     var out = $("#checkboxes").html();
     filter_data(out);
-
-
 });
-
 function filter_data(out){
     var location = $("#location :selected").text();
     /*var locations = document.getElementById('locations');
@@ -553,6 +549,7 @@ function filter_data(out){
                         if (item.service_Type == servicearray[i]){
 
                             trHTML += '<tbody><tr><td>' + item.device_name + '</td><td>'+ item.service_unit + '</td><td>'+item.device_model +
+                            '</td><td>' + '' + '</td><td>' + '' +
                              '</td></tr><tbody>';
                         }
 
@@ -590,10 +587,15 @@ function project_data(){
         $('#div_1').show();
         $('#div_2').show();
         $('#row_port_details').show();
+        $('#ckt_detail').show();
+        $('#div_site').show();
+
     } else {
         $('#div_1').hide();
         $('#div_2').hide();
         $('#row_port_details').hide();
+        $('#ckt_detail').hide();
+        $('#div_site').hide();
     }
 
 
@@ -684,10 +686,54 @@ function process(){
           $("#mpls_count").html(data[0].mpls_count);
           $("#internet_count").html(data[0].internet_count);
           port_count();
+          hide_service(data[1]);
           }
     });
     $('#process_btn').hide();
     $('#calculate_btn').show();
+
+}
+function hide_service(service_list){
+    var array = []
+    var service_array = []
+    var service_lst = service_list
+    var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+
+    for (var i = 0; i < checkboxes.length; i++) {
+      if(checkboxes[i].value == 'Network Services'){
+      array.push('Network_Services')
+      }else{
+      array.push(checkboxes[i].value)
+      }
+    }
+     for (i=0 ; i< service_lst.length; i++){
+         if(service_lst[i] == 'Network Services'){
+                service_type = 'Network_Services';
+         }else if(service_lst[i] == 'Module(Line Card)'){
+                service_type = 'module';
+         }else{
+                service_type = service_lst[i];
+         }
+
+         if (array.indexOf(service_type) > -1){
+            console.log("show");
+             id = "#div_" + service_type;
+             id_exist = "#exit_" + service_type;
+             console.log(id);
+             console.log('exist',id_exist);
+              $(id).show();
+              $(id_exist).show();
+         }
+         else{
+            id = "#div_" + service_type;
+            id_exist = "#exit_" + service_type;
+            console.log(id);
+            console.log('exist',id_exist);
+            $(id).hide();
+            $(id_exist).hide();
+
+         }
+    }
 }
 function port_count(){
     console.log("working");
@@ -761,34 +807,7 @@ $(document).ready(function () {
             complete:function(data){
                 $("#loader").hide();
                 $("#calculate_btn").show();
-                var array = []
-                var service_array = []
-                var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
 
-                for (var i = 0; i < checkboxes.length; i++) {
-                  if(checkboxes[i].value == 'Network Services'){
-                  array.push('Network_Services')
-                  }else{
-                  array.push(checkboxes[i].value)
-                  }
-                }
-                 for (i=0 ; i< service_lst.length; i++){
-                     if(service_lst[i] == 'Network Services'){
-                            service_type = 'Network_Services';
-                     }else{
-                            service_type = service_lst[i];
-                     }
-
-                     if (array.indexOf(service_type) > -1){
-                         id = "#div_" + service_type;
-                          $(id).show();
-                     }
-                     else{
-                        id = "#div_" + service_type;
-                        $(id).hide();
-                        console.log(array.indexOf(service_type));
-                     }
-                }
             },
             error: function (jXHR, textStatus, errorThrown) {
                 alert(errorThrown);
