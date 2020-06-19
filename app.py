@@ -2,6 +2,9 @@ from flask import Flask, request, render_template, jsonify
 import pandas as pd
 import numpy as np
 from flask_mysqldb import MySQL
+#from flask_wtf import FlaskForm
+#from wtforms import SelectField
+import os
 
 
 
@@ -14,6 +17,8 @@ app.config['MYSQL_DB'] = 'cps_db'
 
 mysql = MySQL(app)
 
+#SECRET_KEY = os.urandom(32)
+#app.config['SECRET_KEY'] = SECRET_KEY
 
 std_data = pd.read_csv("data/Network Hardware Standards.csv")
 #std_data = std_data.reindex(sorted(std_data.DeviceType), axis=1)
@@ -24,13 +29,32 @@ sum_data = pd.merge(std_data, model_price, on ="DeviceModel", how="left")
 sum_data['DeviceModel'] = sum_data['DeviceModel'].replace(np.nan, 'NONE')
 #sum_data.to_csv("sum_data.csv")
 
+
+#class Form(FlaskForm):
+#   locations = SelectField('Locations')
+
 @app.route('/')
 def main_page():
     return render_template("main.html")
 @app.route('/existing')
 def existing():
+
     device_type = {}
     device_model = {}
+    conn = mysql.connect
+    '''
+    query_country = "select distinct(site_name)  from site_details "
+    result_country = pd.read_sql(query_country, conn)
+
+
+
+    data = result_country['site_name'].unique().tolist()
+    data = list(filter(None, data))
+    data.sort()
+    data.insert(0, 'Select Locations')
+    form = Form()
+    form.locations.choices = [(i, i) for i in data]
+    '''
     service_list = sum_data['ServiceType'].unique().tolist()
     for service in service_list:
         device_type[service] = sum_data.loc[sum_data['ServiceType'] == service,'DeviceType'].unique().tolist()
@@ -43,7 +67,7 @@ def existing():
     model_price_1 = pd.read_csv("data/Device Model Price.csv")
     model_price = model_price_1.to_json(orient='records')
 
-    conn = mysql.connect
+
     query = "select distinct(country),region  from site_details "\
             "join circuit_details on circuit_details.location=site_details.site_name " \
             "order by country"
@@ -52,10 +76,9 @@ def existing():
 
     country_list = result.to_json(orient='records')
     query_country = "select distinct(site_name),country  from site_details "
-    result_country= pd.read_sql(query_country, conn)
+    result_country = pd.read_sql(query_country, conn)
 
     location_list = result_country.to_json(orient='records')
-
 
     #****Extract device details************
     query_device = "select * from hw_device_details"

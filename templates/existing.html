@@ -19,7 +19,31 @@
                             <!--</select>-->
                         <!--</div>-->
                     <!--</div>-->
-                    <div class="col-md-3 features_box">
+                     <div class="col-md-3 features_box">
+                        <div class="form-group">
+                            <label for="project_type">Project Type :</label>
+                            <select class="form-control" id="project_type" name="project_type" required onchange="project_data()">
+                                <option id="select_project" value="" disabled selected hidden>Select Site Type...</option>
+                                <option id="Floor_Expansion" name="Floor_Expansion" value="Floor Expansion">Floor Expansion</option>
+                                <option id="Project_Infinity" name="Project_Infinity" value="Project Infinity">Project Infinity</option>
+                                <!--<option id="custom" name="Custom" value="Custom">Custom</option>-->
+                            </select>
+                        </div>
+                    </div>
+                     <div class="col-md-3 features_box">
+                        <div class="form-group">
+                            <label for="site_type">Site Type :</label>
+                            <select class="form-control" id="site_type" name="site_type" required>
+                                <option id="select" value="" disabled selected hidden>Select Site Type...</option>
+                                <option id="W&W" name="W&W" value="Wired & Wireless">Wired & Wireless</option>
+                                <option id="Wireless" name="Wireless" value="Wireless">Wireless only</option>
+                                <!--<option id="custom" name="Custom" value="Custom">Custom</option>-->
+                            </select>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 features_box">
                         <div class="form-group">
                             <label for="region">Region :</label>
                             <select class="form-control" id="region" name="region">
@@ -32,32 +56,31 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3 features_box">
-                        <div class="form-group">
-                            <label for="country">Country :</label>
-                            <select class="form-control" id="country" name="country" required disabled>
-                                <option value="" disabled selected hidden>Select Country...</option>
-                                <!--{% for country in country_list %}-->
-                                <!--<option>{{country}}</option>-->
-                                <!--{% endfor %}-->
-                            </select>
+                        <div class="col-md-3 features_box">
+                            <div class="form-group">
+                                <label for="country">Country :</label>
+                                <select class="form-control" id="country" name="country" required disabled>
+                                    <option value="" disabled selected hidden>Select Country...</option>
+                                    <!--{% for country in country_list %}-->
+                                    <!--<option>{{country}}</option>-->
+                                    <!--{% endfor %}-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 features_box">
+                            <div class="form-group">
+                                <label for="location">Location :</label>
+                                    <select class="form-control" id="location" name="location" required disabled>
+                                        <option value="" disabled selected hidden>Select Location...</option>
+                                    <!--{% for country in country_list %}-->
+                                    <!--<option>{{country}}</option>-->
+                                    <!--{% endfor %}-->
+                                    </select>
+
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-3 features_box">
-                        <div class="form-group">
-                            <label for="location">Location :</label>
-                            <select class="form-control" id="location" name="location" required disabled onchange="gss_data()">
-                                <option value="" disabled selected hidden>Select Location...</option>
-                                <!--{% for country in country_list %}-->
-                                <!--<option>{{country}}</option>-->
-                                <!--{% endfor %}-->
-                            </select>
-                        </div>
-                    </div>
-
-
-                    </div>
-                    <div class = "row">
+                    <div class = "row" id ="div_1">
                         <div class="col-md-3 features_box">
                         <label for="headcount">Additional Head Count:</label>
                         <input type="number" class= "form-control" id="headcount" name="headcount"
@@ -73,7 +96,7 @@
                         <div class="col-md-3 features_box">
                             <div class="form-group">
                                 <label for="gss">GSS Presence:</label>
-                                <select class="form-control" id="gss" name="gss" style="width:103%;" onchange="gss_data()">
+                                <select class="form-control" id="gss" name="gss" style="width:103%;">
                                     <option value="" disabled selected hidden>Select GSS...</option>
                                     <option value="" >Yes</option>
                                     <option value="" >No</option>
@@ -82,7 +105,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class = "row">
+                    <div class = "row" id ="div_2">
                         <div class="col-md-3 features_box">
                             <div class="form-group">
                                 <label for="conf_room">Conference Room :</label>
@@ -116,7 +139,8 @@
                 </div>
                 <div class = "col-md-2" style="text-align:center;align-self:center">
                 <!--<p class="detail_text" >Site Details</p>-->
-                    <button id="calculate_btn" type="submit" class="btn btn-block" disabled>Calculate</button>
+                    <input class="btn btn-block" id="process_btn"  onclick="process()" value="Process">
+                    <button id="calculate_btn" type="submit" class="btn btn-block" value="Calculate">Calculate</button>
                     <div id="loader"></div>
                     <br>
                     <button  class="btn btn-block" disabled style="background-color:grey;">Create BOM</button>
@@ -129,8 +153,8 @@
 </div>
 <br>
 <div class="container-fluid">
-    <div class="row site_specifics">
-        <div class="col-md-1">
+    <div class="row site_specifics justify-content-center" id="row_port_details">
+        <div class="col-md-1" style="margin-left:-77px;">
             <div class="card" style="width:150%">
                 <div class="card-body">
                     <h2 class="card-title" id="site_tier"></h2>
@@ -138,7 +162,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2" style="margin-left:30px;">
+        <div class="col-md-2" style="margin-left:54px;">
             <div class="card">
                 <div class="row">
                     <div class="col" style="padding-right:0">
@@ -156,7 +180,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2" style="margin-left:10px;">
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title" id="site_port_count"></h2>
@@ -164,11 +188,99 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <br>
-</div>
+    <div id="row_cost">
 
+    <h3>Costing Details</h3>
+    <hr class="line">
+
+    <div class="row_cost"  style="background:#E3F5FC;">
+        <div class="row site_specifics justify-content-center" id="site_cost_details">
+             <div class="col-md-2" style="">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title" id="site_cost"></h2>
+                        <h5 class="card-text">Total Cost</h5>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title" id="cost_per_head"></h2>
+                        <h5 class="card-text">Cost Per Head</h5>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title" id="cost_per_desk"></h2>
+                        <h5 class="card-text">Cost Per Desk</h5>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title" id="cost_per_port"></h2>
+                        <h5 class="card-text">Cost Per Port</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row site_specifics justify-content-center" id="site_cost_details_1">
+            <div class="col-md-3" style="margin-left: 45px;">
+<!--                <h4 class="cost_header">Hardware Cost</h4>-->
+                <div class="card">
+
+                    <div class="row">
+                        <div class="col" style="padding-right:0">
+                            <div class="card-body" style="padding-right:0">
+                            <h2 class="card-title" id="total_capex"></h2>
+                            <h5 class="card-text">Hardware CapEx</h5>
+                        </div>
+                        </div>
+                        <div class="col" style="padding-left:0">
+                            <div class="card-body" style="padding-left:0">
+                            <h2 class="card-title" id="total_opex"></h2>
+                            <h5 class="card-text">Hardware OpEx</h5>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body" style="padding-left:0;padding-right:0;">
+                        <h2 class="card-title">
+                            <span class="avg-max">Avg</span> <span id="circuit_avg"></span> -
+                            <span id="circuit_max"></span> <span class="avg-max">Max</span></h2>
+                        <h5 class="card-text">Circuit ARC</h5>
+                    </div>
+                    <!--<div class="row">-->
+                        <!---->
+                        <!--<div class="col" style="padding-right:0">-->
+                            <!--<div class="card-body" style="padding-right:0">-->
+                            <!--<span>Avg</span><h2 class="card-title"></h2>-->
+                            <!--<h5 class="card-text">Avg Arc</h5>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col" style="padding-left:0">-->
+                            <!--<div class="card-body" style="padding-left:0">-->
+                            <!--<span>Avg</span><h2 class="card-title"></h2>-->
+                            <!--<h5 class="card-text">Max ARC</h5>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</div>
+<br>
 <div class="container-fluid">
     <div class="row_expand">
             <button class="collapsible">Existing Infrastructure Details</button>
@@ -213,12 +325,14 @@
     </div>
     <br><br>
     <div class="row_expand">
-            <button class="collapsible">Network Infra Details</button>
+            <button class="collapsible">IT InfraStructure Details</button>
             <div class="content">
                 <div class="row site_details">
                 {% for service_val in service_list%}
                     {% if service_val == 'Network Services'%}
                         {% set service = 'Network_Services' %}
+                    {% elif service_val == 'Module(Line Card)' %}
+                        {% set service = 'module' %}
                     {% else %}
                         {% set service = service_val %}
                     {% endif %}
@@ -226,7 +340,7 @@
                     <div class="card">
                     <div class="card-header" style="background:#00567A;color:#fff">
                         <h5 class="service_name" style="display:inline;">{{service}} Details</h5>
-                        <h5 id="sum_{{service}}" style="display:inline;float:right"></h5>
+                        <h5 id="sum_{{service}}" style="display:inline;float:right;font-size:16px;"></h5>
                     </div>
                     <div class="card-body">
                         <table id="table_{{service}}" class="table table-hover" style="height:40%;width:100%;">
@@ -336,7 +450,6 @@ var formatter1 = new Intl.NumberFormat('en-US', {
   currency: 'USD',
   minimumFractionDigits: 2
 });
-
 var countryJSON = {{country_list | safe}}
 var locationJSON = {{location_list | safe}}
 $('#region').on("change",function(){
@@ -365,6 +478,7 @@ $('#country').on("change",function(){
     $('#location').append("<option>" + item.site_name + "</option>");
     });
 });
+
 $(".select_type_qty select").on("change", function() {
 
      var qty_value = this.value;
@@ -412,6 +526,8 @@ $( ".checkBox" ).change(function() {
 
 function filter_data(out){
     var location = $("#location :selected").text();
+    /*var locations = document.getElementById('locations');
+    var location = locations.value;*/
     var dict = {};
     dict.key1 = out;
     dict.key2 = location;
@@ -466,7 +582,22 @@ function filter_data(out){
               }
     });
 }
+function project_data(){
+    console.log("w1");
+    var project = $("#project_type :selected").text();
+    console.log(project);
+    if(project == 'Floor Expansion'){
+        $('#div_1').show();
+        $('#div_2').show();
+        $('#row_port_details').show();
+    } else {
+        $('#div_1').hide();
+        $('#div_2').hide();
+        $('#row_port_details').hide();
+    }
 
+
+}
 function calculate(){
 
     var service_array = {{service_list|safe}};
@@ -478,6 +609,8 @@ function calculate(){
         {
             if(service_array[i] == 'Network Services'){
                 id_service = 'Network_Services';
+            }else if(service_array[i] == 'Module(Line Card)'){
+                id_service = 'module';
             }else{
                 id_service = service_array[i];
             }
@@ -515,7 +648,7 @@ function calculate(){
                 }
             }
             sum_service = capex_service + opex_service;
-            $('#sum_' +service_array[i]).html(formatter.format(sum_service));
+            $('#sum_' + id_service).html(formatter.format(sum_service));
 
         }
     site_cost = sum_capex + sum_opex;
@@ -533,9 +666,10 @@ function calculate(){
     }else{
         $('#cost_per_port').html(formatter.format(site_cost/ports))
     }
+    $('#row_cost').show();
 
 }
-function gss_data(){
+function process(){
 
     var head_count = $('#headcount').val();
     console.log(head_count);
@@ -551,11 +685,10 @@ function gss_data(){
           $("#internet_count").html(data[0].internet_count);
           port_count();
           }
-
     });
-
+    $('#process_btn').hide();
+    $('#calculate_btn').show();
 }
-
 function port_count(){
     console.log("working");
     var site_type = $("#site_type :selected").text();
@@ -569,6 +702,14 @@ function port_count(){
     }
 }
 $(document).ready(function () {
+    $('#row_cost').hide();
+    $('#calculate_btn').hide();
+    var checkboxes = $("input[type='checkbox']"),
+    submitButt = $("input[type='submit']");
+
+    checkboxes.click(function() {
+        submitButt.attr("disabled", !checkboxes.is(":checked"));
+    });
 
     var service_lst = {{service_list|safe}};
     $('#inputForm').on('submit', function(e) {
@@ -614,72 +755,7 @@ $(document).ready(function () {
                 var service_array = []
                 var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
 
-                for (var i = 0; i < checkboxes.length; i++) {
-                  if(checkboxes[i].value == 'Network Services'){
-                  array.push('Network_Services')
-                  }else{
-                  array.push(checkboxes[i].value)
-                  }
-                }
-                console.log(array);
-                for (i=0 ; i< service_lst.length; i++){
-                    console.log(service_lst[i]);
-                    if(service_lst[i] == 'Network Services'){
-                        service_type = 'Network_Services';
-                    }else{
-                        service_type = service_lst[i];
-                    }
-                    if (array.indexOf(service_type) > -1){
-                        service_array.push(service_type);
-                    }
-                    else{
-                        console.log(array.indexOf(service_type));
-                    }
-                }
-                console.log(service_array);
 
-
-                for (i=0 ; i< service_array.length; i++)
-                {
-                    if(service_array[i] == 'Network Services'){
-                        id_service = 'Network_Services';
-                    }else{
-                        id_service = service_array[i];
-                    }
-                    var idx = 1;
-                    var idcpx = 1;
-                    var idopx = 1;
-                    var idqty = 1;
-                    $.each(rspns, function(x, item) {
-
-                        if (item.ServiceType == service_array[i]){
-
-
-                            var id = "#type_" + id_service +  "_" + idx++;
-                            var id_capex = "#capex_" + id_service +  "_" + idcpx++;
-                            var id_opex = "#opex_" + id_service +  "_" + idopx++;
-                            var qid = "type_qty_" + id_service + "_" + idqty++;
-                            var qty_value = document.getElementById(qid).selectedOptions[0].value;
-                            console.log(qty_value);
-
-                            $(id).val(item.DeviceModel);
-
-                            if(item.CAPEX == null){
-                                $(id_capex).html(parseInt(item.CAPEX));
-                            }else{
-                                capex_qty = item.CAPEX * qty_value;
-                                $(id_capex).html(formatter1.format(capex_qty));
-                            }
-                            if(item.OPEX== null){
-                                $(id_opex).html(parseInt(item.OPEX));
-                            }else{
-                                opex_qty = item.OPEX * qty_value;
-                                $(id_opex).html(formatter1.format(opex_qty));
-                            }
-                         }
-
-                    });
-                }
                 calculate();
             },
             complete:function(data){
