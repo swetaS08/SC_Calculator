@@ -139,8 +139,8 @@
                 </div>
                 <div class = "col-md-2" style="text-align:center;align-self:center">
                 <!--<p class="detail_text" >Site Details</p>-->
-                    <input class="btn btn-block" id="process_btn"  onclick="process()" value="Process">
-                    <button id="calculate_btn" type="submit" class="btn btn-block" value="Calculate">Calculate</button>
+                    <input class="btn btn-block" id="process_btn"  onclick="process()" value="Process" disabled>
+                    <button id="calculate_btn" type="submit" class="btn btn-block" value="Calculate" disabled>Calculate</button>
                     <div id="loader"></div>
                     <br>
                     <button  class="btn btn-block" disabled style="background-color:grey;">Create BOM</button>
@@ -360,7 +360,7 @@
                                 <tr id="{{service}}_{{loop.index}}">
                                     <td style="width: 250px;">{{device_type}}</td>
                                     <td  class= "select_device_type" style="width: 300px;">
-                                        <select id="type_{{service}}_{{loop.index}}" class="form-control">
+                                        <select id="type_{{service}}_{{loop.index}}" class="form-control device_select">
                                             <option selected hidden>. . .</option>
                                             {%for device_model in device_model[device_type]%}
                                             <option value="{{device_model}}">{{device_model}}</option>
@@ -750,12 +750,25 @@ function port_count(){
 $(document).ready(function () {
     $('#row_cost').hide();
     $('#calculate_btn').hide();
-    var checkboxes = $("input[type='checkbox']"),
-    submitButt = $("input[type='submit']");
-
-    checkboxes.click(function() {
-        submitButt.attr("disabled", !checkboxes.is(":checked"));
+    $(function() {
+       $(':checkbox').on( 'change', function() {
+          if( $(':checkbox:checked').length == 1 ) {
+             $('#process_btn').prop( 'disabled', false );
+          } else {
+             $('#process_btn').prop( 'disabled', true );
+          }
+       });
     });
+
+    $('.device_select').change(function() {
+
+    var op =$(this).val();
+        if(op !='') {
+          $('#calculate_btn').prop('disabled',false);
+        } else {
+          $('#calculate_btn').prop('disabled', true);
+        }
+      });
 
     var service_lst = {{service_list|safe}};
     $('#inputForm').on('submit', function(e) {
