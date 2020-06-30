@@ -211,3 +211,8 @@ margin-bottom: 10px;
 .row_cost{
     border: 2px solid #FAFAFA;
 }
+.header_text{
+background:#00567A;
+color: white;
+font-size: 16px;
+}

@@ -55,47 +55,63 @@
                         </div>
                     </div>
                     <div class="col-md-2 features_box">
-                        <div class="form-group">
-                            <label for="location">Location :</label>
-                            <input class="form-control" id="location" name="location" required
-                            placeholder="Enter Location">
-                        </div>
+                        <label for="headcount">Desk Count:</label>
+                        <input type="number" class= "form-control" id="headcount" name="headcount"
+                               placeholder="Enter Estimated Headcount" required>
                     </div>
 
                     </div>
                     <div class = "row">
                         <div class="col-md-2 features_box">
-                        <label for="headcount">Head Count:</label>
-                        <input type="number" class= "form-control" id="headcount" name="headcount"
-                               placeholder="Enter Estimated Headcount" required>
+                        <label for="building_number">Number of buildings:</label>
+                        <input type="number" class= "form-control" id="building_number" name="building_number"
+                               placeholder="Enter No:of Building" >
                     </div>
                         <div class="col-md-2 features_box">
                             <div class="form-group">
-                                <label for="desk">Total Desk :</label>
-                                <input type="number" class= "form-control" id="desk" name="desk"
-                                placeholder="Enter Total Desk" style="width:105%;">
+                                <label for="floor_num">Floors per building:</label>
+                                <input type="number" class= "form-control" id="floor_num" name="floor_num"
+                                placeholder="Enter No:of Floor" style="width:105%;">
                             </div>
                         </div>
                         <div class="col-md-2 features_box">
                             <div class="form-group">
-                                <label for="gss">GSS Presence:</label>
-                                <select class="form-control" id="gss" name="gss" style="width:103%;" onchange="gss_data()">
-                                    <option value="" disabled selected hidden>Select GSS...</option>
-                                    <option value="" >Yes</option>
-                                    <option value="" >No</option>
+                                <label for="desk_floor">Desks per floor:</label>
+                                <select class="form-control" id="desk_floor" name="desk_floor" style="width:103%;" onchange="gss_data()">
+                                    <option value="" disabled selected hidden>Select Desk Count...</option>
+                                    <option value="" >5</option>
+                                    <option value="" >10</option>
                                 </select>
 
                             </div>
                         </div>
                         <div class="col-md-2 features_box">
                             <div class="form-group">
-                                <label for="conf_room">Conference Room :</label>
-                                <input type="number" class= "form-control" id="conf_room" name="dconf_room"
-                                placeholder="Enter Total Desk" style="width:105%;">
+                                <label for="hc_num">HeadCount per floor:</label>
+                                <input type="number" class= "form-control" id="hc_num" name="hc_num"
+                                placeholder="Enter HC/floor" style="width:105%;">
 
                             </div>
                         </div>
 
+                    </div>
+                    <div class = "row">
+                        <div class="col-md-2 features_box">
+                            <div class="form-group">
+                                <label for="mdf_num">Number of MDF's:</label>
+                                <input type="number" class= "form-control" id="mdf_num" name="mdf_num"
+                                placeholder="Enter No:of MDF's" style="width:105%;">
+
+                            </div>
+                        </div>
+                        <div class="col-md-2 features_box">
+                            <div class="form-group">
+                                <label for="idf_num">Number of IDF's:</label>
+                                <input type="number" class= "form-control" id="idf_num" name="idf_num"
+                                placeholder="Enter No:of IDF's" style="width:105%;">
+
+                            </div>
+                        </div>
                     </div>
 
 
@@ -105,8 +121,8 @@
                     <button id="calculate_btn" type="submit" class="btn btn-block">Calculate</button>
                     <div id="loader"></div>
                     <br>
-                    <button  class="btn btn-block" disabled style="background-color:grey;">Create BOM</button>
-
+                    <input type="button"  class="btn btn-block" id="bom_btn" value="Create BOM" >
+                    <div id="loader_2"></div>
 
                 </div>
             </div>
@@ -142,109 +158,83 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2" style="margin-left:10px;">
+
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-2">
             <div class="card">
+                <div class="card-header header_text">
+                    Net-Auth Services
+                </div>
                 <div class="card-body">
-                    <h2 class="card-title" id="site_port_count"></h2>
-                    <h5 class="card-text">Port Count Per Desk</h5>
+                    <h2 class="card-title">$</h2>
+                    <h5 class="card-text text_color">Details</h5>
+                </div>
+                <button class="card-footer detail_div">
+                    Click
+                </button>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-header header_text">
+                    AV Services
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title">$</h2>
+                    <h5 class="card-text text_color">Details</h5>
                 </div>
             </div>
         </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-header header_text">
+                    Security Services
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title">$</h2>
+                    <h5 class="card-text text_color">Details</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-header header_text">
+                    UCC
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title">$</h2>
+                    <h5 class="card-text text_color">Details</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-header header_text">
+                    CET
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title">$</h2>
+                    <h5 class="card-text text_color">Details</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-header header_text">
+                    DC-Ops
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title">$</h2>
+                    <h5 class="card-text text_color">Details</h5>
+                </div>
+            </div>
+        </div>
+
+
     </div>
-    <h3>Costing Details</h3>
-    <hr class="line">
-
-    <div class="row_cost" style="background:#E3F5FC;">
-        <div class="row site_specifics justify-content-center" id="site_cost_details">
-             <div class="col-md-2" style="">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title" id="site_cost"></h2>
-                        <h5 class="card-text">Total Cost</h5>
-                    </div>
-                </div>
-            </div>
-             <div class="col-md-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title" id="cost_per_head"></h2>
-                        <h5 class="card-text">Cost Per Head</h5>
-                    </div>
-                </div>
-            </div>
-             <div class="col-md-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title" id="cost_per_desk"></h2>
-                        <h5 class="card-text">Cost Per Desk</h5>
-                    </div>
-                </div>
-            </div>
-             <div class="col-md-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title" id="cost_per_port"></h2>
-                        <h5 class="card-text">Cost Per Port</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row site_specifics justify-content-center" id="site_cost_details_1">
-            <div class="col-md-3" style="margin-left: 45px;">
-<!--                <h4 class="cost_header">Hardware Cost</h4>-->
-                <div class="card">
-
-                    <div class="row">
-                        <div class="col" style="padding-right:0">
-                            <div class="card-body" style="padding-right:0">
-                            <h2 class="card-title" id="total_capex"></h2>
-                            <h5 class="card-text">Hardware CapEx</h5>
-                        </div>
-                        </div>
-                        <div class="col" style="padding-left:0">
-                            <div class="card-body" style="padding-left:0">
-                            <h2 class="card-title" id="total_opex"></h2>
-                            <h5 class="card-text">Hardware OpEx</h5>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body" style="padding-left:0;padding-right:0;">
-                        <h2 class="card-title">
-                            <span class="avg-max">Avg</span> <span id="circuit_avg"></span> -
-                            <span id="circuit_max"></span> <span class="avg-max">Max</span></h2>
-                        <h5 class="card-text">Circuit ARC</h5>
-                    </div>
-                    <!--<div class="row">-->
-                        <!---->
-                        <!--<div class="col" style="padding-right:0">-->
-                            <!--<div class="card-body" style="padding-right:0">-->
-                            <!--<span>Avg</span><h2 class="card-title"></h2>-->
-                            <!--<h5 class="card-text">Avg Arc</h5>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col" style="padding-left:0">-->
-                            <!--<div class="card-body" style="padding-left:0">-->
-                            <!--<span>Avg</span><h2 class="card-title"></h2>-->
-                            <!--<h5 class="card-text">Max ARC</h5>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-<br><br>
-
-<div class="container-fluid">
-    <div class="row_expand">
-            <button class="collapsible">IT Infrastructure Details</button>
-            <div class="content">
+    <div class="content" id="service_content">
                 <div class="row site_details">
                 {% for service_val in service_list%}
                     {% if service_val == 'Network Services'%}
@@ -276,8 +266,8 @@
                             <tbody>
                                 {%for device_type in device_type[service_val]%}
                                 <tr id="{{service}}_{{loop.index}}">
-                                    <td style="width: 250px;">{{device_type}}</td>
-                                    <td  class= "select_device_type" style="width: 300px;">
+                                    <td style="width: 250px;" class="select_device_type">{{device_type}}</td>
+                                    <td  class= "select_device_model" style="width: 300px;">
                                         <select id="type_{{service}}_{{loop.index}}" class="form-control">
                                             <option selected hidden>. . .</option>
                                             {%for device_model in device_model[device_type]%}
@@ -317,6 +307,56 @@
 
         </div>
             </div>
+    <br>
+    <br>
+    <h3>Costing Details</h3>
+    <hr class="line">
+
+    <div class="row_cost" style="background:#E3F5FC;">
+        <div class="row site_specifics justify-content-center" id="site_cost_details">
+             <div class="col-md-2" style="">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title" id="site_cost"></h2>
+                        <h5 class="card-text">Hardware CapEx</h5>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title" id="cost_per_head"></h2>
+                        <h5 class="card-text">Hardware OpEx</h5>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title" id="cost_per_desk"></h2>
+                        <h5 class="card-text">Circuit ARC</h5>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title" id="cost_per_port"></h2>
+                        <h5 class="card-text">Total Cost</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<br><br>
+
+<div class="container-fluid">
+    <div class="row_expand">
+            <button class="collapsible">IT Infrastructure Details</button>
+
 
     </div>
         <br><br>
@@ -356,7 +396,46 @@
 
 </div>
 <script>
+$('#bom_btn').click(function() {
 
+    dict_nest = []
+    $("tr").each(function(i,v){
+    var device_type = $(this).find(".select_device_type").text();
+    console.log(device_type);
+    var device_model = $(this).find("td:eq(1)");
+    var device_model = device_model.find("select"); //grab the <select> tag assuming that there will be only single select box within that <td>
+    var device_model = device_model.val();
+
+    var device_qty =$(this).find("td:eq(2)");
+    var device_qty = device_qty.find("select"); //grab the <select> tag assuming that there will be only single select box within that <td>
+    var device_qty = device_qty.val();
+    dict_nest.push({'device_type' : device_type,'device_model' : device_model,'device_qty' : device_qty});
+
+    });
+    $.ajax({
+        type: "POST",
+        url: "bom.html",
+        data : JSON.stringify(dict_nest),
+        beforeSend: function()
+        {
+            $('#loader_2').show();
+            $('#bom_btn').hide();
+        },
+        success: function(data)
+        {
+            pageRedirect();
+            console.log(data);
+        },
+        complete: function()
+        {
+            $('#loader_2').hide();
+            $('#bom_btn').show();
+        }
+    });
+});
+function pageRedirect() {
+      window.location.href = "http://127.0.0.1:5000/bom_html";
+    }
 var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
@@ -610,17 +689,19 @@ $(document).ready(function () {
 });
 </script>
 <script>
-var coll = document.getElementsByClassName("collapsible");
+var coll = document.getElementsByClassName("detail_div");
+var content = document.getElementById("service_content");
 var i;
 
 for (i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
+
+
     if (content.style.maxHeight){
       content.style.maxHeight = null;
     } else {
       content.style.maxHeight = content.scrollHeight + "px";
+     
     }
   });
 }

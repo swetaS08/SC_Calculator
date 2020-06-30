@@ -293,6 +293,25 @@ def existing_details():
 
     return jsonify(response)
 
+@app.route('/bom', methods = ['POST','GET'])
+def bom():
+    dict_value = request.get_json('dict_nest')
+    #checkbox_service = dict_value['key1']
+
+    output = pd.DataFrame()
+
+    for i in dict_value:
+        output = output.append([i], ignore_index=True)
+    #df = pd.DataFrame(list(dict_value.items()), columns=['column1', 'column2'])
+    print(output.dropna())
+
+    return "true"
+
+@app.route('/bom_html', methods = ['POST','GET'])
+def bom_html():
+
+    return  render_template('bom_html.html')
+
 
 
 if __name__ == "__main__":
