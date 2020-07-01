@@ -167,11 +167,12 @@
                     Net-Auth Services
                 </div>
                 <div class="card-body">
-                    <h2 class="card-title">$</h2>
-                    <h5 class="card-text text_color">Details</h5>
+                    <h2 class="card-title" id ="total_net_auth">$</h2>
+                    <h5 class="card-text text_left" id="capex_net_auth">$$</h5>
+                    <h5 class="card-text text_right" id="opex_net_auth">$$</h5>
                 </div>
-                <button class="card-footer detail_div">
-                    Click
+                <button class="card-footer detail_div" id="net_auth">
+                    Details
                 </button>
 
             </div>
@@ -182,9 +183,14 @@
                     AV Services
                 </div>
                 <div class="card-body">
-                    <h2 class="card-title">$</h2>
-                    <h5 class="card-text text_color">Details</h5>
+                    <h2 class="card-title" id="total_av_services">$</h2>
+                    <h5 class="card-text text_left" id="capex_av_services">$$</h5>
+                    <h5 class="card-text text_right" id="opex_av_services">$$</h5>
                 </div>
+                <button class="card-footer detail_div" id="av_services">
+                    Details
+                </button>
+
             </div>
         </div>
         <div class="col-md-2">
@@ -193,9 +199,14 @@
                     Security Services
                 </div>
                 <div class="card-body">
-                    <h2 class="card-title">$</h2>
-                    <h5 class="card-text text_color">Details</h5>
+                    <h2 class="card-title" id="total_security">$</h2>
+                    <h5 class="card-text text_left" id="capex_security">$$</h5>
+                    <h5 class="card-text text_right" id="opex_security">$$</h5>
                 </div>
+                <button class="card-footer detail_div" id="security">
+                    Details
+                </button>
+
             </div>
         </div>
         <div class="col-md-2">
@@ -205,8 +216,13 @@
                 </div>
                 <div class="card-body">
                     <h2 class="card-title">$</h2>
-                    <h5 class="card-text text_color">Details</h5>
+                    <h5 class="card-text text_left">$$</h5>
+                    <h5 class="card-text text_right">$$</h5>
                 </div>
+                <button class="card-footer detail_div" id="ucc">
+                    Details
+                </button>
+
             </div>
         </div>
         <div class="col-md-2">
@@ -216,8 +232,12 @@
                 </div>
                 <div class="card-body">
                     <h2 class="card-title">$</h2>
-                    <h5 class="card-text text_color">Details</h5>
+                    <h5 class="card-text text_left">$$</h5>
+                    <h5 class="card-text text_right">$$</h5>
                 </div>
+                <button class="card-footer detail_div" id="cet">
+                    Details
+                </button>
             </div>
         </div>
         <div class="col-md-2">
@@ -227,86 +247,103 @@
                 </div>
                 <div class="card-body">
                     <h2 class="card-title">$</h2>
-                    <h5 class="card-text text_color">Details</h5>
+                    <h5 class="card-text text_left">$$</h5>
+                    <h5 class="card-text text_right">$$</h5>
                 </div>
+                <button class="card-footer detail_div" id="dc_ops">
+                    Details
+                </button>
             </div>
         </div>
-
 
     </div>
+    <br><br>
     <div class="content" id="service_content">
-                <div class="row site_details">
-                {% for service_val in service_list%}
-                    {% if service_val == 'Network Services'%}
-                        {% set service = 'Network_Services' %}
-                    {% elif service_val == 'Module(Line Card)' %}
-                        {% set service = 'module' %}
-                    {% else %}
-                        {% set service = service_val %}
-                    {% endif %}
-                <div class="col-md-12" id = "div_{{service}}" style="margin-bottom:20px; margin-top:20px">
-                    <div class="card">
-                    <div class="card-header" style="background:#00567A;color:#fff">
-                        <h5 class="service_name" style="display:inline;">{{service_val}} Details</h5>
-                        <h5 id="sum_{{service}}" style="display:inline;float:right;font-size:16px;"></h5>
-                    </div>
-                    <div class="card-body">
-                        <table id="table_{{service}}" class="table table-hover" style="height:40%;width:100%;">
-                            <thead class="thead-light" align="centre">
-                            <tr>
-                                <th align="centre">Device Type</th>
-                                <th>Device Model</th>
-                                <th>Qty.</th>
-                                <th>CAPEX</th>
-                                <th>Discount</th>
-                                <th>OPEX</th>
-                                <th>Discount</th>
-                            </tr>
-                           </thead>
-                            <tbody>
-                                {%for device_type in device_type[service_val]%}
-                                <tr id="{{service}}_{{loop.index}}">
-                                    <td style="width: 250px;" class="select_device_type">{{device_type}}</td>
-                                    <td  class= "select_device_model" style="width: 300px;">
-                                        <select id="type_{{service}}_{{loop.index}}" class="form-control">
-                                            <option selected hidden>. . .</option>
-                                            {%for device_model in device_model[device_type]%}
-                                            <option value="{{device_model}}">{{device_model}}</option>
+                {% for service_cat in service_category_list%}
+                        {% if service_cat == 'Net-Auth Services'%}
+                            {% set service_category = 'net_auth' %}
+                        {% elif service_cat == 'Security Services'%}
+                            {% set service_category = 'security' %}
+                        {% elif service_cat == 'DC-Ops' %}
+                            {% set service_category = 'dc_ops'%}
+                        {% else %}
+                            {% set service_category = service_val%}
+                        {% endif %}
+                <div class="row site_details" id="category_{{service_category}}">
+
+                        <h2 class="category_text"  style="text-align: center;">{{service_cat}}</h2>
+                        {%for  service_val in device_category[service_cat]%}
+                                {% if service_val == 'Network Services'%}
+                                    {% set service = 'Network_Services' %}
+                                {% elif service_val == 'Module(Line Card)' %}
+                                    {% set service = 'module' %}
+                                {% else %}
+                                    {% set service = service_val %}
+                                {% endif %}
+                            <div class="col-md-12" id = "div_{{service}}" style="margin-bottom:20px; margin-top:20px">
+                                <div class="card">
+                                <div class="card-header" style="background:#00567A;color:#fff">
+                                    <h5 class="service_name" style="display:inline;">{{service_val}} Details</h5>
+                                    <h5 id="sum_{{service}}" style="display:inline;float:right;font-size:16px;"></h5>
+                                </div>
+                                <div class="card-body">
+                                    <table id="table_{{service}}" class="table table-hover" style="height:40%;width:100%;">
+                                        <thead class="thead-light" align="centre">
+                                        <tr>
+                                            <th align="centre">Device Type</th>
+                                            <th>Device Model</th>
+                                            <th>Qty.</th>
+                                            <th>CAPEX</th>
+                                            <th>Discount</th>
+                                            <th>OPEX</th>
+                                            <th>Discount</th>
+                                        </tr>
+                                       </thead>
+                                        <tbody>
+                                            {%for device_type in device_type[service_val]%}
+                                            <tr id="{{service}}_{{loop.index}}">
+                                                <td style="width: 250px;" class="select_device_type">{{device_type}}</td>
+                                                <td  class= "select_device_model" style="width: 300px;">
+                                                    <select id="type_{{service}}_{{loop.index}}" class="form-control">
+                                                        <option selected hidden>. . .</option>
+                                                        {%for device_model in device_model[device_type]%}
+                                                        <option value="{{device_model}}">{{device_model}}</option>
+                                                        {% endfor%}
+                                                    </select></td>
+
+                                                <td class= "select_type_qty">
+                                                    <select id="type_qty_{{service}}_{{loop.index}}" class="form-control" style="width: 50px;">
+                                                        <option selected hidden>. . .</option>
+                                                        {% for i in range(1, 51) %}
+                                                           {% if i == 1 %}
+                                                                <option value="{{i}}" selected>{{i}}</option>
+                                                            {% else %}
+                                                                <option value="{{i}}">{{i}}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </td>
+
+                                                <td class="capex" id="capex_{{service}}_{{loop.index}}"></td>
+                                                <td> </td>
+                                                <td class= "opex" id="opex_{{service}}_{{loop.index}}"></td>
+                                                <td> </td>
+                                            </tr>
                                             {% endfor%}
-                                        </select></td>
+                                        </tbody>
 
-                                    <td class= "select_type_qty">
-                                        <select id="type_qty_{{service}}_{{loop.index}}" class="form-control" style="width: 50px;">
-                                            <option selected hidden>. . .</option>
-                                            {% for i in range(1, 51) %}
-                                               {% if i == 1 %}
-                                                    <option value="{{i}}" selected>{{i}}</option>
-                                                {% else %}
-                                                    <option value="{{i}}">{{i}}</option>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </select>
-                                    </td>
+                                    </table>
+                                </div>
 
-                                    <td class="capex" id="capex_{{service}}_{{loop.index}}"></td>
-                                    <td> </td>
-                                    <td class= "opex" id="opex_{{service}}_{{loop.index}}"></td>
-                                    <td> </td>
-                                </tr>
-                                {% endfor%}
-                            </tbody>
+                            </div>
+                            </div>
 
-                        </table>
-                    </div>
+                        {% endfor %}
+
 
                 </div>
-                </div>
-            {% endfor %}
-
-
-
-        </div>
-            </div>
+                {% endfor %}
+    </div>
     <br>
     <br>
     <h3>Costing Details</h3>
@@ -317,7 +354,7 @@
              <div class="col-md-2" style="">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title" id="site_cost"></h2>
+                        <h2 class="card-title" id="total_capex"></h2>
                         <h5 class="card-text">Hardware CapEx</h5>
                     </div>
                 </div>
@@ -325,7 +362,7 @@
              <div class="col-md-2">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title" id="cost_per_head"></h2>
+                        <h2 class="card-title" id="total_opex"></h2>
                         <h5 class="card-text">Hardware OpEx</h5>
                     </div>
                 </div>
@@ -333,7 +370,7 @@
              <div class="col-md-2">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title" id="cost_per_desk"></h2>
+                        <h2 class="card-title" id="ckt_arc"></h2>
                         <h5 class="card-text">Circuit ARC</h5>
                     </div>
                 </div>
@@ -341,7 +378,7 @@
              <div class="col-md-2">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title" id="cost_per_port"></h2>
+                        <h2 class="card-title" id="site_cost"></h2>
                         <h5 class="card-text">Total Cost</h5>
                     </div>
                 </div>
@@ -354,11 +391,6 @@
 <br><br>
 
 <div class="container-fluid">
-    <div class="row_expand">
-            <button class="collapsible">IT Infrastructure Details</button>
-
-
-    </div>
         <br><br>
     <div class= "row_expand">
         <button class="collapsible">Circuit Details</button>
@@ -501,23 +533,41 @@ function calculate(){
 
     var service_array = {{service_list|safe}};
     var device_type = {{device_type | safe}};
+    var service_type= {{device_category|safe}};
+    var category_array = {{service_category_list|safe}}
 
     var sum_capex = 0 ;
     var sum_opex = 0 ;
-    for (i=0 ; i< service_array.length; i++)
+    for (k=0 ; k< category_array.length; k++)
         {
-            if(service_array[i] == 'Network Services'){
+        var category_capex = 0 ;
+        var category_opex = 0 ;
+        console.log(category_array[k]);
+        if(category_array[k] == 'Net-Auth Services'){
+                id_cat = 'net_auth';
+            }else if(category_array[k] == 'DC-Ops'){
+                id_cat = 'dc_ops';
+            }else if(category_array[k] == 'Security Services'){
+                id_cat = 'security';
+            }else{
+                id_cat = category_array[k];
+        }
+
+        service_type_array = service_type[category_array[k]];
+        for (i=0 ; i< service_type_array.length; i++)
+            {
+            if(service_type_array[i] == 'Network Services'){
                 id_service = 'Network_Services';
-            }else if(service_array[i] == 'Module(Line Card)'){
+            }else if(service_type_array[i] == 'Module(Line Card)'){
                 id_service = 'module';
             }else{
-                id_service = service_array[i];
+                id_service = service_type_array[i];
             }
 
             var sum_service = 0;
             var capex_service=0;
             var opex_service=0;
-            type_array = device_type[service_array[i]];
+            type_array = device_type[service_type_array[i]];
             for(j=1; j<= type_array.length;j++)
             {
                 var cid = "#capex_"+ id_service+"_"+j;
@@ -538,18 +588,27 @@ function calculate(){
                 }
                 if(!isNaN(capex_value)){
                    capex_service += capex_value;
+                   category_capex += capex_value;
                    sum_capex += capex_value;
                 }
                 if(!isNaN(opex_value)){
-                   opex_service += opex_value
+                   opex_service += opex_value;
+                   category_opex += opex_value;
                    sum_opex += opex_value;
 
                 }
             }
+            total_category =category_capex + category_opex;
             sum_service = capex_service + opex_service;
             $('#sum_' + id_service).html(formatter.format(sum_service));
-
+            id_total = "#total_" + id_cat;
+            id_capex = "#capex_" + id_cat;
+            id_opex = "#opex_" + id_cat;
+            $(id_total).html(formatter.format(total_category));
+            $(id_capex).html(formatter.format(category_capex));
+            $(id_opex).html(formatter.format(category_opex));
         }
+    }
     site_cost = sum_capex + sum_opex;
     $('#total_capex').html(formatter.format(sum_capex));
     $('#total_opex').html(formatter.format(sum_opex));
@@ -689,21 +748,60 @@ $(document).ready(function () {
 });
 </script>
 <script>
+var collapse = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < collapse.length; i++) {
+  collapse[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}
 var coll = document.getElementsByClassName("detail_div");
 var content = document.getElementById("service_content");
 var i;
+var service_category = {{service_category_list|safe}};
+console.log(service_category);
+$(".detail_div").click(function() {
+    var btn_clicked = this.id;
+    console.log(btn_clicked);
+    for (i=0 ; i< service_category.length; i++)
+    {
+    if(service_category[i] == 'Net-Auth Services'){
+        id_category = 'net_auth';
+    }else if(service_category[i] == 'Security Services'){
+        id_category = 'security';
+    }else if(service_category[i] == 'DC-Ops'){
+        id_category = 'dc_ops';
+    }else{
+        id_category = service_category[i];
+    }
+    if(id_category == btn_clicked){
+        id = "#category_" + id_category;
+        $(id).show();
+    }else{
+        id = "#category_" + id_category;
+        $(id).hide();
+    }
+    }
+});
 
 for (i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
-
 
     if (content.style.maxHeight){
       content.style.maxHeight = null;
     } else {
       content.style.maxHeight = content.scrollHeight + "px";
-     
     }
+
   });
 }
+
 </script>
 {% endblock %}

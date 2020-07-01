@@ -1,5 +1,5 @@
 body{
-background:#fafafa;
+background:#F5F5F5;
 font-size:12px;
 }
 .header{
@@ -215,4 +215,20 @@ margin-bottom: 10px;
 background:#00567A;
 color: white;
 font-size: 16px;
+}
+h2.category_text{
+text-align: center;
+font-weight:bold;
+}
+.text_left{
+float:left;
+display:inline-block;
+}
+.text_right{
+float:right;
+display:inline-block;
+}
+.detail_div{
+font-size:15px;
+text-align:left;
 }

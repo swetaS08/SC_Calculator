@@ -111,9 +111,13 @@ def existing():
 
 @app.route('/new')
 def new():
+    device_category = {}
     device_type = {}
     device_model = {}
     service_list = sum_data['ServiceType'].unique().tolist()
+    service_category_list = sum_data['ServiceCategory'].unique().tolist()
+    for category in service_category_list:
+        device_category[category] = sum_data.loc[sum_data['ServiceCategory'] == category, 'ServiceType'].unique().tolist()
     for service in service_list:
         device_type[service] = sum_data.loc[sum_data['ServiceType'] == service,'DeviceType'].unique().tolist()
         device_type[service] = sorted(device_type[service])
@@ -121,6 +125,7 @@ def new():
     device_list = sum_data['DeviceType'].unique().tolist()
     for device in device_list:
         device_model[device] = sum_data.loc[sum_data['DeviceType'] == device, 'DeviceModel'].unique().tolist()
+
 
     model_price_1 = pd.read_csv("data/Device Model Price.csv")
     model_price = model_price_1.to_json(orient='records')
@@ -145,6 +150,7 @@ def new():
 
 
     return render_template("new.html", service_list=service_list, device_type=device_type,
+                           service_category_list = service_category_list,device_category=device_category,
                            device_model=device_model,model_price=model_price,
                            country_list=country_list, location_list = location_list, gss_list = gss_list)
 
