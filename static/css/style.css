@@ -119,20 +119,24 @@ margin-bottom: 1rem;
 .card{
 width:100%;
 }
-.btn{
+
+.action-btn{
 background-color: #0072a3;
 font-size:14px;
 letter-spacing:1px;
 font-weight:500;
 color:#f8f8f8;
 }
-.btn:hover{
+
+.action-btn:hover{
 background-color: #00567A;
 color:#fff;
 }
-.btn:focus{
+
+.action-btn:focus{
 color:#fff;
 }
+
 .line {
 width:100%;
 margin-top: 0px;
@@ -197,6 +201,10 @@ margin-bottom: 10px;
   content: "\2212";
   color:white;
 }
+#service_content{
+  padding: 0 18px;
+  background-color: white;
+}
 .content {
   padding: 0 18px;
   max-height: 0;
@@ -217,7 +225,6 @@ color: white;
 font-size: 16px;
 }
 h2.category_text{
-text-align: center;
 font-weight:bold;
 }
 .text_left{
@@ -228,7 +235,19 @@ display:inline-block;
 float:right;
 display:inline-block;
 }
-.detail_div{
-font-size:15px;
-text-align:left;
+.detail_div:hover{
+    background-color : #e6e6e6;
+}
+/*.detail_div:focus{
+    box-shadow : none;
+}*/
+.fa{
+    font-weight: 600;
+    transform: scale(2,1.7);
+    color: #00567A;
+}
+.equal-sign{
+    margin: auto 0;
+    font-size: 23px;
+    font-weight: 800;
 }

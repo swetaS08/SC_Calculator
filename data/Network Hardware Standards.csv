@@ -25,14 +25,14 @@ Tier 1B,WAN,Velocloud A,NONE,Net-Auth Services
 Tier 1C,WAN,Velocloud A,NONE,Net-Auth Services
 Tier 2A,WAN,Velocloud A,VeloCloud Edge 3800,Net-Auth Services
 Tier 2B,WAN,Velocloud A,VeloCloud Edge 3800,Net-Auth Services
-Tier 1A,Footprint,Switch B,Cisco N9K-C93180YC-FX,Net-Auth Services
-Tier 1B,Footprint,Switch B,Cisco N9K-C93180YC-FX,Net-Auth Services
-Tier 1C,Footprint,Switch B,Cisco N9K-C93180YC-FX,Net-Auth Services
-Tier 2A,Footprint,Switch B,Cisco N9K-C93180YC-FX,Net-Auth Services
-Tier 1A,Footprint,Switch A,Cisco N9K-C93180YC-FX,Net-Auth Services
-Tier 1B,Footprint,Switch A,Cisco N9K-C93180YC-FX,Net-Auth Services
-Tier 1C,Footprint,Switch A,Cisco N9K-C93180YC-FX,Net-Auth Services
-Tier 2A,Footprint,Switch A,Cisco N9K-C93180YC-FX,Net-Auth Services
+Tier 1A,Footprint,Switch B,Cisco N9K-C93180YC-FX,Infra Services
+Tier 1B,Footprint,Switch B,Cisco N9K-C93180YC-FX,Infra Services
+Tier 1C,Footprint,Switch B,Cisco N9K-C93180YC-FX,Infra Services
+Tier 2A,Footprint,Switch B,Cisco N9K-C93180YC-FX,Infra Services
+Tier 1A,Footprint,Switch A,Cisco N9K-C93180YC-FX,Infra Services
+Tier 1B,Footprint,Switch A,Cisco N9K-C93180YC-FX,Infra Services
+Tier 1C,Footprint,Switch A,Cisco N9K-C93180YC-FX,Infra Services
+Tier 2A,Footprint,Switch A,Cisco N9K-C93180YC-FX,Infra Services
 Tier 1A,DC-Ops,Rack,NONE,DC-Ops
 Tier 1B,DC-Ops,Rack,NONE,DC-Ops
 Tier 1C,DC-Ops,Rack,NONE,DC-Ops
@@ -67,9 +67,9 @@ Tier 2B,WAN,MPLS Route Reflector A,NONE,Net-Auth Services
 Tier 1A,DC-Ops,Mgmt Switch,NONE,DC-Ops
 Tier 1B,DC-Ops,Mgmt Switch,NONE,DC-Ops
 Tier 1C,DC-Ops,Mgmt Switch,NONE,DC-Ops
-Tier 1A,Network Services,Load Balancer,NONE,Security Services
-Tier 1B,Network Services,Load Balancer,NONE,Security Services
-Tier 1C,Network Services,Load Balancer,NONE,Security Services
+Tier 1A,Network Services,Load Balancer,NONE,Net-Auth Services
+Tier 1B,Network Services,Load Balancer,NONE,Net-Auth Services
+Tier 1C,Network Services,Load Balancer,NONE,Net-Auth Services
 Tier 1A,LAN-WLAN,LAN DMZ B,Cisco C9500-48Y4C-A,Net-Auth Services
 Tier 1B,LAN-WLAN,LAN DMZ B,Cisco C9500-48Y4C-A,Net-Auth Services
 Tier 1C,LAN-WLAN,LAN DMZ B,Cisco C9500-48Y4C-A,Net-Auth Services
@@ -110,18 +110,18 @@ Tier 1B,WAN,Int Route Reflector A,Cisco ASR 1001-X,Net-Auth Services
 Tier 1C,WAN,Int Route Reflector A,Cisco ASR 1001-X,Net-Auth Services
 Tier 2A,WAN,Int Route Reflector A,NONE,Net-Auth Services
 Tier 2B,WAN,Int Route Reflector A,NONE,Net-Auth Services
-Tier 1A,Network Services,InfoBlox Maintenance,IB-MNT-PRM,Security Services
-Tier 1B,Network Services,InfoBlox Maintenance,IB-MNT-PRM,Security Services
-Tier 1C,Network Services,InfoBlox Maintenance,IB-MNT-PRM,Security Services
-Tier 2A,Network Services,InfoBlox Maintenance,IB-MNT-PRM,Security Services
-Tier 1A,Network Services,InfoBlox License VM Trinzic V8B5,TE-V825-NS1GRID,Security Services
-Tier 1B,Network Services,InfoBlox License VM Trinzic V8B5,TE-V825-NS1GRID,Security Services
-Tier 1C,Network Services,InfoBlox License VM Trinzic V8B5,TE-V825-NS1GRID,Security Services
-Tier 2A,Network Services,InfoBlox License VM Trinzic V8B5,TE-V825-NS1GRID,Security Services
-Tier 1A,Footprint,Footprint Server,Dell/EMC/VX Rail,Net-Auth Services
-Tier 1B,Footprint,Footprint Server,Dell/EMC/VX Rail,Net-Auth Services
-Tier 1C,Footprint,Footprint Server,Dell/EMC/VX Rail,Net-Auth Services
-Tier 2A,Footprint,Footprint Server,Dell/EMC/VX Rail,Net-Auth Services
+Tier 1A,Network Services,InfoBlox Maintenance,IB-MNT-PRM,Net-Auth Services
+Tier 1B,Network Services,InfoBlox Maintenance,IB-MNT-PRM,Net-Auth Services
+Tier 1C,Network Services,InfoBlox Maintenance,IB-MNT-PRM,Net-Auth Services
+Tier 2A,Network Services,InfoBlox Maintenance,IB-MNT-PRM,Net-Auth Services
+Tier 1A,Network Services,InfoBlox License VM Trinzic V8B5,TE-V825-NS1GRID,Net-Auth Services
+Tier 1B,Network Services,InfoBlox License VM Trinzic V8B5,TE-V825-NS1GRID,Net-Auth Services
+Tier 1C,Network Services,InfoBlox License VM Trinzic V8B5,TE-V825-NS1GRID,Net-Auth Services
+Tier 2A,Network Services,InfoBlox License VM Trinzic V8B5,TE-V825-NS1GRID,Net-Auth Services
+Tier 1A,Footprint,Footprint Server,Dell/EMC/VX Rail,Infra Services
+Tier 1B,Footprint,Footprint Server,Dell/EMC/VX Rail,Infra Services
+Tier 1C,Footprint,Footprint Server,Dell/EMC/VX Rail,Infra Services
+Tier 2A,Footprint,Footprint Server,Dell/EMC/VX Rail,Infra Services
 Tier 1A,Firewall,FIREWALL B,PAN 3250,Net-Auth Services
 Tier 1B,Firewall,FIREWALL B,PAN 3250,Net-Auth Services
 Tier 1C,Firewall,FIREWALL B,PAN 3220,Net-Auth Services
@@ -137,12 +137,12 @@ Tier 1B,LAN-WLAN,Console Switch,Avocent ACS8048MDAC-400,Net-Auth Services
 Tier 1C,LAN-WLAN,Console Switch,Avocent ACS8048MDAC-400,Net-Auth Services
 Tier 2A,LAN-WLAN,Console Switch,Avocent ACS8048MDAC-400,Net-Auth Services
 Tier 2B,LAN-WLAN,Console Switch,Avocent ACS8048MDAC-400,Net-Auth Services
-Tier 1A,Network Services,ClearPass License VM,HPE Aruba ClearPass JZ399AAE,Security Services
-Tier 1B,Network Services,ClearPass License VM,HPE Aruba ClearPass JZ399AAE,Security Services
-Tier 1C,Network Services,ClearPass License VM,HPE Aruba ClearPass JZ399AAE,Security Services
-Tier 1A,Network Services,ClearPass License 5000,HPE Aruba ClearPass JZ403AAE,Security Services
-Tier 1B,Network Services,ClearPass License 5000,HPE Aruba ClearPass JZ403AAE,Security Services
-Tier 1C,Network Services,ClearPass License 5000,HPE Aruba ClearPass JZ403AAE,Security Services
+Tier 1A,Network Services,ClearPass License VM,HPE Aruba ClearPass JZ399AAE,Net-Auth Services
+Tier 1B,Network Services,ClearPass License VM,HPE Aruba ClearPass JZ399AAE,Net-Auth Services
+Tier 1C,Network Services,ClearPass License VM,HPE Aruba ClearPass JZ399AAE,Net-Auth Services
+Tier 1A,Network Services,ClearPass License 5000,HPE Aruba ClearPass JZ403AAE,Net-Auth Services
+Tier 1B,Network Services,ClearPass License 5000,HPE Aruba ClearPass JZ403AAE,Net-Auth Services
+Tier 1C,Network Services,ClearPass License 5000,HPE Aruba ClearPass JZ403AAE,Net-Auth Services
 Tier 1A,LAN-WLAN,AV Switch,Cisco C9300-48UN-E,Net-Auth Services
 Tier 1B,LAN-WLAN,AV Switch,Cisco C9300-48UN-E,Net-Auth Services
 Tier 1C,LAN-WLAN,AV Switch,Cisco C9300-48UN-E,Net-Auth Services
@@ -163,26 +163,26 @@ Tier 1B,LAN-WLAN,Access Lab Switch,Cisco C9300-48UN-E,Net-Auth Services
 Tier 1C,LAN-WLAN,Access Lab Switch,Cisco C9300-48UN-E,Net-Auth Services
 Tier 2A,LAN-WLAN,Access Lab Switch,Cisco C9300-48UN-E,Net-Auth Services
 Tier 2B,LAN-WLAN,Access Lab Switch,Cisco C9300-48UN-E,Net-Auth Services
-Tier 1A,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=,Security Services
-Tier 1A,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=,Security Services
-Tier 1A,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=,Security Services
-Tier 1A,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=,Security Services
-Tier 1B,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=,Security Services
-Tier 1B,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=,Security Services
-Tier 1B,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=,Security Services
-Tier 1B,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=,Security Services
-Tier 1C,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=,Security Services
-Tier 1C,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=,Security Services
-Tier 1C,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=,Security Services
-Tier 1C,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=,Security Services
-Tier 2A,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=,Security Services
-Tier 2A,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=,Security Services
-Tier 2A,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=,Security Services
-Tier 2A,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=,Security Services
-Tier 2B,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=,Security Services
-Tier 2B,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=,Security Services
-Tier 2B,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=,Security Services
-Tier 2B,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=,Security Services
+Tier 1A,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=,Net-Auth Services
+Tier 1A,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=,Net-Auth Services
+Tier 1A,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=,Net-Auth Services
+Tier 1A,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=,Net-Auth Services
+Tier 1B,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=,Net-Auth Services
+Tier 1B,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=,Net-Auth Services
+Tier 1B,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=,Net-Auth Services
+Tier 1B,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=,Net-Auth Services
+Tier 1C,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=,Net-Auth Services
+Tier 1C,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=,Net-Auth Services
+Tier 1C,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=,Net-Auth Services
+Tier 1C,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=,Net-Auth Services
+Tier 2A,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=,Net-Auth Services
+Tier 2A,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=,Net-Auth Services
+Tier 2A,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=,Net-Auth Services
+Tier 2A,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=,Net-Auth Services
+Tier 2B,Module(Line Card),10 Gbps MMF,Cisco SFP-10G-SR=,Net-Auth Services
+Tier 2B,Module(Line Card),1 Gbps MMF,Cisco SX-MMD=,Net-Auth Services
+Tier 2B,Module(Line Card),1 Gbps Copper,Cisco GLC-TE=,Net-Auth Services
+Tier 2B,Module(Line Card),10 Gbps SMF,Cisco SFP-10G-LR=,Net-Auth Services
 Tier 1C,Security,Gigamon,Gigamon HC1,Security Services
 Tier 2A,Security,Gigamon,Gigamon HC1,Security Services
 Tier 2B,Security,Gigamon,Gigamon HC1,Security Services
