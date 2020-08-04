@@ -36,6 +36,7 @@ sum_data['DeviceModel'] = sum_data['DeviceModel'].replace(np.nan, 'NONE')
 @app.route('/')
 def main_page():
     return render_template("main.html")
+
 @app.route('/existing')
 def existing():
 
@@ -109,6 +110,7 @@ def existing():
                            country_list=country_list, location_list = location_list,
                            gss_list = gss_list, device_list=device_list, service_list_checkbox = service_list_checkbox)
 
+
 @app.route('/new')
 def new():
     device_category = {}
@@ -153,6 +155,7 @@ def new():
                            service_category_list = service_category_list,device_category=device_category,
                            device_model=device_model,model_price=model_price,
                            country_list=country_list, location_list = location_list, gss_list = gss_list)
+
 
 def getSiteSpecifics(headcount):
     site_specs = dict()
@@ -250,6 +253,7 @@ def fetch():
 
     return jsonify(response)
 
+
 @app.route('/fetch_device', methods = ['POST','GET'])
 def fetch_device():
 
@@ -259,6 +263,7 @@ def fetch_device():
     response = {'0': site_specs, '1': service_list}
 
     return jsonify(response)
+
 
 @app.route('/existing_details', methods = ['POST','GET'])
 def existing_details():
@@ -299,6 +304,7 @@ def existing_details():
 
     return jsonify(response)
 
+
 @app.route('/bom', methods = ['POST','GET'])
 def bom():
     dict_value = request.get_json('dict_nest')
@@ -313,11 +319,11 @@ def bom():
 
     return "true"
 
+
 @app.route('/bom_html', methods = ['POST','GET'])
 def bom_html():
 
     return  render_template('bom_html.html')
-
 
 
 if __name__ == "__main__":

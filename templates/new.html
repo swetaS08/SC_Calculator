@@ -1,523 +1,565 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="static/css/input.css">
+</head>
 {% extends "header.html" %} {% block body %}
 
-<div class="container-fluid">
-
-    <form action="fetch" id="inputForm">
-        <div class="row" style="margin-left: 55px;">
-            <div class="col-md-9">
+<div id="input_block">
+    <div class="main-wrapper">
+    <div class="row content">
+        <div class="col-8 input-form">
+            <form action="fetch" id="inputForm">
                 <div class="row">
-                    <div class="col-md-2 features_box">
-                        <div class="form-group">
-                            <label for="site_type">Site Type :</label>
-                            <select class="form-control" id="site_type" name="site_type" required>
-                                <option disabled hidden id="select" selected value="">Select Site Type...</option>
-                                <option id="W&W" name="W&W" value="Wired & Wireless">Wired & Wireless</option>
-                                <option id="Wireless" name="Wireless" value="Wireless">Wireless only</option>
-                                <!--<option id="custom" name="Custom" value="Custom">Custom</option>-->
-                            </select>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="site_type">Site Type :</label>
+                                <select class="form-control" id="site_type" name="site_type" required>
+                                    <option disabled hidden id="select" selected value="">Select Site Type...</option>
+                                    <option id="W&W" name="W&W" value="Wired & Wireless">Wired & Wireless</option>
+                                    <option id="Wireless" name="Wireless" value="Wireless">Wireless only</option>
+                                    <!--<option id="custom" name="Custom" value="Custom">Custom</option>-->
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <!--<div class="col-md-2">-->
-                    <!--<div class="form-group">-->
-                    <!--<label for="BU">Business Unit :</label>-->
-                    <!--<select class="form-control" id="BU" name="BU">-->
-                    <!--<option value="" disabled selected>Select...</option>-->
-                    <!--&lt;!&ndash;<option value="weekly">Weekly</option>&ndash;&gt;-->
-                    <!--<option>HR & Sales</option>-->
-                    <!--<option>HR, Sales & RnD</option>-->
-                    <!--<option>HR, Sales & GSS</option>-->
-                    <!--&lt;!&ndash;<option value="custom">Custom Date</option>&ndash;&gt;-->
-                    <!--</select>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <div class="col-md-2 features_box">
-                        <div class="form-group">
-                            <label for="region">Region :</label>
-                            <select class="form-control" id="region" name="region">
-                                <option disabled hidden selected value="">Select Region...</option>
-                                <!--<option value="weekly">Weekly</option>-->
-                                <option>APAC</option>
-                                <option>EMEA</option>
-                                <option>NASA</option>
-                                <!--<option value="custom">Custom Date</option>-->
-                            </select>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="region">Region :</label>
+                                <select class="form-control" id="region" name="region">
+                                    <option disabled hidden selected value="">Select Region...</option>
+                                    <!--<option value="weekly">Weekly</option>-->
+                                    <option>APAC</option>
+                                    <option>EMEA</option>
+                                    <option>NASA</option>
+                                    <!--<option value="custom">Custom Date</option>-->
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2 features_box">
-                        <div class="form-group">
-                            <label for="country">Country :</label>
-                            <select class="form-control" disabled id="country" name="country" required>
-                                <option disabled hidden selected value="">Select Country...</option>
-                                <!--{% for country in country_list %}-->
-                                <!--<option>{{country}}</option>-->
-                                <!--{% endfor %}-->
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2 features_box">
-                        <label for="headcount">Desk Count:</label>
-                        <input class="form-control" id="headcount" name="headcount" placeholder="Enter Estimated Headcount"
-                               required type="number">
-                    </div>
-
                 </div>
                 <div class="row">
-                    <div class="col-md-2 features_box">
-                        <label for="building_number">No. of buildings:</label>
-                        <input class="form-control" id="building_number" name="building_number" placeholder="Enter No. of Building"
-                               type="number">
-                    </div>
-                    <div class="col-md-2 features_box">
-                        <div class="form-group">
-                            <label for="floor_count">Floors per building:</label>
-                            <input class="form-control" id="floor_count" name="floor_count" placeholder="Enter No. of Floor"
-                                   style="width:105%;" type="number">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="country">Country :</label>
+                                <select class="form-control" disabled id="country" name="country" required>
+                                    <option disabled hidden selected value="">Select Country...</option>
+                                    <!--{% for country in country_list %}-->
+                                    <!--<option>{{country}}</option>-->
+                                    <!--{% endfor %}-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="headcount">Desk Count:</label>
+                            <input class="form-control" id="headcount" name="headcount" placeholder="Enter Estimated Headcount"
+                                   required type="number">
                         </div>
                     </div>
-                    <div class="col-md-2 features_box" id="floor_radio">
-                        <label class="radio">
-                            <input type="radio" value="similar" disabled name="optradio">Similar Floors
-                        </label>
-                        <label class="radio">
-                            <input type="radio" value="diverse" disabled name="optradio">Diverse Floors
-                        </label>
-                    </div>
-                    <div class="col-md-2 features_box">
-                        <div class="form-group">
-                            <label for="floor_mdf">MDF</label>
-                            <select class="form-control" disabled id="floor_mdf" name="floor_mdf">
-                                <option disabled hidden selected value="">Select Floor...</option>
-                            </select>
+                <div class="row">
+                        <div class="col-md-5">
+                            <label for="building_number">No. of buildings:</label>
+                            <input class="form-control" id="building_number" name="building_number" placeholder="Enter No. of Building"
+                                   type="number">
                         </div>
-                    </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="floor_count">Floors per building:</label>
+                                <input class="form-control" id="floor_count" name="floor_count" placeholder="Enter No. of Floor"
+                                       type="number">
+                            </div>
+                        </div>
                 </div>
-                    <div id="floor_details">
-
+                <div class="row">
+                        <div class="col-md-5" id="floor_radio">
+                            <label class="radio">
+                                <input type="radio" value="similar" disabled name="optradio">Similar Floors
+                            </label>
+                            <label class="radio">
+                                <input type="radio" value="diverse" disabled name="optradio">Diverse Floors
+                            </label>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="floor_mdf">MDF</label>
+                                <select class="form-control" disabled id="floor_mdf" name="floor_mdf">
+                                    <option disabled hidden selected value="">Select Floor...</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
+                <div id="floor_details">
 
-            </div>
-            <div class="col-md-2" style="text-align:center;align-self:center">
-                <!--<p class="detail_text" >Site Details</p>-->
+                </div>
+                <div class="col-4 calc_btn">
                 <button class="btn btn-block action-btn" id="calculate_btn" type="submit">Calculate</button>
-                <div id="loader"></div>
-                <br>
-                <input class="btn btn-block action-btn" id="bom_btn" type="button" value="Create BOM">
-                <div id="loader_2"></div>
-
+                    <div id="loader"></div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 image">
+            <div class="title">
+                New<br> Site<br> Buildout
             </div>
         </div>
-    </form>
-</div>
-<div class="container-fluid">
-    <div class="row site_specifics justify-content-center">
-        <div class="col-md-1" style="margin-left:-77px;">
-            <div class="card" style="width:150%">
-                <div class="card-body">
-                    <h2 class="card-title" id="site_tier"></h2>
-                    <h5 class="card-text">Tier</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2" style="margin-left:54px;">
-            <div class="card">
-                <div class="row">
-                    <div class="col" style="padding-right:0">
-                        <div class="card-body" style="padding-right:0">
-                            <h2 class="card-title" id="mpls_count"></h2>
-                            <h5 class="card-text">MPLS</h5>
-                        </div>
-                    </div>
-                    <div class="col" style="padding-left:0">
-                        <div class="card-body" style="padding-left:0">
-                            <h2 class="card-title" id="internet_count"></h2>
-                            <h5 class="card-text">Internet</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <h3>Costing Details</h3>
-    <hr class="line">
-    <div class="row_cost" style="background:#E3F5FC;">
-        <div class="row site_specifics justify-content-center" id="site_cost_details">
-            <div class="col-md-2" style="">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title" id="total_capex"></h2>
-                        <h5 class="card-text">Network Investment</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2" style="">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title" id="annual_capex"></h2>
-                        <h5 class="card-text">Annual CapEx</h5>
-                    </div>
-                </div>
-            </div>
-            <span class="glyphicon" style="margin: auto 0;">+</span>
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title" id="total_opex"></h2>
-                        <h5 class="card-text">Annual Maintenance</h5>
-                    </div>
-                </div>
-            </div>
-            <span class="glyphicon" style="margin: auto 0;">+</span>
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title" id="circuit_arc"></h2>
-                        <h5 class="card-text">Circuit ARC</h5>
-                    </div>
-                </div>
-            </div>
-            <i class="equal-sign">=</i>
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title" id="site_cost"></h2>
-                        <h5 class="card-text">Annual Runrate</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <br><br>
-    <div class="row justify-content-center">
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-header header_text">
-                    Net-Auth Services
-                </div>
-                <div class="card-body" style="text-align:center">
-                    <h2 class="card-title" id="total_net_auth">$</h2>
-                    <div class="row">
-                        <div class="col-6">
-                            <h5 class="card-text" id="capex_net_auth">$$</h5>
-                            <h5 class="card-text">CapEx</h5>
-                        </div>
-                        <div class="col-6">
-                            <h5 class="card-text" id="opex_net_auth">$$</h5>
-                            <h5 class="card-text">OpEx</h5>
-                        </div>
-                    </div>
-                </div>
-                <button class="card-footer btn detail_div" id="net_auth">
-                    <!--<span class="glyphicon glyphicon-chevron-down"></span>-->
-                    <span class="fa fa-angle-double-down"></span>
-                </button>
-
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-header header_text">
-                    AV Services
-                </div>
-                <div class="card-body" style="text-align:center">
-                    <h2 class="card-title" id="total_av_services">$</h2>
-                    <div class="row">
-                        <div class="col-6">
-                            <h5 class="card-text" id="capex_av_services">$$</h5>
-                            <h5 class="card-text">CapEx</h5>
-                        </div>
-                        <div class="col-6">
-                            <h5 class="card-text" id="opex_av_services">$$</h5>
-                            <h5 class="card-text">OpEx</h5>
-                        </div>
-                    </div>
-                </div>
-                <button class="card-footer btn detail_div" id="av_services">
-                    <span class="fa fa-angle-double-down"></span>
-                </button>
-
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-header header_text">
-                    Security Services
-                </div>
-                <div class="card-body" style="text-align:center">
-                    <h2 class="card-title" id="total_security">$</h2>
-                    <div class="row">
-                        <div class="col-6">
-                            <h5 class="card-text" id="capex_security">$$</h5>
-                            <h5 class="card-text">CapEx</h5>
-                        </div>
-                        <div class="col-6">
-                            <h5 class="card-text" id="opex_security">$$</h5>
-                            <h5 class="card-text">OpEx</h5>
-                        </div>
-                    </div>
-                </div>
-                <button class="card-footer btn detail_div" id="security">
-                    <span class="fa fa-angle-double-down"></span>
-                </button>
-
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-header header_text">
-                    UCC
-                </div>
-                <div class="card-body" style="text-align:center">
-                    <h2 class="card-title">$</h2>
-                    <div class="row">
-                        <div class="col-6">
-                            <h5 class="card-text" >$$</h5>
-                            <h5 class="card-text">CapEx</h5>
-                        </div>
-                        <div class="col-6">
-                            <h5 class="card-text">$$</h5>
-                            <h5 class="card-text">OpEx</h5>
-                        </div>
-                    </div>
-                </div>
-                <button class="card-footer btn detail_div" id="ucc">
-                    <span class="fa fa-angle-double-down"></span>
-                </button>
-
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-header header_text">
-                    Infra Services
-                </div>
-                <div class="card-body" style="text-align:center">
-                    <h2 class="card-title">$</h2>
-                    <div class="row">
-                        <div class="col-6">
-                            <h5 class="card-text">$$</h5>
-                            <h5 class="card-text">CapEx</h5>
-                        </div>
-                        <div class="col-6">
-                            <h5 class="card-text">$$</h5>
-                            <h5 class="card-text">OpEx</h5>
-                        </div>
-                    </div>
-                </div>
-                <button class="card-footer btn detail_div" id="infra">
-                    <span class="fa fa-angle-double-down"></span>
-                </button>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-header header_text">
-                    DC-Ops
-                </div>
-                <div class="card-body" style="text-align:center">
-                    <h2 class="card-title">$</h2>
-                    <div class="row">
-                        <div class="col-6">
-                            <h5 class="card-text">$$</h5>
-                            <h5 class="card-text">CapEx</h5>
-                        </div>
-                        <div class="col-6">
-                            <h5 class="card-text">$$</h5>
-                            <h5 class="card-text">OpEx</h5>
-                        </div>
-                    </div>
-                </div>
-                <button class="card-footer btn detail_div" id="dc_ops">
-                    <span class="fa fa-angle-double-down"></span>
-                </button>
-            </div>
-        </div>
-
-    </div>
-    <br>
-    <div id="service_content">
-        {% for service_cat in service_category_list%}
-            {% if service_cat == 'Net-Auth Services'%}
-                {% set service_category = 'net_auth' %}
-            {% elif service_cat == 'Security Services'%}
-                {% set service_category = 'security' %}
-            {% elif service_cat == 'DC-Ops' %}
-                {% set service_category = 'dc_ops'%}
-            {% elif service_cat == 'Infra Services' %}
-                {% set service_category = 'infra'%}
-            {% else %}
-                {% set service_category = service_cat%}
-            {% endif %}
-            <div class="row site_details" id="category_{{service_category}}" style="display:none">
-                <div class="col-md-12 row" style="margin-top:10px;">
-                    <div class="col-4">
-                        <h2 class="category_text">{{service_cat}}</h2>
-                    </div>
-                    <div class="col-2 offset-6" style="text-align:right;padding-right:0;margin-right:0">
-                        <button class="btn btn-default action-btn customize-btn" id="customize_btn">Customize</button>
-                        <span><button type="button" id="close_btn" class="btn btn-default close-btn" style="border: 1px solid grey;padding:6px 10px;">
-                            <i class="glyphicon glyphicon-remove" style="font-size:12px;color:orangered"></i>
-                        </button></span>
-                        <button class="btn btn-default action-btn save-btn" id="save_btn" style="display:none;">Save & Close</button>
-                    </div>
-
-                </div>
-
-            {%for service_val in device_category[service_cat]%}
-                {% if service_val == 'Network Services'%}
-                    {% set service = 'Network_Services' %}
-                {% elif service_val == 'Module(Line Card)' %}
-                    {% set service = 'module' %}
-                {% else %}
-                    {% set service = service_val %}
-                {% endif %}
-            <div class="col-md-12" id="div_{{service}}" style="margin-bottom:20px; margin-top:20px">
-                <div class="card">
-                    <div class="card-header" style="background:#00567A;color:#fff">
-                        <h5 class="service_name" style="display:inline;">{{service_val}} Details</h5>
-                        <h5 id="sum_{{service}}" style="display:inline;float:right;font-size:16px;"></h5>
-                    </div>
-                    <div class="card-body">
-                        <table id="table_{{service}}" class="table table-hover" style="height:40%;width:100%;">
-                            <thead class="thead-light" align="centre">
-                            <tr>
-                                <th align="centre">Device Type</th>
-                                <th>Device Model</th>
-                                <th>Qty.</th>
-                                <th>CAPEX</th>
-                                <th>Discount</th>
-                                <th>OPEX</th>
-                                <th>Discount</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {%for device_type in device_type[service_val]%}
-                            <tr id="{{service}}_{{loop.index}}">
-                                <td style="width: 250px;" class="select_device_type">{{device_type}}</td>
-                                <td class="select_device_model" style="width: 300px;">
-                                    <select id="type_{{service}}_{{loop.index}}" disabled class="form-control service-select">
-                                        <option selected hidden>. . .</option>
-                                        {%for device_model in device_model[device_type]%}
-                                        <option value="{{device_model}}">{{device_model}}</option>
-                                        {% endfor%}
-                                    </select></td>
-
-                                <td class="select_type_qty">
-                                    <select id="type_qty_{{service}}_{{loop.index}}" disabled class="form-control qty-select" style="width: 50px;">
-                                        <option selected hidden>. . .</option>
-                                        {% for i in range(1, 51) %}
-                                        {% if i == 1 %}
-                                        <option value="{{i}}" selected>{{i}}</option>
-                                        {% else %}
-                                        <option value="{{i}}">{{i}}</option>
-                                        {% endif %}
-                                        {% endfor %}
-                                    </select>
-                                </td>
-
-                                <td class="capex" id="capex_{{service}}_{{loop.index}}"></td>
-                                <td></td>
-                                <td class="opex" id="opex_{{service}}_{{loop.index}}"></td>
-                                <td></td>
-                            </tr>
-                            {% endfor%}
-                            </tbody>
-
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-
-            {% endfor %}
-
-
-        </div>
-        {% endfor %}
     </div>
 </div>
-<div class="container-fluid">
-    <br><br>
-    <div class="row_expand">
-        <button class="collapsible">Circuit Details</button>
-        <div class="content">
-            <div class="row">
-                <div class="col-md-9">
+</div>
+<div id="output_block" style="display:none;">
+    <div class="container-fluid">
+        <div class="row site_specifics justify-content-center">
+             <!--<div class="col-md-1" style="text-align:center">-->
+            <!--</div>-->
+            <div class="col-md-2" style="text-align:left">
+                <p style="margin-bottom:0;">new <span id="office_type"></span> office at</p>
+                <h1 id="country_name"></h1>
+            </div>
+            <div class="col-md-1" style="text-align:left;margin: auto 0;">
+                <p>with</p>
+            </div>
+            <div class="col-md-1" style="text-align:left">
+                <h1 id="desk_input"></h1>
+                <p>Desks</p>
+            </div>
+             <div class="col-md-1" style="text-align:left;margin: auto 0;">
+                <p>in</p>
+            </div>
+            <div class="col-md-1" style="text-align:left">
+                <h1 id="bldng_input"></h1>
+                <p>Building</p>
+            </div>
+             <div class="col-md-1" style="text-align:left;margin: auto 0;">
+                <p>with total</p>
+            </div>
+            <div class="col-md-1" style="text-align:left">
+                <h1 id="floor_input"></h1>
+                <p>Floors</p>
+            </div>
+        </div>
+        <br>
+        <div class="row site_specifics justify-content-center">
+
+            <div class="col-md-1">
+                <div class="card" style="width:150%">
+                    <div class="card-body">
+                        <h2 class="card-title" id="site_tier"></h2>
+                        <h5 class="card-text">Tier</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2" style="margin-left:54px;">
+                <div class="card">
+                    <div class="row">
+                        <div class="col" style="padding-right:0">
+                            <div class="card-body" style="padding-right:0">
+                                <h2 class="card-title" id="mpls_count"></h2>
+                                <h5 class="card-text">MPLS</h5>
+                            </div>
+                        </div>
+                        <div class="col" style="padding-left:0">
+                            <div class="card-body" style="padding-left:0">
+                                <h2 class="card-title" id="internet_count"></h2>
+                                <h5 class="card-text">Internet</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Costing Details</h3>
+        <hr class="line">
+        <div class="row_cost" style="background:#E3F5FC;">
+            <div class="row site_specifics justify-content-center" id="site_cost_details">
+                <div class="col-md-2" style="">
+                    <!--<div class="card">-->
+                        <!--<div class="card-body">-->
+                            <!--<h2 class="card-title" id="total_capex"></h2>-->
+                            <!--<h5 class="card-text">Network Investment</h5>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="col-md-2" style="">
                     <div class="card">
-                        <table class="table" id="circuit_details" style="text-align:center;">
-                            <thead>
-                            <th colspan="2" style="background:#ededed"></th>
-                            <th colspan="3" style="background:#DFF0D0">Average</th>
-                            <th colspan="3" style="background:#FFF4C7">Maximum</th>
-                            </thead>
-                            <thead>
-                            <th>Service</th>
-                            <th>Capacity(Mbps)</th>
-                            <th>Price Per Meg</th>
-                            <th>MRC Per Circuit</th>
-                            <th>Total MRC</th>
-                            <th>Price Per Meg</th>
-                            <th>MRC Per Circuit</th>
-                            <th>Total MRC</th>
-                            </thead>
-                            <tbody>
+                        <div class="card-body">
+                            <h2 class="card-title" id="annual_capex"></h2>
+                            <h5 class="card-text">Annual CapEx</h5>
+                        </div>
+                    </div>
+                </div>
+                <span class="glyphicon" style="margin: auto 0;">+</span>
+                <div class="col-md-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title" id="total_opex"></h2>
+                            <h5 class="card-text">Annual Maintenance</h5>
+                        </div>
+                    </div>
+                </div>
+                <span class="glyphicon" style="margin: auto 0;">+</span>
+                <div class="col-md-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title" id="circuit_arc"></h2>
+                            <h5 class="card-text">Circuit ARC</h5>
+                        </div>
+                    </div>
+                </div>
+                <i class="equal-sign">=</i>
+                <div class="col-md-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title" id="site_cost"></h2>
+                            <h5 class="card-text">Annual Runrate</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            </tbody>
-                        </table>
+        </div>
+        <br><br>
+        <div class="row justify-content-center">
+            <div class="col-md-2">
+                <div class="card">
+                    <div class="card-header header_text">
+                        Net-Auth Services
+                    </div>
+                    <div class="card-body" style="text-align:center">
+                        <h2 class="card-title" id="total_net_auth">$</h2>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-text" id="capex_net_auth">$$</h5>
+                                <h5 class="card-text">CapEx</h5>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="card-text" id="opex_net_auth">$$</h5>
+                                <h5 class="card-text">OpEx</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="card-footer btn detail_div" id="net_auth">
+                        <!--<span class="glyphicon glyphicon-chevron-down"></span>-->
+                        <span class="fa fa-angle-double-down"></span>
+                    </button>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card">
+                    <div class="card-header header_text">
+                        AV Services
+                    </div>
+                    <div class="card-body" style="text-align:center">
+                        <h2 class="card-title" id="total_av_services">$</h2>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-text" id="capex_av_services">$$</h5>
+                                <h5 class="card-text">CapEx</h5>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="card-text" id="opex_av_services">$$</h5>
+                                <h5 class="card-text">OpEx</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="card-footer btn detail_div" id="av_services">
+                        <span class="fa fa-angle-double-down"></span>
+                    </button>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card">
+                    <div class="card-header header_text">
+                        Security Services
+                    </div>
+                    <div class="card-body" style="text-align:center">
+                        <h2 class="card-title" id="total_security">$</h2>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-text" id="capex_security">$$</h5>
+                                <h5 class="card-text">CapEx</h5>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="card-text" id="opex_security">$$</h5>
+                                <h5 class="card-text">OpEx</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="card-footer btn detail_div" id="security">
+                        <span class="fa fa-angle-double-down"></span>
+                    </button>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card">
+                    <div class="card-header header_text">
+                        UCC
+                    </div>
+                    <div class="card-body" style="text-align:center">
+                        <h2 class="card-title">$</h2>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-text" >$$</h5>
+                                <h5 class="card-text">CapEx</h5>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="card-text">$$</h5>
+                                <h5 class="card-text">OpEx</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="card-footer btn detail_div" id="ucc">
+                        <span class="fa fa-angle-double-down"></span>
+                    </button>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card">
+                    <div class="card-header header_text">
+                        Infra Services
+                    </div>
+                    <div class="card-body" style="text-align:center">
+                        <h2 class="card-title">$</h2>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-text">$$</h5>
+                                <h5 class="card-text">CapEx</h5>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="card-text">$$</h5>
+                                <h5 class="card-text">OpEx</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="card-footer btn detail_div" id="infra">
+                        <span class="fa fa-angle-double-down"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card">
+                    <div class="card-header header_text">
+                        DC-Ops
+                    </div>
+                    <div class="card-body" style="text-align:center">
+                        <h2 class="card-title">$</h2>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-text">$$</h5>
+                                <h5 class="card-text">CapEx</h5>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="card-text">$$</h5>
+                                <h5 class="card-text">OpEx</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="card-footer btn detail_div" id="dc_ops">
+                        <span class="fa fa-angle-double-down"></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <div id="service_content">
+            {% for service_cat in service_category_list%}
+                {% if service_cat == 'Net-Auth Services'%}
+                    {% set service_category = 'net_auth' %}
+                {% elif service_cat == 'Security Services'%}
+                    {% set service_category = 'security' %}
+                {% elif service_cat == 'DC-Ops' %}
+                    {% set service_category = 'dc_ops'%}
+                {% elif service_cat == 'Infra Services' %}
+                    {% set service_category = 'infra'%}
+                {% else %}
+                    {% set service_category = service_cat%}
+                {% endif %}
+                <div class="row site_details" id="category_{{service_category}}" style="display:none">
+                    <div class="col-md-12 row" style="margin-top:10px;">
+                        <div class="col-4">
+                            <h2 class="category_text">{{service_cat}}</h2>
+                        </div>
+                        <div class="col-2 offset-6" style="text-align:right;padding-right:0;margin-right:0">
+                            <button class="btn btn-default action-btn customize-btn" id="customize_btn">Customize</button>
+                            <span><button type="button" id="close_btn" class="btn btn-default close-btn" style="border: 1px solid grey;padding:6px 10px;">
+                                <i class="glyphicon glyphicon-remove" style="font-size:12px;color:orangered"></i>
+                            </button></span>
+                            <button class="btn btn-default action-btn save-btn" id="save_btn" style="display:none;">Save & Close</button>
+                        </div>
+
+                    </div>
+
+                {%for service_val in device_category[service_cat]%}
+                    {% if service_val == 'Network Services'%}
+                        {% set service = 'Network_Services' %}
+                    {% elif service_val == 'Module(Line Card)' %}
+                        {% set service = 'module' %}
+                    {% else %}
+                        {% set service = service_val %}
+                    {% endif %}
+                <div class="col-md-12" id="div_{{service}}" style="margin-bottom:20px; margin-top:20px">
+                    <div class="card">
+                        <div class="card-header" style="background:#00567A;color:#fff">
+                            <h5 class="service_name" style="display:inline;">{{service_val}} Details</h5>
+                            <h5 id="sum_{{service}}" style="display:inline;float:right;font-size:16px;"></h5>
+                        </div>
+                        <div class="card-body">
+                            <table id="table_{{service}}" class="table table-hover" style="height:40%;width:100%;">
+                                <thead class="thead-light" align="centre">
+                                <tr>
+                                    <th align="centre">Device Type</th>
+                                    <th>Device Model</th>
+                                    <th>Qty.</th>
+                                    <th>CAPEX</th>
+                                    <th>Discount</th>
+                                    <th>OPEX</th>
+                                    <th>Discount</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {%for device_type in device_type[service_val]%}
+                                <tr id="{{service}}_{{loop.index}}">
+                                    <td style="width: 250px;" class="select_device_type">{{device_type}}</td>
+                                    <td class="select_device_model" style="width: 300px;">
+                                        <select id="type_{{service}}_{{loop.index}}" disabled class="form-control service-select">
+                                            <option selected hidden>. . .</option>
+                                            {%for device_model in device_model[device_type]%}
+                                            <option value="{{device_model}}">{{device_model}}</option>
+                                            {% endfor%}
+                                        </select></td>
+
+                                    <td class="select_type_qty">
+                                        <select id="type_qty_{{service}}_{{loop.index}}" disabled class="form-control qty-select" style="width: 50px;">
+                                            <option selected hidden>. . .</option>
+                                            {% for i in range(1, 51) %}
+                                            {% if i == 1 %}
+                                            <option value="{{i}}" selected>{{i}}</option>
+                                            {% else %}
+                                            <option value="{{i}}">{{i}}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+
+                                    <td class="capex" id="capex_{{service}}_{{loop.index}}"></td>
+                                    <td></td>
+                                    <td class="opex" id="opex_{{service}}_{{loop.index}}"></td>
+                                    <td></td>
+                                </tr>
+                                {% endfor%}
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                {% endfor %}
+
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container-fluid">
+        <br><br>
+        <div class="row_expand">
+            <button class="collapsible">Circuit Details</button>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <table class="table" id="circuit_details" style="text-align:center;">
+                                <thead>
+                                <th colspan="2" style="background:#ededed"></th>
+                                <th colspan="3" style="background:#DFF0D0">Average</th>
+                                <th colspan="3" style="background:#FFF4C7">Maximum</th>
+                                </thead>
+                                <thead>
+                                <th>Service</th>
+                                <th>Capacity(Mbps)</th>
+                                <th>Price Per Meg</th>
+                                <th>MRC Per Circuit</th>
+                                <th>Total MRC</th>
+                                <th>Price Per Meg</th>
+                                <th>MRC Per Circuit</th>
+                                <th>Total MRC</th>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <br><br><br><br><br><br>
+
     </div>
-
-    <br><br><br><br><br><br>
-
 </div>
 <script>
+
+var countryJSON = {{country_list | safe}}
+$('#region').on("change",function(){
+
+    $('#country').find('option').remove().end();
+    var region = this.value;
+    var countries = countryJSON.filter(function(item){
+        return item.region == region;
+    });
+    $('#country').prop('disabled',false);
+    $('#country').append("<option disabled selected hidden>Select...</option>");
+    countries.forEach(item => {
+    $('#country').append("<option>" + item.country + "</option>");
+    });
+});
+
 $("#floor_count").on("input", function(){
-    var floor_count = $(this).val()
+var floor_count = $(this).val()
 
-    $('#floor_mdf').find('option').remove().end();
-    $('#floor_mdf').append("<option disabled selected hidden>Select Floor...</option>");
-    for(var i = 1;i<=floor_count;i++){
-    $('#floor_mdf').append("<option value=floor_"+i+">Floor " + i + "</option>");
-    }
+$('#floor_mdf').find('option').remove().end();
+$('#floor_mdf').append("<option disabled selected hidden>Select Floor...</option>");
+for(var i = 1;i<=floor_count;i++){
+$('#floor_mdf').append("<option value=floor_"+i+">Floor " + i + "</option>");
+}
 
-    $('#floor_details').children().slideUp(function() {
-    $('#floor_details').empty();
+$('#floor_details').children().slideUp(function() {
+$('#floor_details').empty();
+});
+
+$("input[type=radio][name=optradio]").attr("checked", false);
+if(floor_count <= 0 || floor_count == ""){
+    $('input[type=radio][name=optradio]').attr("disabled", true);
+    $('#floor_mdf').attr('disabled',true);
+}
+else if(floor_count == 1){
+    $('input[type=radio][name=optradio]').attr("disabled", true);
+    append_floors(1,'single');
+    $('#floor_mdf').attr('disabled',false);
+    $('#floor_mdf').val('floor_1');
+    $('#floor_1 input[type=number][name=idf_num]').val(0);
+    $('#floor_1 input[type=number][name=idf_num]').attr("disabled", true);
+}
+else if(floor_count>1){
+    $('input[type=radio][name=optradio]').attr("disabled", false);
+    $('input[type=radio][name=optradio]').change(function(){
+        $("#floor_details").empty();
+        $('#floor_mdf').prop('selectedIndex',0);
+        var floor_radio_val = $(this).val();
+        if(floor_radio_val == "similar"){
+            append_floors(1,'similar');
+            $('#floor_mdf').attr('disabled',false);
+        }
+        else{
+            append_floors(floor_count,'diverse');
+            $('#floor_mdf').attr('disabled',false);
+        }
     });
 
-    $("input[type=radio][name=optradio]").attr("checked", false);
-    if(floor_count <= 0 || floor_count == ""){
-        $('input[type=radio][name=optradio]').attr("disabled", true);
-        $('#floor_mdf').attr('disabled',true);
-    }
-    else if(floor_count == 1){
-        $('input[type=radio][name=optradio]').attr("disabled", true);
-        append_floors(1,'single');
-        $('#floor_mdf').attr('disabled',false);
-        $('#floor_mdf').val('floor_1');
-        $('#floor_1 input[type=number][name=idf_num]').val(0);
-        $('#floor_1 input[type=number][name=idf_num]').attr("disabled", true);
-    }
-    else if(floor_count>1){
-        $('input[type=radio][name=optradio]').attr("disabled", false);
-        $('input[type=radio][name=optradio]').change(function(){
-            $("#floor_details").empty();
-            $('#floor_mdf').prop('selectedIndex',0);
-            var floor_radio_val = $(this).val();
-            if(floor_radio_val == "similar"){
-                append_floors(1,'similar');
-                $('#floor_mdf').attr('disabled',false);
-            }
-            else{
-                append_floors(floor_count,'diverse');
-                $('#floor_mdf').attr('disabled',false);
-            }
-        });
-
-    }
+}
 });
 $('#floor_mdf').on('change',function(){
     $('input[type=number][name=idf_num]').attr("disabled", false);
@@ -580,6 +622,9 @@ function append_floors(floor_count,type){
     }
 }
 
+</script>
+
+<script>
 
 $('#bom_btn').click(function() {
 
@@ -634,20 +679,7 @@ var formatter1 = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 2
 });
 
-var countryJSON = {{country_list | safe}}
-$('#region').on("change",function(){
 
-    $('#country').find('option').remove().end();
-    var region = this.value;
-    var countries = countryJSON.filter(function(item){
-        return item.region == region;
-    });
-    $('#country').prop('disabled',false);
-    $('#country').append("<option disabled selected hidden>Select...</option>");
-    countries.forEach(item => {
-    $('#country').append("<option>" + item.country + "</option>");
-    });
-});
 $(".select_type_qty select").on("change", function() {
 
      var qty_value = this.value;
@@ -808,6 +840,13 @@ $(document).ready(function () {
                 $("#loader").show();
             },
             success: function (data) {
+                $("#office_type").html($("#site_type").val().toLowerCase());
+                $("#country_name").html($("#country").val());
+
+                $("#desk_input").html($("#headcount").val());
+                $("#bldng_input").html($("#building_number").val());
+                $("#floor_input").html($("#floor_count").val());
+
                 $("#site_tier").html(data[1].tier);
                 $("#mpls_count").html(data[1].mpls_count);
                 $("#internet_count").html(data[1].internet_count);
@@ -892,6 +931,8 @@ $(document).ready(function () {
             complete:function(data){
                 $("#loader").hide();
                 $("#calculate_btn").show();
+                $("#input_block").hide();
+                $("#output_block").show();
 
             },
             error: function (jXHR, textStatus, errorThrown) {

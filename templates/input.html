@@ -1,0 +1,225 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="static/css/input.css">
+</head>
+{% extends "header.html" %}
+{% block body %}
+<div class="main-wrapper">
+    <div class="row content">
+        <div class="col-8 input-form">
+            <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="site_type">Site Type :</label>
+                            <select class="form-control" id="site_type" name="site_type" required>
+                                <option disabled hidden id="select" selected value="">Select Site Type...</option>
+                                <option id="W&W" name="W&W" value="Wired & Wireless">Wired & Wireless</option>
+                                <option id="Wireless" name="Wireless" value="Wireless">Wireless only</option>
+                                <!--<option id="custom" name="Custom" value="Custom">Custom</option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="region">Region :</label>
+                            <select class="form-control" id="region" name="region">
+                                <option disabled hidden selected value="">Select Region...</option>
+                                <!--<option value="weekly">Weekly</option>-->
+                                <option>APAC</option>
+                                <option>EMEA</option>
+                                <option>NASA</option>
+                                <!--<option value="custom">Custom Date</option>-->
+                            </select>
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="country">Country :</label>
+                            <select class="form-control" disabled id="country" name="country" required>
+                                <option disabled hidden selected value="">Select Country...</option>
+                                <!--{% for country in country_list %}-->
+                                <!--<option>{{country}}</option>-->
+                                <!--{% endfor %}-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="headcount">Desk Count:</label>
+                        <input class="form-control" id="headcount" name="headcount" placeholder="Enter Estimated Headcount"
+                               required type="number">
+                    </div>
+                </div>
+            <div class="row">
+                    <div class="col-md-5">
+                        <label for="building_number">No. of buildings:</label>
+                        <input class="form-control" id="building_number" name="building_number" placeholder="Enter No. of Building"
+                               type="number">
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="floor_count">Floors per building:</label>
+                            <input class="form-control" id="floor_count" name="floor_count" placeholder="Enter No. of Floor"
+                                   type="number">
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                    <div class="col-md-5" id="floor_radio">
+                        <label class="radio">
+                            <input type="radio" value="similar" disabled name="optradio">Similar Floors
+                        </label>
+                        <label class="radio">
+                            <input type="radio" value="diverse" disabled name="optradio">Diverse Floors
+                        </label>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="floor_mdf">MDF</label>
+                            <select class="form-control" disabled id="floor_mdf" name="floor_mdf">
+                                <option disabled hidden selected value="">Select Floor...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            <div id="floor_details">
+
+            </div>
+            <div class="col-4 calc_btn">
+            <button class="btn btn-block action-btn" id="calculate_btn" type="submit">Calculate</button>
+            </div>
+        </div>
+        <div class="col-4 image">
+            <div class="title">
+                New<br> Site<br> Buildout
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+var countryJSON = {{country_list | safe}}
+$('#region').on("change",function(){
+
+    $('#country').find('option').remove().end();
+    var region = this.value;
+    var countries = countryJSON.filter(function(item){
+        return item.region == region;
+    });
+    $('#country').prop('disabled',false);
+    $('#country').append("<option disabled selected hidden>Select...</option>");
+    countries.forEach(item => {
+    $('#country').append("<option>" + item.country + "</option>");
+    });
+});
+
+$("#floor_count").on("input", function(){
+var floor_count = $(this).val()
+
+$('#floor_mdf').find('option').remove().end();
+$('#floor_mdf').append("<option disabled selected hidden>Select Floor...</option>");
+for(var i = 1;i<=floor_count;i++){
+$('#floor_mdf').append("<option value=floor_"+i+">Floor " + i + "</option>");
+}
+
+$('#floor_details').children().slideUp(function() {
+$('#floor_details').empty();
+});
+
+$("input[type=radio][name=optradio]").attr("checked", false);
+if(floor_count <= 0 || floor_count == ""){
+    $('input[type=radio][name=optradio]').attr("disabled", true);
+    $('#floor_mdf').attr('disabled',true);
+}
+else if(floor_count == 1){
+    $('input[type=radio][name=optradio]').attr("disabled", true);
+    append_floors(1,'single');
+    $('#floor_mdf').attr('disabled',false);
+    $('#floor_mdf').val('floor_1');
+    $('#floor_1 input[type=number][name=idf_num]').val(0);
+    $('#floor_1 input[type=number][name=idf_num]').attr("disabled", true);
+}
+else if(floor_count>1){
+    $('input[type=radio][name=optradio]').attr("disabled", false);
+    $('input[type=radio][name=optradio]').change(function(){
+        $("#floor_details").empty();
+        $('#floor_mdf').prop('selectedIndex',0);
+        var floor_radio_val = $(this).val();
+        if(floor_radio_val == "similar"){
+            append_floors(1,'similar');
+            $('#floor_mdf').attr('disabled',false);
+        }
+        else{
+            append_floors(floor_count,'diverse');
+            $('#floor_mdf').attr('disabled',false);
+        }
+    });
+
+}
+});
+$('#floor_mdf').on('change',function(){
+    $('input[type=number][name=idf_num]').attr("disabled", false);
+    $('input[type=number][name=idf_num]').val(1);
+    var mdf_floor = $(this).val();
+    if($('input[type=radio][name=optradio]:checked').val() == 'diverse'){
+        $('#'+mdf_floor+' input[type=number][name=idf_num]').val(0);
+        $('#'+mdf_floor+' input[type=number][name=idf_num]').attr("disabled", true);
+    }
+});
+
+function append_floors(floor_count,type){
+    var parent = $("#floor_details");
+    var x,y;
+
+    for(var i = 1;i<=floor_count;i++){
+    if(type == 'similar'){
+        x="Each ";y="";
+    }
+    else{
+        x="";y=i;
+    }
+          $(`<div class="row" id = "floor_`+i+`">
+                <h4 style="margin: 8px 4px 0px 16px;">`+x+`Floor `+y+` :</h4>
+                <div class="col-md-2 features_box">
+                    <div class="form-group">
+                        <label for="desk_floor">Desk Count:</label>
+                        <input class="form-control" id="desk_floor" name="desk_floor" placeholder="Desks/floor"
+                               style="width:105%;" type="number">
+
+                    </div>
+                </div>
+
+                <div class="col-md-2 features_box" style="flex: 0 0 18.6%;max-width: 18.6%;">
+                    <div class="form-group">
+                        <label for="meeting_rooms">Meeting/Zoom Rooms:</label>
+                        <input class="form-control" id="meeting_rooms" name="meeting_rooms" placeholder="No. of rooms"
+                               style="width:105%;" type="number">
+
+                    </div>
+                </div>
+
+                <div class="col-md-2 features_box">
+                    <div class="form-group">
+                    <label for="conf_rooms">Conference Rooms:</label>
+                    <input class="form-control" id="conf_rooms" name="conf_rooms" placeholder="No. of rooms"
+                           style="width:105%;" type="number">
+
+                    </div>
+                </div>
+                <div class="col-md-2 features_box">
+                        <div class="form-group">
+                            <label for="idf_num">IDF's:</label>
+                            <input class="form-control" id="idf_num" name="idf_num" placeholder="No. of IDF's"
+                           style="width:105%;" type="number">
+
+                        </div>
+                </div>
+          </div>`).hide().appendTo(parent).slideDown(500);
+    }
+}
+
+</script>
+
+
+{% endblock %}
