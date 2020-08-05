@@ -299,7 +299,7 @@ def existing_details():
     result = device_list.to_json(orient='records')
     service_list_checkbox = ['LAN-WLAN', 'WAN', 'DC-Ops', 'Firewall']
 
-    response = {'0': result, '1' : checked_service, '2' : service_list_checkbox}
+    response = {'0': result, '1': checked_service, '2': service_list_checkbox}
     conn.close()
 
     return jsonify(response)

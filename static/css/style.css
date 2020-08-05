@@ -38,6 +38,11 @@ box-shadow: 0 5px 15px rgba(57,98,254,.02), 0 4px 6px rgba(117,108,254,.12);
 border:none;
 }
 
+.disable-card{
+box-shadow: none;
+}
+
+
 .site_specifics .card{
     border-left: solid 4px #00567A;
     border-radius:0;
@@ -223,6 +228,12 @@ margin-bottom: 10px;
 background:#00567A;
 color: white;
 font-size: 16px;
+}
+.disable-card .header_text{
+background : #c8c8c8;
+}
+.disable-card .card-body{
+background : #ededed;
 }
 h2.category_text{
 font-weight:bold;

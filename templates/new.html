@@ -8,88 +8,153 @@
     <div class="row content">
         <div class="col-8 input-form">
             <form action="fetch" id="inputForm">
-                <div class="row">
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="site_type">Site Type :</label>
-                                <select class="form-control" id="site_type" name="site_type" required>
-                                    <option disabled hidden id="select" selected value="">Select Site Type...</option>
-                                    <option id="W&W" name="W&W" value="Wired & Wireless">Wired & Wireless</option>
-                                    <option id="Wireless" name="Wireless" value="Wireless">Wireless only</option>
-                                    <!--<option id="custom" name="Custom" value="Custom">Custom</option>-->
-                                </select>
+                <div id="site_input">
+                    <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="site_type">Site Type :</label>
+                                    <select class="form-control" id="site_type" name="site_type" required>
+                                        <option disabled hidden id="select" selected value="">Select Site Type...</option>
+                                        <option id="W&W" name="W&W" value="Wired & Wireless">Wired & Wireless</option>
+                                        <option id="Wireless" name="Wireless" value="Wireless">Wireless only</option>
+                                        <!--<option id="custom" name="Custom" value="Custom">Custom</option>-->
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="region">Region :</label>
-                                <select class="form-control" id="region" name="region">
-                                    <option disabled hidden selected value="">Select Region...</option>
-                                    <!--<option value="weekly">Weekly</option>-->
-                                    <option>APAC</option>
-                                    <option>EMEA</option>
-                                    <option>NASA</option>
-                                    <!--<option value="custom">Custom Date</option>-->
-                                </select>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="region">Region :</label>
+                                    <select class="form-control" id="region" name="region">
+                                        <option disabled hidden selected value="">Select Region...</option>
+                                        <!--<option value="weekly">Weekly</option>-->
+                                        <option>APAC</option>
+                                        <option>EMEA</option>
+                                        <option>NASA</option>
+                                        <!--<option value="custom">Custom Date</option>-->
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                </div>
-                <div class="row">
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="country">Country :</label>
-                                <select class="form-control" disabled id="country" name="country" required>
-                                    <option disabled hidden selected value="">Select Country...</option>
-                                    <!--{% for country in country_list %}-->
-                                    <!--<option>{{country}}</option>-->
-                                    <!--{% endfor %}-->
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <label for="headcount">Desk Count:</label>
-                            <input class="form-control" id="headcount" name="headcount" placeholder="Enter Estimated Headcount"
-                                   required type="number">
-                        </div>
                     </div>
-                <div class="row">
-                        <div class="col-md-5">
-                            <label for="building_number">No. of buildings:</label>
-                            <input class="form-control" id="building_number" name="building_number" placeholder="Enter No. of Building"
-                                   type="number">
+                    <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="country">Country :</label>
+                                    <select class="form-control" disabled id="country" name="country" required>
+                                        <option disabled hidden selected value="">Select Country...</option>
+                                        <!--{% for country in country_list %}-->
+                                        <!--<option>{{country}}</option>-->
+                                        <!--{% endfor %}-->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="headcount">Desk Count:</label>
+                                <input class="form-control" id="headcount" name="headcount" placeholder="Enter Estimated Headcount"
+                                       required type="number">
+                            </div>
                         </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="floor_count">Floors per building:</label>
-                                <input class="form-control" id="floor_count" name="floor_count" placeholder="Enter No. of Floor"
+                    <div class="row">
+                            <div class="col-md-5">
+                                <label for="building_number">No. of buildings:</label>
+                                <input class="form-control" id="building_number" name="building_number" placeholder="Enter No. of Building"
                                        type="number">
                             </div>
-                        </div>
-                </div>
-                <div class="row">
-                        <div class="col-md-5" id="floor_radio">
-                            <label class="radio">
-                                <input type="radio" value="similar" disabled name="optradio">Similar Floors
-                            </label>
-                            <label class="radio">
-                                <input type="radio" value="diverse" disabled name="optradio">Diverse Floors
-                            </label>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="floor_mdf">MDF</label>
-                                <select class="form-control" disabled id="floor_mdf" name="floor_mdf">
-                                    <option disabled hidden selected value="">Select Floor...</option>
-                                </select>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="floor_count">Floors per building:</label>
+                                    <input class="form-control" id="floor_count" name="floor_count" placeholder="Enter No. of Floor"
+                                           type="number">
+                                </div>
+                            </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-5" id="floor_radio">
+                                <label class="radio">
+                                    <input type="radio" value="similar" disabled name="optradio">Similar Floors
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" value="diverse" disabled name="optradio">Diverse Floors
+                                </label>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="floor_mdf">MDF</label>
+                                    <select class="form-control" disabled id="floor_mdf" name="floor_mdf">
+                                        <option disabled hidden selected value="">Select Floor...</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <div id="floor_details">
+                    <div id="floor_details">
 
+                    </div>
+                </div>
+                <button id="show_discounts" class="collapsible1" type="button">Vendor Discounts</button>
+                <div id="discounts">
+                    <!--<h3 style="text-align:center; margin-bottom:20px;">Vendor Discounts</h3>-->
+                    <div class="row justify-content-center">
+                        <div class="col-10">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th style="font-weight:400;">Vendor</th>
+                            <th style="font-weight:400;">CapEx Discount (%)</th>
+                            <th style="font-weight:400;">OpEx Discount (%)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td style="font-weight:600;">Cisco : </td>
+                            <td><input class="form-control" id="cisco_capex" name="cisco_capex" value="61"
+                                   type="number"></td>
+                            <td><input class="form-control" id="cisco_opex" name="cisco_opex" value="37"
+                                   type="number"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:600;">Brocade : </td>
+                            <td><input class="form-control" id="brocade_capex" name="brocade_capex" value="58"
+                                   type="number"></td>
+                            <td><input class="form-control" id="brocade_opex" name="brocade_opex" value="30"
+                                   type="number"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:600;">Aruba : </td>
+                            <td><input class="form-control" id="aruba_capex" name="aruba_capex" value="50"
+                                   type="number"></td>
+                            <td><input class="form-control" id="aruba_opex" name="aruba_opex" value="50"
+                                   type="number"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:600;">PAN : </td>
+                            <td><input class="form-control" id="pan_capex" name="pan_capex" value="58"
+                                   type="number"></td>
+                            <td><input class="form-control" id="pan_opex" name="pan_opex" value="10"
+                                   type="number"></td>
+                          </tr>
+                        <tr>
+                            <td style="font-weight:600;">F5/AVI : </td>
+                            <td><input class="form-control" id="f5_capex" name="f5_capex" value="0"
+                                   type="number"></td>
+                            <td><input class="form-control" id="f5_opex" name="f5_opex" value="0"
+                                   type="number"></td>
+                          </tr>
+                        <tr>
+                            <td style="font-weight:600;">Infoblox : </td>
+                            <td><input class="form-control" id="infoblox_capex" name="infoblox_capex" value="0"
+                                   type="number"></td>
+                            <td><input class="form-control" id="infoblox_opex" name="infoblox_opex" value="0"
+                                   type="number"></td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                            </div>
+                        </div>
                 </div>
                 <div class="col-4 calc_btn">
                 <button class="btn btn-block action-btn" id="calculate_btn" type="submit">Calculate</button>
                     <div id="loader"></div>
+                     <!--<button class="btn btn-block action-btn" id="next_btn">Next</button>-->
                 </div>
             </form>
         </div>
@@ -99,6 +164,18 @@
             </div>
         </div>
     </div>
+        <script>
+            document.getElementById("show_discounts").addEventListener("click", function(){
+                this.classList.toggle("active1");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight){
+                  content.style.maxHeight = null;
+                } else {
+                  content.style.maxHeight = content.scrollHeight + "px";
+                }
+              });
+
+        </script>
 </div>
 </div>
 <div id="output_block" style="display:none;">
@@ -110,23 +187,17 @@
                 <p style="margin-bottom:0;">new <span id="office_type"></span> office at</p>
                 <h1 id="country_name"></h1>
             </div>
-            <div class="col-md-1" style="text-align:left;margin: auto 0;">
-                <p>with</p>
-            </div>
+
             <div class="col-md-1" style="text-align:left">
                 <h1 id="desk_input"></h1>
                 <p>Desks</p>
             </div>
-             <div class="col-md-1" style="text-align:left;margin: auto 0;">
-                <p>in</p>
-            </div>
+
             <div class="col-md-1" style="text-align:left">
                 <h1 id="bldng_input"></h1>
                 <p>Building</p>
             </div>
-             <div class="col-md-1" style="text-align:left;margin: auto 0;">
-                <p>with total</p>
-            </div>
+
             <div class="col-md-1" style="text-align:left">
                 <h1 id="floor_input"></h1>
                 <p>Floors</p>
@@ -161,20 +232,28 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-2" style="">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title" id="total_capex"></h2>
+                            <h5 class="card-text">IT Investment</h5>
+                        </div>
+                    </div>
+                </div>
         </div>
 
         <h3>Costing Details</h3>
         <hr class="line">
         <div class="row_cost" style="background:#E3F5FC;">
             <div class="row site_specifics justify-content-center" id="site_cost_details">
-                <div class="col-md-2" style="">
+                <!--<div class="col-md-2" style="">-->
                     <!--<div class="card">-->
                         <!--<div class="card-body">-->
                             <!--<h2 class="card-title" id="total_capex"></h2>-->
                             <!--<h5 class="card-text">Network Investment</h5>-->
                         <!--</div>-->
                     <!--</div>-->
-                </div>
+                <!--</div>-->
                 <div class="col-md-2" style="">
                     <div class="card">
                         <div class="card-body">
@@ -218,6 +297,31 @@
             <div class="col-md-2">
                 <div class="card">
                     <div class="card-header header_text">
+                        NetOps Services
+                    </div>
+                    <div class="card-body" style="text-align:center">
+                        <h2 class="card-title" id="total_net_ops">$</h2>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-text" id="capex_net_ops">$$</h5>
+                                <h5 class="card-text">CapEx</h5>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="card-text" id="opex_net_ops">$$</h5>
+                                <h5 class="card-text">OpEx</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="card-footer btn detail_div" id="net_ops">
+                        <!--<span class="glyphicon glyphicon-chevron-down"></span>-->
+                        <span class="fa fa-angle-double-down"></span>
+                    </button>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card">
+                    <div class="card-header header_text">
                         Net-Auth Services
                     </div>
                     <div class="card-body" style="text-align:center">
@@ -234,31 +338,6 @@
                         </div>
                     </div>
                     <button class="card-footer btn detail_div" id="net_auth">
-                        <!--<span class="glyphicon glyphicon-chevron-down"></span>-->
-                        <span class="fa fa-angle-double-down"></span>
-                    </button>
-
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-header header_text">
-                        AV Services
-                    </div>
-                    <div class="card-body" style="text-align:center">
-                        <h2 class="card-title" id="total_av_services">$</h2>
-                        <div class="row">
-                            <div class="col-6">
-                                <h5 class="card-text" id="capex_av_services">$$</h5>
-                                <h5 class="card-text">CapEx</h5>
-                            </div>
-                            <div class="col-6">
-                                <h5 class="card-text" id="opex_av_services">$$</h5>
-                                <h5 class="card-text">OpEx</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="card-footer btn detail_div" id="av_services">
                         <span class="fa fa-angle-double-down"></span>
                     </button>
 
@@ -289,24 +368,24 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <div class="card">
+                <div class="card disable-card">
                     <div class="card-header header_text">
                         UCC
                     </div>
                     <div class="card-body" style="text-align:center">
-                        <h2 class="card-title">$</h2>
+                        <h2 class="card-title">Pending</h2>
                         <div class="row">
                             <div class="col-6">
-                                <h5 class="card-text" >$$</h5>
+                                <h5 class="card-text"></h5>
                                 <h5 class="card-text">CapEx</h5>
                             </div>
                             <div class="col-6">
-                                <h5 class="card-text">$$</h5>
+                                <h5 class="card-text"></h5>
                                 <h5 class="card-text">OpEx</h5>
                             </div>
                         </div>
                     </div>
-                    <button class="card-footer btn detail_div" id="ucc">
+                    <button class="card-footer btn detail_div" disabled id="ucc">
                         <span class="fa fa-angle-double-down"></span>
                     </button>
 
@@ -336,24 +415,24 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <div class="card">
+                <div class="card disable-card">
                     <div class="card-header header_text">
                         DC-Ops
                     </div>
                     <div class="card-body" style="text-align:center">
-                        <h2 class="card-title">$</h2>
+                        <h2 class="card-title">Pending</h2>
                         <div class="row">
                             <div class="col-6">
-                                <h5 class="card-text">$$</h5>
+                                <h5 class="card-text"></h5>
                                 <h5 class="card-text">CapEx</h5>
                             </div>
                             <div class="col-6">
-                                <h5 class="card-text">$$</h5>
+                                <h5 class="card-text"></h5>
                                 <h5 class="card-text">OpEx</h5>
                             </div>
                         </div>
                     </div>
-                    <button class="card-footer btn detail_div" id="dc_ops">
+                    <button class="card-footer btn detail_div" disabled id="dc_ops">
                         <span class="fa fa-angle-double-down"></span>
                     </button>
                 </div>
@@ -367,6 +446,8 @@
                     {% set service_category = 'net_auth' %}
                 {% elif service_cat == 'Security Services'%}
                     {% set service_category = 'security' %}
+                {% elif service_cat == 'NetOps Services'%}
+                    {% set service_category = 'net_ops' %}
                 {% elif service_cat == 'DC-Ops' %}
                     {% set service_category = 'dc_ops'%}
                 {% elif service_cat == 'Infra Services' %}
@@ -406,15 +487,21 @@
                         <div class="card-body">
                             <table id="table_{{service}}" class="table table-hover" style="height:40%;width:100%;">
                                 <thead class="thead-light" align="centre">
-                                <tr>
-                                    <th align="centre">Device Type</th>
-                                    <th>Device Model</th>
-                                    <th>Qty.</th>
-                                    <th>CAPEX</th>
-                                    <th>Discount</th>
-                                    <th>OPEX</th>
-                                    <th>Discount</th>
-                                </tr>
+                                    <tr>
+                                        <th align="centre" rowspan="3">Device Type</th>
+                                        <th rowspan="3">Device Model</th>
+                                        <th rowspan="3">Qty.</th>
+                                        <th colspan="3" style="text-align:center;">CAPEX</th>
+                                        <th colspan="3" style="text-align:center;">OPEX</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="min-width:60px;">Vendor Price</th>
+                                        <th style="min-width:60px;">Discount</th>
+                                        <th style="min-width:90px;">Customer Price</th>
+                                        <th style="min-width:60px;">Vendor Price</th>
+                                        <th style="min-width:60px;">Discount</th>
+                                        <th style="min-width:90px;">Customer Price</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 {%for device_type in device_type[service_val]%}
@@ -440,11 +527,14 @@
                                             {% endfor %}
                                         </select>
                                     </td>
-
+                                    <td></td>
+                                    <td></td>
                                     <td class="capex" id="capex_{{service}}_{{loop.index}}"></td>
+
+                                    <td></td>
                                     <td></td>
                                     <td class="opex" id="opex_{{service}}_{{loop.index}}"></td>
-                                    <td></td>
+
                                 </tr>
                                 {% endfor%}
                                 </tbody>
@@ -732,6 +822,8 @@ function calculate(){
                 id_cat = 'net_auth';
             }else if(category_array[k] == 'DC-Ops'){
                 id_cat = 'dc_ops';
+            }else if(category_array[k] == 'NetOps Services'){
+                id_cat = 'net_ops';
             }else if(category_array[k] == 'Security Services'){
                 id_cat = 'security';
             }else{
@@ -831,6 +923,7 @@ $(document).ready(function () {
     var service_array = {{service_list|safe}};
     $('#inputForm').on('submit', function(e) {
         e.preventDefault();
+        $("#site_input").show();
         $.ajax({
             url : $(this).attr('action') || window.location.pathname,
             type: "GET",
@@ -972,6 +1065,8 @@ $(".detail_div").click(function() {
     {
     if(service_category[i] == 'Net-Auth Services'){
         id_category = 'net_auth';
+    }else if(service_category[i] == 'NetOps Services'){
+        id_category = 'net_ops';
     }else if(service_category[i] == 'Security Services'){
         id_category = 'security';
     }else if(service_category[i] == 'DC-Ops'){
@@ -983,7 +1078,7 @@ $(".detail_div").click(function() {
     }
     if(id_category == btn_clicked){
         id = "#category_" + id_category;
-        if(id_category == 'net_auth'){
+        if(id_category == 'net_ops'){
             $(id).slideDown(1500);}
         else{$(id).slideDown(500);}
     }else{

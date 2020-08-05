@@ -65,3 +65,42 @@ padding-left : 32px;
     text-align:end;
 }
 
+.collapsible1 {
+  background: linear-gradient(to right,#777,#c8c8c8,#fff);
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+.active1, .collapsible1:hover {
+  background: linear-gradient(to right,#555,#777,#ededed);
+}
+
+.collapsible1:before {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.active1:before {
+  content: "\2212";
+}
+
+#discounts {
+  margin-top:5px;
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+
