@@ -1,5 +1,5 @@
 body{
- color : #E9ECEF !important;
+ color : #fff !important;
 }
 
 /*.main-wrapper{
@@ -55,9 +55,9 @@ body{
     font-family: Metropolis,"Avenir Next","Helvetica Neue",Arial,sans-serif;
 }
 .main-wrapper .select-type .button {
-  background-color: #49AFD9;
+  border: 2px solid #49AFD9;
   border-radius: 3px;
-  color: black;
+  color: #fff;
   padding: 10px 14px;
   text-align: center;
   text-decoration: none;
@@ -71,7 +71,7 @@ body{
 }
 
 .main-wrapper .select-type .button:hover {
-  background-color: #6D7884;
-  color: white;
+  background-color: #49AFD9;
+  color: black;
 }
 
