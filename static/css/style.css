@@ -1,6 +1,9 @@
 body{
-background:#F5F5F5;
-font-size:12px;
+    background:#F5F5F5;
+    font-size:12px;
+}
+#output_block{
+    color:#000 !important;
 }
 .header{
 padding: 10px;
