@@ -36,7 +36,7 @@ max-height:100px;
 
 #input_summary div[class^="col-"]{
     margin:15px;
-    background : #5C3552;
+    background : #205522;
     padding-top:10px;
     text-align:left;
 }
@@ -267,9 +267,7 @@ background:#5C3552;
 color: #E9ECEF;
 font-size: 16px;
 }
-.disable-card .header_text,.disable-card .card-body,.disable-card .detail_div{
-background : #566572;
-}
+
 
 h2.category_text{
 font-weight:bold;
@@ -292,7 +290,13 @@ display:inline-block;
     background-color : #29414E;
     box-shadow : none;
 }
+.disable-card .header_text,.disable-card .card-body,.disable-card .detail_div{
+background : #566572;
+}
 
+.disable-card .header_text{
+    background:#7F6509;
+}
 
 .fa{
     transform: scale(2,1.7);

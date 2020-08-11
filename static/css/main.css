@@ -55,7 +55,6 @@ body{
     font-family: Metropolis,"Avenir Next","Helvetica Neue",Arial,sans-serif;
 }
 .main-wrapper .select-type .button {
-  border: 2px solid #49AFD9;
   border-radius: 3px;
   color: #fff;
   padding: 10px 14px;
@@ -66,12 +65,15 @@ body{
   letter-spacing:1px;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
-  cursor: pointer;
   margin-top:15px;
 }
 
-.main-wrapper .select-type .button:hover {
+.main-wrapper .select-type .new-site:hover {
   background-color: #49AFD9;
   color: black;
+}
+
+.new-site{
+    border: 2px solid #49AFD9;
 }
 

@@ -182,7 +182,7 @@
              <!--<div class="col-md-1" style="text-align:center">-->
             <!--</div>-->
             <div class="col-md-2">
-                <p style="margin-bottom:0;">new <span id="office_type"></span> office at</p>
+                <p style="margin-bottom:0;">New <span id="office_type"></span> Office at</p>
                 <h1 id="country_name"></h1>
             </div>
 
@@ -370,7 +370,7 @@
                         UCC
                     </div>
                     <div class="card-body" style="text-align:center">
-                        <h2 class="card-title">Pending</h2>
+                        <h2 class="card-title">Pending</h2><br>
                         <div class="row">
                             <div class="col-6">
                                 <h5 class="card-text"></h5>
@@ -394,14 +394,14 @@
                         Infra Services
                     </div>
                     <div class="card-body" style="text-align:center">
-                        <h2 class="card-title">$</h2>
+                        <h2 class="card-title" id="total_infra">$</h2>
                         <div class="row">
                             <div class="col-6">
-                                <h5 class="card-text">$$</h5>
+                                <h5 class="card-text" id="capex_infra">$$</h5>
                                 <h5 class="card-text">CapEx</h5>
                             </div>
                             <div class="col-6">
-                                <h5 class="card-text">$$</h5>
+                                <h5 class="card-text" id="opex_infra">$$</h5>
                                 <h5 class="card-text">OpEx</h5>
                             </div>
                         </div>
@@ -417,7 +417,7 @@
                         DC-Ops
                     </div>
                     <div class="card-body" style="text-align:center">
-                        <h2 class="card-title">Pending</h2>
+                        <h2 class="card-title">Pending</h2><br>
                         <div class="row">
                             <div class="col-6">
                                 <h5 class="card-text"></h5>
@@ -524,12 +524,11 @@
                                             {% endfor %}
                                         </select>
                                     </td>
-                                    <td></td>
-                                    <td></td>
+                                    <td class="capex_list" id="list_capex_{{service}}_{{loop.index}}"></td>
+                                    <td class="capex_discount" id="discount_capex_{{service}}_{{loop.index}}"></td>
                                     <td class="capex" id="capex_{{service}}_{{loop.index}}"></td>
-
-                                    <td></td>
-                                    <td></td>
+                                    <td class="opex_list" id="list_opex_{{service}}_{{loop.index}}"></td>
+                                    <td class="opex_discount" id="discount_opex_{{service}}_{{loop.index}}"></td>
                                     <td class="opex" id="opex_{{service}}_{{loop.index}}"></td>
 
                                 </tr>
@@ -823,7 +822,10 @@ function calculate(){
                 id_cat = 'net_ops';
             }else if(category_array[k] == 'Security Services'){
                 id_cat = 'security';
-            }else{
+            }else if(category_array[k] == 'Infra Services'){
+                id_cat = 'infra';
+            }
+            else{
                 id_cat = category_array[k];
         }
 
@@ -930,7 +932,7 @@ $(document).ready(function () {
                 $("#loader").show();
             },
             success: function (data) {
-                $("#office_type").html($("#site_type").val().toLowerCase());
+                $("#office_type").html($("#site_type").val());
                 $("#country_name").html($("#country").val());
 
                 $("#desk_input").html($("#headcount").val());
@@ -984,15 +986,23 @@ $(document).ready(function () {
                     var idcpx = 1;
                     var idopx = 1;
                     var idqty = 1;
+                    var idlistcapex = 1;
+                    var idcapexdiscount = 1;
+                    var idlistopex = 1;
+                    var idopexdiscount =1;
                     $.each(rspns, function(x, item) {
 
                         if (item.ServiceType == service_array[i]){
 
-
+                            var vendor_name = item.Vendor.toLowerCase();;
                             var id = "#type_" + id_service +  "_" + idx++;
                             var id_capex = "#capex_" + id_service +  "_" + idcpx++;
                             var id_opex = "#opex_" + id_service +  "_" + idopx++;
                             var qid = "type_qty_" + id_service + "_" + idqty++;
+                            var list_capex_id = "#list_capex_" + id_service + "_" + idlistcapex++ ;
+                            var discount_capex_id = "#discount_capex_" + id_service + "_" + idcapexdiscount++ ;
+                            var list_opex_id = "#list_opex_" + id_service + "_" + idlistopex++ ;
+                            var discount_opex_id = "#discount_opex_" + id_service + "_" + idopexdiscount++ ;
 
                             var qty_value = document.getElementById(qid).selectedOptions[0].value;
 
@@ -1000,15 +1010,42 @@ $(document).ready(function () {
 
                             $(id).val(item.DeviceModel);
 
-                            if(item.CAPEX == null){
+                            if(item.CAPEX == 0){
+                                id_vendor = vendor_name + "_capex";
+                                var vendor_discount = document.getElementById(id_vendor);
+                                $(list_capex_id).html(parseInt(0));
+                                $(discount_capex_id).html(parseInt(0));
                                 $(id_capex).html(parseInt(item.CAPEX));
                             }else{
-                                capex_qty = item.CAPEX * qty_value;
+                                id_vendor = vendor_name + "_capex";
+                                var vendor_discount = document.getElementById(id_vendor);
+                                console.log(vendor_discount.value);
+                                vendor_value = vendor_discount.value * qty_value;
+                                vendor_percent = vendor_value + "%";
+                                list_value= item.CAPEX * qty_value;
+                                console.log(vendor_value);
+                                capex_qty = list_value -(list_value*vendor_value/100);
+                                $(discount_capex_id).html(vendor_percent);
+                                $(list_capex_id).html(formatter1.format(list_value));
                                 $(id_capex).html(formatter1.format(capex_qty));
                             }
-                            if(item.OPEX== null){
+                            if(item.OPEX== 0){
+                                id_vendor = vendor_name + "_opex";
+                                var vendor_discount = document.getElementById(id_vendor);
+                                $(list_opex_id).html(parseInt(0));
+                                $(discount_opex_id).html(parseInt(0));
                                 $(id_opex).html(parseInt(item.OPEX));
                             }else{
+                                id_vendor = vendor_name + "_opex";
+                                var vendor_discount = document.getElementById(id_vendor);
+                                console.log(vendor_discount.value);
+                                vendor_value = vendor_discount.value * qty_value;
+                                vendor_percent = vendor_value + "%";
+                                opex_qty = item.OPEX * qty_value;
+                                console.log(vendor_value);
+                                list_value = opex_qty +(opex_qty*vendor_value/100);
+                                $(discount_opex_id).html(vendor_percent);
+                                $(list_opex_id).html(formatter1.format(list_value));
                                 opex_qty = item.OPEX * qty_value;
                                 $(id_opex).html(formatter1.format(opex_qty));
                             }
