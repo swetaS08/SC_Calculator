@@ -1,5 +1,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="static/css/input.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 {% extends "header.html" %} {% block body %}
 
@@ -13,7 +14,7 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="site_type">Site Type :</label>
-                                    <select class="form-control" id="site_type" name="site_type" required>
+                                    <select class="form-control" id="site_type" name="site_type" >
                                         <option disabled hidden id="select" selected value="">Select Site Type...</option>
                                         <option id="W&W" name="W&W" value="Wired & Wireless">Wired & Wireless</option>
                                         <option id="Wireless" name="Wireless" value="Wireless">Wireless only</option>
@@ -39,7 +40,7 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="country">Country :</label>
-                                    <select class="form-control" disabled id="country" name="country" required>
+                                    <select class="form-control" disabled id="country" name="country" >
                                         <option disabled hidden selected value="">Select Country...</option>
                                         <!--{% for country in country_list %}-->
                                         <!--<option>{{country}}</option>-->
@@ -48,9 +49,9 @@
                                 </div>
                             </div>
                             <div class="col-md-5">
-                                <label for="headcount">Desk Count:</label>
-                                <input class="form-control" id="headcount" name="headcount" placeholder="Enter Estimated Headcount"
-                                       required type="number">
+                                <label for="city">City:</label>
+                                <input class="form-control" id="city" name="city" placeholder="Enter the city name"
+                                        type="text">
                             </div>
                         </div>
                     <div class="row">
@@ -181,9 +182,9 @@
         <div class="row justify-content-center" id="input_summary">
              <!--<div class="col-md-1" style="text-align:center">-->
             <!--</div>-->
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <p style="margin-bottom:0;">New <span id="office_type"></span> Office at</p>
-                <h1 id="country_name"></h1>
+                <h1 id="city_name" style="display:inline;"><h1 id="country_name" style="display:inline;"></h1></h1>
             </div>
 
             <div class="col-md-1">
@@ -230,7 +231,7 @@
                 </div>
             </div>
             <div class="col-md-2" style="">
-                    <div class="card">
+                    <div class="card" style="border:solid;">
                         <div class="card-body">
                             <h2 class="card-title" id="total_capex"></h2>
                             <h5 class="card-text">IT Investment</h5>
@@ -286,9 +287,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-2">
+                    <div class="card" style="border:solid;">
+                        <div class="card-body">
+                            <h2 class="card-title" id="cost_per_desk"></h2>
+                            <h5 class="card-text">Cost Per Desk</h5>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
+
         <br><br>
         <div class="row justify-content-center business-units">
             <div class="col-md-2">
@@ -452,6 +462,8 @@
                 {% else %}
                     {% set service_category = service_cat%}
                 {% endif %}
+
+
                 <div class="row site_details" id="category_{{service_category}}" style="display:none">
                     <div class="col-md-12 row" style="margin-top:10px;">
                         <div class="col-4">
@@ -464,87 +476,111 @@
                             </button></span>
                             <button class="btn btn-default action-btn save-btn" id="save_btn" style="display:none;">Save & Close</button>
                         </div>
-
                     </div>
+                    <div class="col-10 offset-1">
+                            <ul id="tabs_{{service_category}}" class="nav nav-tabs justify-content-center" data-tabs="tabs">
+                                <li class="active"><a href="#mdf_{{service_category}}" data-toggle="tab">Floor1</a>
+                                </li>
+                                <!--<li><a href="#floor2_{{service_category}}" data-toggle="tab">Floor 2</a>-->
+                                <!--</li>-->
+                                <!--<li><a href="#floor3_{{service_category}}" data-toggle="tab">Floor 3</a>-->
+                                <!--<li><a href="#floor4_{{service_category}}" data-toggle="tab">Floor 4</a>-->
+                                <!--</li>-->
+                                <!--<li><a href="#floor5_{{service_category}}" data-toggle="tab">Floor 5</a>-->
+                                <!--</li>-->
+                            </ul>
 
-                {%for service_val in device_category[service_cat]%}
-                    {% if service_val == 'Network Services'%}
-                        {% set service = 'Network_Services' %}
-                    {% elif service_val == 'Module(Line Card)' %}
-                        {% set service = 'module' %}
-                    {% else %}
-                        {% set service = service_val %}
-                    {% endif %}
-                <div class="col-md-12" id="div_{{service}}" style="margin-bottom:20px; margin-top:20px">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="service_name" style="display:inline;">{{service_val}} Details</h5>
-                            <h5 id="sum_{{service}}" style="display:inline;float:right;font-size:16px;"></h5>
-                        </div>
-                        <div class="card-body">
-                            <table id="table_{{service}}" class="table table-hover table-dark table-borderless" style="height:40%;width:100%;">
-                                <thead align="centre">
-                                    <tr>
-                                        <th align="centre" rowspan="3" style="padding-left:15px">Device Type</th>
-                                        <th rowspan="3">Device Model</th>
-                                        <th rowspan="3">Qty.</th>
-                                        <th colspan="3" style="text-align:center;">CAPEX</th>
-                                        <th colspan="3" style="text-align:center;">OPEX</th>
-                                    </tr>
-                                    <tr>
-                                        <th style="min-width:60px;">Vendor Price</th>
-                                        <th style="min-width:60px;">Discount</th>
-                                        <th style="min-width:90px;">Customer Price</th>
-                                        <th style="min-width:60px;">Vendor Price</th>
-                                        <th style="min-width:60px;">Discount</th>
-                                        <th style="min-width:90px;">Customer Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {%for device_type in device_type[service_val]%}
-                                <tr id="{{service}}_{{loop.index}}">
-                                    <td style="width: 250px; padding-left:15px" class="select_device_type">{{device_type}}</td>
-                                    <td class="select_device_model" style="width: 300px;">
-                                        <select id="type_{{service}}_{{loop.index}}" disabled class="form-control service-select">
-                                            <option selected hidden>. . .</option>
-                                            {%for device_model in device_model[device_type]%}
-                                            <option value="{{device_model}}">{{device_model}}</option>
+                        <div id="my-tab-content_{{service_category}}" class="tab-content">
+                          <div class="tab-pane active" id="mdf_{{service_category}}">
+                              <h1 style="text-align:center;">MDF</h1>
+                              <div class="row">
+                                  <div class="col-2 floor_desks">
+                                    <h1 class="floor1_desks"></h1>
+                                    <p>Deskcount</p>
+                                  </div>
+                              </div>
+                              {%for service_val in device_category[service_cat]%}
+                                {% if service_val == 'Network Services'%}
+                                    {% set service = 'Network_Services' %}
+                                {% elif service_val == 'Module(Line Card)' %}
+                                    {% set service = 'module' %}
+                                {% else %}
+                                    {% set service = service_val %}
+                                {% endif %}
+
+                                <div class="col-md-12" id="div_{{service}}" style="margin-bottom:20px; margin-top:20px">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="service_name" style="display:inline;">{{service_val}} Details</h5>
+                                        <h5 id="sum_{{service}}" style="display:inline;float:right;font-size:16px;"></h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <table id="table_{{service}}" class="table table-hover table-dark table-borderless" style="height:40%;width:100%;">
+                                            <thead align="centre">
+                                                <tr>
+                                                    <th align="centre" rowspan="3" style="padding-left:15px">Device Type</th>
+                                                    <th rowspan="3">Device Model</th>
+                                                    <th rowspan="3">Qty.</th>
+                                                    <th colspan="3" style="text-align:center;">CAPEX</th>
+                                                    <th colspan="3" style="text-align:center;">OPEX</th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="min-width:60px;">List Price</th>
+                                                    <th style="min-width:60px;">Discount</th>
+                                                    <th style="min-width:90px;">Customer Price</th>
+                                                    <th style="min-width:60px;">List Price</th>
+                                                    <th style="min-width:60px;">Discount</th>
+                                                    <th style="min-width:90px;">Customer Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {%for device_type in device_type[service_val]%}
+                                            <tr id="{{service}}_{{loop.index}}">
+                                                <td style="width: 250px; padding-left:15px" class="select_device_type">{{device_type}}</td>
+                                                <td class="select_device_model" style="width: 300px;">
+                                                    <select id="type_{{service}}_{{loop.index}}" disabled class="form-control service-select">
+                                                        <option selected hidden>. . .</option>
+                                                        {%for device_model in device_model[device_type]%}
+                                                        <option value="{{device_model}}">{{device_model}}</option>
+                                                        {% endfor%}
+                                                    </select></td>
+
+                                                <td class="select_type_qty">
+                                                    <select id="type_qty_{{service}}_{{loop.index}}" disabled class="form-control qty-select" style="width: 50px;">
+                                                        <option selected hidden>. . .</option>
+                                                        {% for i in range(1, 51) %}
+                                                        {% if i == 1 %}
+                                                        <option value="{{i}}" selected>{{i}}</option>
+                                                        {% else %}
+                                                        <option value="{{i}}">{{i}}</option>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </td>
+                                                <td class="capex_list" id="list_capex_{{service}}_{{loop.index}}"></td>
+                                                <td class="capex_discount" id="discount_capex_{{service}}_{{loop.index}}"></td>
+                                                <td class="capex" id="capex_{{service}}_{{loop.index}}"></td>
+                                                <td class="opex_list" id="list_opex_{{service}}_{{loop.index}}"></td>
+                                                <td class="opex_discount" id="discount_opex_{{service}}_{{loop.index}}"></td>
+                                                <td class="opex" id="opex_{{service}}_{{loop.index}}"></td>
+
+                                            </tr>
                                             {% endfor%}
-                                        </select></td>
+                                            </tbody>
 
-                                    <td class="select_type_qty">
-                                        <select id="type_qty_{{service}}_{{loop.index}}" disabled class="form-control qty-select" style="width: 50px;">
-                                            <option selected hidden>. . .</option>
-                                            {% for i in range(1, 51) %}
-                                            {% if i == 1 %}
-                                            <option value="{{i}}" selected>{{i}}</option>
-                                            {% else %}
-                                            <option value="{{i}}">{{i}}</option>
-                                            {% endif %}
-                                            {% endfor %}
-                                        </select>
-                                    </td>
-                                    <td class="capex_list" id="list_capex_{{service}}_{{loop.index}}"></td>
-                                    <td class="capex_discount" id="discount_capex_{{service}}_{{loop.index}}"></td>
-                                    <td class="capex" id="capex_{{service}}_{{loop.index}}"></td>
-                                    <td class="opex_list" id="list_opex_{{service}}_{{loop.index}}"></td>
-                                    <td class="opex_discount" id="discount_opex_{{service}}_{{loop.index}}"></td>
-                                    <td class="opex" id="opex_{{service}}_{{loop.index}}"></td>
+                                        </table>
+                                    </div>
 
-                                </tr>
-                                {% endfor%}
-                                </tbody>
+                                </div>
+                            </div>
 
-                            </table>
+                              {% endfor %}
+                          </div>
+                        </div>
                         </div>
 
-                    </div>
+
                 </div>
-
-                {% endfor %}
-
-
-            </div>
             {% endfor %}
         </div>
     </div>
@@ -556,14 +592,15 @@
                 <div class="row">
                     <div class="col-md-9">
                         <div class="card">
-                            <table class="table" id="circuit_details" style="text-align:center;">
+                            <table class="table table-hover table-dark table-borderless" id="circuit_details" style="text-align:center;">
                                 <thead>
-                                <th colspan="2" style="background:#ededed"></th>
-                                <th colspan="3" style="background:#DFF0D0">Average</th>
-                                <th colspan="3" style="background:#FFF4C7">Maximum</th>
+                                <th colspan="3"></th>
+                                <th colspan="3" style="background:#7F6509">Average</th>
+                                <th colspan="3" style="background:#5C3552">Maximum</th>
                                 </thead>
                                 <thead>
                                 <th>Service</th>
+                                <th>Qty.</th>
                                 <th>Capacity(Mbps)</th>
                                 <th>Price Per Meg</th>
                                 <th>MRC Per Circuit</th>
@@ -586,6 +623,8 @@
 
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script>
 
 var countryJSON = {{country_list | safe}}
@@ -672,8 +711,8 @@ function append_floors(floor_count,type){
                 <h4 style="margin: 8px 4px 0px 16px;">`+x+`Floor `+y+` :</h4>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label for="desk_floor">Desk Count:</label>
-                        <input class="form-control" id="desk_floor" name="desk_floor" placeholder="Desks/floor"
+                        <label for="headcount">Desk Count:</label>
+                        <input class="form-control" id="headcount_${i}" name="headcount_${i}" placeholder="Desks/floor"
                                style="width:105%;" type="number">
 
                     </div>
@@ -682,14 +721,14 @@ function append_floors(floor_count,type){
                 <div class="col-md-3" style="max-width:23%">
                     <div class="form-group">
                         <label for="meeting_rooms">Meeting/Zoom Rooms:</label>
-                        <input class="form-control" id="meeting_rooms" name="meeting_rooms" placeholder="No. of rooms"
+                        <input class="form-control" id="meeting_rooms_${i}" name="meeting_rooms" placeholder="No. of rooms"
                                style="width:105%;" type="number">
 
                     </div>
                 </div>
 
                 <div class="col-md-3" style="max-width:23%">
-                    <div class="form-group" >
+                    <div class="form-group">
                     <label for="conf_rooms">Conference Rooms:</label>
                     <input class="form-control" id="conf_rooms" name="conf_rooms" placeholder="No. of rooms"
                            style="width:105%;" type="number">
@@ -717,7 +756,6 @@ $('#bom_btn').click(function() {
     dict_nest = []
     $("tr").each(function(i,v){
     var device_type = $(this).find(".select_device_type").text();
-    console.log(device_type);
     var device_model = $(this).find("td:eq(1)");
     var device_model = device_model.find("select"); //grab the <select> tag assuming that there will be only single select box within that <td>
     var device_model = device_model.val();
@@ -740,7 +778,6 @@ $('#bom_btn').click(function() {
         success: function(data)
         {
             pageRedirect();
-            console.log(data);
         },
         complete: function()
         {
@@ -813,7 +850,6 @@ function calculate(){
         {
         var category_capex = 0 ;
         var category_opex = 0 ;
-        console.log(category_array[k]);
         if(category_array[k] == 'Net-Auth Services'){
                 id_cat = 'net_auth';
             }else if(category_array[k] == 'DC-Ops'){
@@ -886,16 +922,14 @@ function calculate(){
         }
     }
     site_cost = (sum_capex/6) + sum_opex + circuit_arc;
-    console.log(circuit_arc,'==================');
     $('#total_capex').html(formatter.format(sum_capex));
     $('#annual_capex').html(formatter.format(sum_capex/6));
     $('#total_opex').html(formatter.format(sum_opex));
     $('#site_cost').html(formatter.format(site_cost));
-    var headcount = parseInt($('#headcount').val());
+    var headcount = parseInt($('#desk_input').html());
     $('#cost_per_head').html(formatter.format(site_cost/headcount));
-    var desks = parseInt($('#desk').val());
-    $('#cost_per_desk').html(formatter.format(site_cost/desks));
-    var ports = desks * parseInt($("#site_port_count").html());
+    $('#cost_per_desk').html(formatter.format(site_cost/headcount));
+    var ports = headcount * parseInt($("#site_port_count").html());
 
     if (ports == 0){
         $('#cost_per_port').html("NA")
@@ -907,7 +941,6 @@ function calculate(){
 function gss_data(){
     var site_type = $("#site_type :selected").text();
     var gss = $("#gss :selected").text();
-    console.log(gss);
     if( site_type == 'Wired & Wireless' && gss == "Yes"){
         $("#site_port_count").html('2');
     } else if (site_type == 'Wired & Wireless' && gss == "No"){
@@ -933,9 +966,10 @@ $(document).ready(function () {
             },
             success: function (data) {
                 $("#office_type").html($("#site_type").val());
+                $("#city_name").html($("#city").val() +", ");
                 $("#country_name").html($("#country").val());
 
-                $("#desk_input").html($("#headcount").val());
+                $("#desk_input").html(data[1].headcount);
                 $("#bldng_input").html($("#building_number").val());
                 $("#floor_input").html($("#floor_count").val());
 
@@ -943,9 +977,153 @@ $(document).ready(function () {
                 $("#mpls_count").html(data[1].mpls_count);
                 $("#internet_count").html(data[1].internet_count);
 
+                var service_category = {{service_category_list|safe}};
+                var total_floors = parseInt($("#floor_count").val());
+                for (var i=0 ; i< service_category.length; i++){
+                    var id_service = '';
+                    if(service_category[i] == 'Net-Auth Services'){
+                        id_service = 'net_auth';
+                    }else if(service_category[i] == 'NetOps Services'){
+                        id_service = 'net_ops';
+                    }else if(service_category[i] == 'Security Services'){
+                        id_service = 'security';
+                    }else if(service_category[i] == 'DC-Ops'){
+                        id_service = 'dc_ops';
+                    }else if(service_category[i] == 'Infra Services'){
+                        id_service = 'infra';
+                    }else{
+                        id_service = service_category[i];
+                    }
+                    console.log('id_service'+id_service);
+                    if(total_floors > 1){
+                        for(var j = 2; j <= total_floors; j++){
+                            $('#tabs_'+id_service).append(`<li><a href="#floor${j}_${id_service}" data-toggle="tab">Floor ${j}</a></li>`);
+                            var temp_html = `<div class="tab-pane" id="floor${j}_${id_service}">
+                                                <div class="row">
+                                                  <div class="col-2 floor_desks">
+                                                    <h1 class="floor${j}_desks"></h1>
+                                                    <p>Deskcount</p>
+                                                  </div>
+                                                </div>
+                                             </div>`
+                            $('#my-tab-content_'+id_service).append(temp_html);
+                        }
+                    }
+                    if(total_floors==1){
+                        $(`.floor1_desks`).html($(`#headcount_1`).val());
+                    }
+                    else if(total_floors>1){
+                        if($('input[name=optradio]:checked').val() == "similar"){
+                            var each_floor_desks = $(`#headcount_1`).val()/total_floors;
+                            for(var j = 1; j <= total_floors; j++){
+                                $(`.floor${j}_desks`).html(each_floor_desks);
+                            }
+
+                        }
+                        else{
+                            for(var j = 1; j <= total_floors; j++){
+                                $(`.floor${j}_desks`).html($(`#headcount_${j}`).val());
+                            }
+                        }
+                    }
+                }
+
+                for(var j = 2; j <= total_floors; j++){
+                    var floor_rspns  = JSON.parse(data[3]);
+
+                    var floor_service_cat = Array.from(new Set(floor_rspns.map((item) => item.ServiceCategory1)))
+
+                    floor_service_cat.forEach( category => {
+                        var service_cat_devices = floor_rspns.filter( item => {
+                            return item.ServiceCategory1 == category;
+                        });
+                        var floor_service_types = Array.from(new Set(service_cat_devices.map((item) => item.ServiceType1)));
+                        floor_service_types.forEach( service_type => {
+                             var floor_html = `<div class="col-md-12" id="floor${j}_${service_type}" style="margin-bottom:20px; margin-top:20px">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h5 class="service_name" id="floor${j}_${service_type}_name" style="display:inline;"></h5>
+                                                            <h5 id="floor${j}_sum_${service_type}" style="display:inline;float:right;font-size:16px;"></h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table id="floor${j}_table_${service_type}" class="table table-hover table-dark table-borderless" style="height:40%;width:100%;">
+                                                                <thead align="centre">
+                                                                    <tr>
+                                                                        <th align="centre" rowspan="3" style="padding-left:15px">Device Type</th>
+                                                                        <th rowspan="3">Device Model</th>
+                                                                        <th rowspan="3">Qty.</th>
+                                                                        <th colspan="3" style="text-align:center;">CAPEX</th>
+                                                                        <th colspan="3" style="text-align:center;">OPEX</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th style="min-width:60px;">List Price</th>
+                                                                        <th style="min-width:60px;">Discount</th>
+                                                                        <th style="min-width:90px;">Customer Price</th>
+                                                                        <th style="min-width:60px;">List Price</th>
+                                                                        <th style="min-width:60px;">Discount</th>
+                                                                        <th style="min-width:90px;">Customer Price</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody> </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                              </div>`;
+                            $(`#floor${j}_`+category).append(floor_html);
+                            var service_type_devices = floor_rspns.filter( elem => {
+                                return elem.ServiceType1 == service_type;
+                            });
+
+                            service_type_devices.forEach( (device,index) => {
+                              var tr_html = `<tr id="floor${j}_${device.ServiceType1}}_${index}">
+                                                    <td style="width: 250px; padding-left:15px" class="select_device_type">${device.DeviceType}</td>
+                                                    <td class="select_device_model" style="width: 300px;">${device.DeviceModel}</td>
+
+                                                    <td class="select_type_qty">
+                                                        <select id="floor${j}_type_qty_${device.ServiceType1}_${index}" disabled class="form-control qty-select" style="width: 50px;">
+                                                            <option selected >1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                            <option>6</option>
+                                                            <option>7</option>
+                                                            <option>8</option>
+                                                            <option>9</option>
+                                                            <option>10</option>
+                                                        </select>
+                                                    </td>
+                                                    <td class="capex_list" id="floor${j}_list_capex_${device.ServiceType1}_${index}"></td>
+                                                    <td class="capex_discount" id="floor${j}_discount_capex_${device.ServiceType1}_${index}"></td>
+                                                    <td class="capex" id="floor${j}_capex_${device.ServiceType1}_${index}"></td>
+                                                    <td class="opex_list" id="floor${j}_list_opex_${device.ServiceType1}_${index}">${device.OPEX}</td>
+                                                    <td class="opex_discount" id="floor${j}_discount_opex_${device.ServiceType1}_${index}"></td>
+                                                    <td class="opex" id="floor${j}_opex_${device.ServiceType1}_${index}"></td>
+                                               </tr>`;
+                              $(`#floor${j}_table_${device.ServiceType1} tbody`).append(tr_html);
+                              $(`#floor${j}_${device.ServiceType1}_name`).html(`${device.ServiceType} Details`)
+
+                              $(`#floor${j}_list_capex_${device.ServiceType1}_${index}`).html(formatter1.format(device.CAPEX));
+                              var id_vendor_capex = device.Vendor.toLowerCase() + "_capex";
+                              var vendor_discount_capex = parseInt($(`#${id_vendor_capex}`).val());
+                              $(`#floor${j}_discount_capex_${device.ServiceType1}_${index}`).html(vendor_discount_capex + '%');
+                              $(`#floor${j}_capex_${device.ServiceType1}_${index}`).html(formatter1.format(device.CAPEX * (100 - vendor_discount_capex)/100));
+
+                              $(`#floor${j}_list_opex_${device.ServiceType1}_${index}`).html(formatter1.format(device.OPEX));
+                              var id_vendor_opex = device.Vendor.toLowerCase() + "_opex";
+                              var vendor_discount_opex = parseInt($(`#${id_vendor_opex}`).val());
+                              $(`#floor${j}_discount_opex_${device.ServiceType1}_${index}`).html(vendor_discount_opex + '%');
+                              $(`#floor${j}_opex_${device.ServiceType1}_${index}`).html(formatter1.format(device.OPEX * (100 - vendor_discount_opex)/100));
+
+                            });
+                        });
+
+                    });
+                }
+
 
                 $("#circuit_details tbody > tr").remove();
-                 var mpls_tr = '<tr id="mpls_row"><th>MPLS</th><td>' + data[1].mpls_bw + '</td><td>' +
+                 var mpls_tr = '<tr id="mpls_row"><th>MPLS</th><td>'+ data[1].mpls_count +'</td><td>' + data[1].mpls_bw + '</td><td>' +
                             formatter1.format(data[2].mpls_avg) + '</td><td>'+
                             formatter1.format(data[2].mpls_cost_avg) + '</td><td>'+
                             formatter1.format(data[2].mpls_cost_avg * data[1].mpls_count) + '</td><td>'+
@@ -954,7 +1132,7 @@ $(document).ready(function () {
                             formatter1.format(data[2].mpls_cost_max * data[1].mpls_count) + '</td></tr>';
 
 
-                 var int_tr = '<tr id="int_row"><th>Internet</th><td>' + data[1].mpls_bw + '</td><td>' +
+                 var int_tr = '<tr id="int_row"><th>Internet</th><td>'+ data[1].internet_count +'</td><td>' + data[1].mpls_bw + '</td><td>' +
                             formatter1.format(data[2].int_avg) + '</td><td>'+
                             formatter1.format(data[2].int_cost_avg) + '</td><td>'+
                             formatter1.format(data[2].int_cost_avg * data[1].internet_count) + '</td><td>'+
@@ -971,7 +1149,6 @@ $(document).ready(function () {
                  $('#circuit_max').html(formatter.format(circuit_max));
 
                 var rspns = JSON.parse(data[0]);
-
 
                 for (i=0 ; i< service_array.length; i++)
                 {
@@ -991,10 +1168,9 @@ $(document).ready(function () {
                     var idlistopex = 1;
                     var idopexdiscount =1;
                     $.each(rspns, function(x, item) {
-
                         if (item.ServiceType == service_array[i]){
 
-                            var vendor_name = item.Vendor.toLowerCase();;
+                            var vendor_name = item.Vendor.toLowerCase();
                             var id = "#type_" + id_service +  "_" + idx++;
                             var id_capex = "#capex_" + id_service +  "_" + idcpx++;
                             var id_opex = "#opex_" + id_service +  "_" + idopx++;
@@ -1006,43 +1182,35 @@ $(document).ready(function () {
 
                             var qty_value = document.getElementById(qid).selectedOptions[0].value;
 
-                            console.log(qty_value);
-
                             $(id).val(item.DeviceModel);
 
                             if(item.CAPEX == 0){
                                 id_vendor = vendor_name + "_capex";
-                                var vendor_discount = document.getElementById(id_vendor);
                                 $(list_capex_id).html(parseInt(0));
                                 $(discount_capex_id).html(parseInt(0));
                                 $(id_capex).html(parseInt(item.CAPEX));
                             }else{
                                 id_vendor = vendor_name + "_capex";
                                 var vendor_discount = document.getElementById(id_vendor);
-                                console.log(vendor_discount.value);
                                 vendor_value = vendor_discount.value * qty_value;
                                 vendor_percent = vendor_value + "%";
                                 list_value= item.CAPEX * qty_value;
-                                console.log(vendor_value);
-                                capex_qty = list_value -(list_value*vendor_value/100);
+                                capex_qty = list_value - (list_value*vendor_value/100);
                                 $(discount_capex_id).html(vendor_percent);
                                 $(list_capex_id).html(formatter1.format(list_value));
                                 $(id_capex).html(formatter1.format(capex_qty));
                             }
                             if(item.OPEX== 0){
                                 id_vendor = vendor_name + "_opex";
-                                var vendor_discount = document.getElementById(id_vendor);
                                 $(list_opex_id).html(parseInt(0));
                                 $(discount_opex_id).html(parseInt(0));
                                 $(id_opex).html(parseInt(item.OPEX));
                             }else{
                                 id_vendor = vendor_name + "_opex";
                                 var vendor_discount = document.getElementById(id_vendor);
-                                console.log(vendor_discount.value);
                                 vendor_value = vendor_discount.value * qty_value;
                                 vendor_percent = vendor_value + "%";
                                 opex_qty = item.OPEX * qty_value;
-                                console.log(vendor_value);
                                 list_value = opex_qty +(opex_qty*vendor_value/100);
                                 $(discount_opex_id).html(vendor_percent);
                                 $(list_opex_id).html(formatter1.format(list_value));
@@ -1077,7 +1245,7 @@ var i;
 
 for (i = 0; i < collapse.length; i++) {
   collapse[i].addEventListener("click", function() {
-    this.classList.toggle("active");
+    this.classList.toggle("active2");
     var content = this.nextElementSibling;
     if (content.style.maxHeight){
       content.style.maxHeight = null;
@@ -1094,7 +1262,6 @@ var coll = document.getElementsByClassName("detail_div");
 var content = document.getElementById("service_content");
 var i;
 var service_category = {{service_category_list|safe}};
-console.log(service_category);
 $(".detail_div").click(function() {
     var btn_clicked = this.id;
     $('#service_content').css('border','1px solid #0e161b');

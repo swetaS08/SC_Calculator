@@ -216,7 +216,7 @@ background: -webkit-linear-gradient(left,rgba(14, 86, 117, 1),rgba(14, 86, 117, 
     font-size: 18.72px;
     padding: 18px;
 }
- .active,.collapsible:hover {
+ .active2,.collapsible:hover {
   background-color: #0F171C ;
   color:#E9ECEF;
 }
@@ -229,7 +229,7 @@ background: -webkit-linear-gradient(left,rgba(14, 86, 117, 1),rgba(14, 86, 117, 
 .collapsible:focus{
     outline : none;
 }
-.active:after {
+.active2:after {
   content: "\2212";
   color:white;
 }
@@ -306,4 +306,11 @@ background : #566572;
     margin: auto 0;
     font-size: 23px;
     font-weight: 800;
+}
+
+.floor_desks{
+    margin:15px;
+    background : #205522;
+    padding-top:10px;
+    text-align:left;
 }

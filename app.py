@@ -10,7 +10,7 @@ import os
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'nw-poc-cps1.vmware.com'
+app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Suman.524532'
 app.config['MYSQL_DB'] = 'cps_db'
@@ -121,7 +121,7 @@ def new():
     for category in service_category_list:
         device_category[category] = sum_data.loc[sum_data['ServiceCategory'] == category, 'ServiceType'].unique().tolist()
     for service in service_list:
-        device_type[service] = sum_data.loc[sum_data['ServiceType'] == service,'DeviceType'].unique().tolist()
+        device_type[service] = sum_data.loc[sum_data['ServiceType'] == service, 'DeviceType'].unique().tolist()
         device_type[service] = sorted(device_type[service])
 
     device_list = sum_data['DeviceType'].unique().tolist()
@@ -159,6 +159,7 @@ def new():
 
 def getSiteSpecifics(headcount):
     site_specs = dict()
+    site_specs['headcount'] = headcount
     site_specs['mpls_count'] = 0
     site_specs['internet_count'] = 2
     if headcount < 50:
@@ -236,20 +237,29 @@ def ciruitDetails(country, site_specs):
 
 @app.route('/fetch')
 def fetch():
-
-    headcount = int(request.args.get("headcount"))
+    floor_count = int(request.args.get("floor_count"))
+    headcount = 0
+    if request.args.get("optradio") == "similar":
+        headcount = int(request.args.get("headcount_1"))
+    else:
+        for floor_num in range(1, floor_count+1):
+            headcount = headcount + int(request.args.get("headcount_"+str(floor_num)))
     country = request.args.get('country')
 
     site_specs = getSiteSpecifics(headcount)
     circuit_cost = ciruitDetails(country, site_specs)
-    tier_val = "Tier "+ site_specs['tier']
+    tier_val = "Tier " + site_specs['tier']
 
     tier_data = sum_data.loc[sum_data['Tier'] == tier_val]
     tier_data = tier_data.sort_values(['ServiceType', 'DeviceType'])
 
     result = tier_data.to_json(orient='records')
 
-    response = {'0': result, '1': site_specs, '2': circuit_cost}
+    floor_data = tier_data.loc[tier_data['IDF'] == 'Yes']
+    floor_data = floor_data.sort_values(['ServiceType', 'DeviceType'])
+    floor_result = floor_data.to_json(orient='records')
+
+    response = {'0': result, '1': site_specs, '2': circuit_cost, '3': floor_result}
 
     return jsonify(response)
 
@@ -315,12 +325,11 @@ def bom():
     for i in dict_value:
         output = output.append([i], ignore_index=True)
     #df = pd.DataFrame(list(dict_value.items()), columns=['column1', 'column2'])
-    print(output.dropna())
 
     return "true"
 
 
-@app.route('/bom_html', methods = ['POST','GET'])
+@app.route('/bom_html', methods=['POST', 'GET'])
 def bom_html():
 
     return  render_template('bom_html.html')
