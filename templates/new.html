@@ -49,26 +49,42 @@
                                 </div>
                             </div>
                             <div class="col-md-5">
-                                <label for="city">City:</label>
+                                <label for="city">City :</label>
                                 <input class="form-control" id="city" name="city" placeholder="Enter the city name"
                                         type="text">
                             </div>
                         </div>
                     <div class="row">
-                            <div class="col-md-5">
+                            <!-- <div class="col-md-5">
                                 <label for="building_number">No. of buildings:</label>
                                 <input class="form-control" id="building_number" name="building_number" placeholder="Enter No. of Building"
                                        type="number">
-                            </div>
-                            <div class="col-md-5">
+                            </div> -->
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="floor_count">Floors per building:</label>
+                                    <label for="floor_count">Total Floors :</label>
                                     <input class="form-control" id="floor_count" name="floor_count" placeholder="Enter No. of Floor"
                                            type="number">
                                 </div>
                             </div>
+                            <div class="col-md-3" id="floor_radio">
+                                <label class="radio">
+                                    <input type="radio" value="similar" disabled name="optradio">Similar Floors
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" value="diverse" disabled name="optradio">Diverse Floors
+                                </label>
+                            </div>
+                            <div class="col-md-3" style="margin-left: 0;">
+                                <div class="form-group">
+                                    <label for="floor_mdf">MDF</label>
+                                    <select class="form-control" disabled id="floor_mdf" name="floor_mdf">
+                                        <option disabled hidden selected value="">Select Floor...</option>
+                                    </select>
+                                </div>
+                            </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                             <div class="col-md-5" id="floor_radio">
                                 <label class="radio">
                                     <input type="radio" value="similar" disabled name="optradio">Similar Floors
@@ -85,7 +101,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     <div id="floor_details">
 
                     </div>
@@ -192,10 +208,10 @@
                 <p>Desks</p>
             </div>
 
-            <div class="col-md-1">
+            <!-- <div class="col-md-1">
                 <h1 id="bldng_input"></h1>
                 <p>Building</p>
-            </div>
+            </div> -->
 
             <div class="col-md-1">
                 <h1 id="floor_input"></h1>

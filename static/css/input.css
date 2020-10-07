@@ -30,7 +30,7 @@ body{
   overflow : auto;
 }
 
-.input-form .row .col-md-5{
+.input-form .row div[class^="col-"]{
 padding-bottom: 20px;
 margin-left:20px;
 }
